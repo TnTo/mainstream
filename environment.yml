@@ -1,0 +1,16 @@
+name: mainstream
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - black
+  - ipykernel
+  # tag
+  - nltk
+  # data
+  - modin-omnisci
+  - seaborn
+  - graph-tool
+  - pingouin
+  - tinydb
+
