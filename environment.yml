@@ -2,15 +2,15 @@ name: mainstream
 channels:
   - conda-forge
 dependencies:
-  - python
+  # - pypy
   - black
   - ipykernel
+  - tqdm
   # tag
   - nltk
   # data
   - modin-omnisci
-  - seaborn
-  - graph-tool
-  - pingouin
-  - tinydb
+  #- seaborn
+  #- graph-tool
+  #- pingouin
 
