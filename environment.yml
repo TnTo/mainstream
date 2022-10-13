@@ -5,12 +5,14 @@ dependencies:
   # - pypy
   - black
   - ipykernel
+  - ipywidgets
   - tqdm
   # tag
   - nltk
   # data
+  - sqlalchemy
   - modin-omnisci
-  #- seaborn
+  - seaborn
   #- graph-tool
   #- pingouin
 
