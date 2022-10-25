@@ -2,7 +2,7 @@ name: mainstream
 channels:
   - conda-forge
 dependencies:
-  - pypy
+  - python
   - black
   - jupyter
   - ipykernel

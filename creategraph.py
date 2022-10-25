@@ -7,7 +7,6 @@ from collections import defaultdict
 g = gt.Graph(directed=False)
 id = g.vp["id"] = g.new_vp("int")
 kind = g.vp["kind"] = g.new_vp("int")
-ecount = g.ep["count"] = g.new_ep("int")
 
 docs_add = defaultdict(lambda: g.add_vertex())
 words_add = defaultdict(lambda: g.add_vertex())
@@ -30,8 +29,8 @@ with sqlite3.connect("data.db") as db:
 
     for i in cur.execute("SELECT * FROM graph").fetchall():
         i_d, i_w, c = i
-        e = g.add_edge(i_d, lag + i_w)
-        ecount[e] = c
+        for _ in range(c):
+            g.add_edge(i_d, lag + i_w)
 
 g.save("graph.gt.gz")
 
