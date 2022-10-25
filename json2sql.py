@@ -8,7 +8,7 @@ from tqdm.auto import tqdm
 paths = glob.glob("data/*.jsonl")
 
 # %%
-db = sqlite3.connect("mainstream.db")
+db = sqlite3.connect("raw.db")
 cur = db.cursor()
 
 cur.execute("PRAGMA foreign_keys = ON;")
