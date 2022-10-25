@@ -3,3 +3,4 @@ data/*
 TM4HET
 .vscode
 *.db
+*.gt.gz
