@@ -2,13 +2,29 @@
 from mainstream import *
 
 # %%
+min_year = 1946  # 1946
+max_year = 1949  # 2016
+suffix = ""
+
+# %%
+print("json2sql")
 # json2sql()
 
 # %%
-clean_raw(min_year=2007, output="clean_small.db", tmp="merge_small.db")
+print("clean raw")
+# clean_raw(
+#    min_year=min_year,
+#    max_year=max_year,
+#    output=f"clean{suffix}.db",
+#    tmp=f"merge{suffix}.db",
+# )
 
 # %%
-clean_data(input="clean_small.db", output="data_small.db")
+print("clean data")
+# clean_data(input=f"clean{suffix}.db", output=f"data{suffix}.db")
 
 # %%
-create_graph(input="data_small.db", output="graph_small.gt.gz")
+print("create graph")
+create_graph(input=f"data{suffix}.db", output=f"graph{suffix}.gt.gz", overlap=False)
+
+# %%
