@@ -1,6 +1,7 @@
+.vscode
+__pycache__
+
 data_gz/*
 data/*
-TM4HET
-.vscode
 *.db
 *.gt.gz

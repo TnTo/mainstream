@@ -3,15 +3,15 @@ channels:
   - conda-forge
 dependencies:
   - python
-  - pypy
   # dev
-  # - black
-  # - jupyter
-  # - ipykernel
-  # - ipywidgets
+  - black
+  - jupyter
+  - ipykernel
+  - ipywidgets
   # data
   - sqlalchemy
   - graph-tool
+  - pandas
   # analysis
   # - seaborn
   # - pingouin

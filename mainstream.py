@@ -164,7 +164,7 @@ def clean_raw(
 
     # %%
     words = pandas.read_sql("vocabulary", f"sqlite:///{input}", index_col="id")
-    words = words.assign(word_clean=words.word.progress_apply(clean_str))
+    words = words.assign(word_clean=words.word.apply(clean_str))
     vocabulary = pandas.Series(
         words.query("word_clean.str.len() > 1").word_clean.unique(),
         name="word",
@@ -255,10 +255,12 @@ def clean_data(
         )
 
 
-def create_graph(input="data.db", output="graph.gt.gz"):
+def create_graph(input="data.db", output="graph.gt.gz", overlap=False):
     g = gt.Graph(directed=False)
     id = g.vp["id"] = g.new_vp("int")
     kind = g.vp["kind"] = g.new_vp("int")
+    if not overlap:
+        count = g.ep["count"] = g.new_ep("int")
 
     docs_add = defaultdict(lambda: g.add_vertex())
     words_add = defaultdict(lambda: g.add_vertex())
@@ -274,14 +276,18 @@ def create_graph(input="data.db", output="graph.gt.gz"):
             id[d] = i_d
             kind[d] = 0
 
-        for i_w in range(max_doc_id + 1):
+        for i_w in range(max_word_id + 1):
             w = words_add[i_w]
             id[w] = i_w
             kind[w] = 1
 
         for i in cur.execute("SELECT * FROM graph").fetchall():
             i_d, i_w, c = i
-            for _ in range(c):
-                g.add_edge(i_d, lag + i_w)
+            if overlap:
+                for _ in range(c):
+                    g.add_edge(i_d, lag + i_w)
+            else:
+                e = g.add_edge(i_d, lag + i_w)
+                count[e] = c
 
     g.save(output)
