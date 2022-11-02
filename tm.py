@@ -4,31 +4,53 @@ import numpy as np
 import pickle
 
 # %%
+suffix = "_small"
+
+# %%
 print("Load...")
-g = gt.load_graph("graph.gt.gz")
+g = gt.load_graph(f"graph{suffix}.gt.gz")
 print("Loaded!")
 
 # %%
-np.random.seed(42)
-gt.seed_rng(42)
-
 n_initial = 5
+overlap = False
+verbose = True
+
 label = g.vp["kind"]
 mdl = np.inf
 
-for i in range(n_initial):
-    print(f"Run {i+1} of {n_initial}")
-    state_tmp = gt.minimize_nested_blockmodel_dl(
-        g,
-        state_args=dict(base_type=gt.OverlapBlockState, clabel=label),
-        multilevel_mcmc_args=dict(verbose=True),
-    )
-    print(state_tmp)
-    if mdl_tmp := state_tmp.entropy() < mdl:
-        mdl = 1.0 * mdl_tmp
-        state = state_tmp.copy()
+state_args = {"clabel": label}
+if not overlap:
+    state_args["pclabel"] = label
+    state_args["eweight"] = g.ep.count
 
-load("Saving...")
-pickle.dump(state, "state.pkl")
-load("Saved!")
 # %%
+for i in range(n_initial):
+    np.random.seed(1000 + i)
+    gt.seed_rng(1000 + i)
+
+    print(f"Run {i+1} of {n_initial}")
+    base_type = gt.OverlapBlockState if overlap else gt.BlockState
+    state = gt.minimize_nested_blockmodel_dl(
+        g,
+        state_args=dict(base_type=base_type, **state_args),
+        multilevel_mcmc_args=dict(verbose=verbose),
+    )
+    L = 0
+    for s in state.levels:
+        L += 1
+        if s.get_nonempty_B() == 2:
+            break
+    state = state.copy(bs=state.get_bs()[:L] + [np.zeros(1)])
+    print(state)
+    print("Saving...")
+    with open(f"state_{i}{suffix}.pkl", 'wb') as f:
+        pickle.dump(state, f)
+    print("Saved!")
+    del state
+
+# %%
+
+
+
+ 
