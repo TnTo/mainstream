@@ -193,3 +193,26 @@ res_rank.sort_values("max_rank")[
 ].reset_index(drop=True).head(20)
 
 # %%
+def plot(
+    state, filename=None, nedges=1000, hide_h=0, h_v_size=5.0, h_e_size=1.0, **kwargs
+):
+    """
+    Plot the graph and group structure.
+    optional:
+    - filename, str; where to save the plot. if None, will not be saved
+    - nedges, int; subsample  to plot (faster, less memory)
+    - hide_h, int; wether or not to hide the hierarchy
+    - h_v_size, float; size of hierarchical vertices
+    - h_e_size, float; size of hierarchical edges
+    - **kwargs; keyword arguments passed to self.state.draw method (https://graph-tool.skewed.de/static/doc/draw.html#graph_tool.draw.draw_hierarchy)
+    """
+    state.draw(
+        layout="bipartite",
+        output=filename,
+        subsample_edges=nedges,
+        hshortcuts=1,
+        hide=hide_h,
+        hvprops={"size": h_v_size},
+        heprops={"pen_width": h_e_size},
+        **kwargs,
+    )
