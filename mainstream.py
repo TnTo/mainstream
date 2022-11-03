@@ -5,6 +5,7 @@ import sqlite3
 from collections import defaultdict
 
 import graph_tool.all as gt
+import numpy as np
 import pandas
 
 
@@ -291,3 +292,46 @@ def create_graph(input="data.db", output="graph.gt.gz", overlap=False):
                 count[e] = c
 
     g.save(output)
+
+
+def infer_tm(
+    input="graph.gt.gz",
+    output_prefix="state",
+    overlap=False,
+    verbose=False,
+    seeds=[1000, 1001, 1002, 1003, 1004],
+):
+    print("Load...")
+    g = gt.load_graph(input)
+    print("Loaded!")
+
+    label = g.vp["kind"]
+
+    state_args = {"clabel": label}
+    if not overlap:
+        state_args["pclabel"] = label
+        state_args["eweight"] = g.ep.count
+
+    for s in seeds:
+        np.random.seed(s)
+        gt.seed_rng(s)
+
+        print(f"Seed {s}")
+        base_type = gt.OverlapBlockState if overlap else gt.BlockState
+        state = gt.minimize_nested_blockmodel_dl(
+            g,
+            state_args=dict(base_type=base_type, **state_args),
+            multilevel_mcmc_args=dict(verbose=verbose),
+        )
+        L = 0
+        for l in state.levels:
+            L += 1
+            if l.get_nonempty_B() == 2:
+                break
+        state = state.copy(bs=state.get_bs()[:L] + [np.zeros(1)])
+        print(state)
+        print("Saving...")
+        with open(f"{output_prefix}_{s}.pkl", "wb") as f:
+            pickle.dump(state, f)
+        print("Saved!")
+        del state
