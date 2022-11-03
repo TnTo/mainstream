@@ -5,3 +5,5 @@ data_gz/*
 data/*
 *.db
 *.gt.gz
+*.pkl
+results_*

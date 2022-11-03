@@ -1,5 +1,7 @@
 import glob
 import json
+import os
+import pickle
 import re
 import sqlite3
 from collections import defaultdict
@@ -335,3 +337,126 @@ def infer_tm(
             pickle.dump(state, f)
         print("Saved!")
         del state
+
+
+def dump_level(g, V, D, state, root_results_dir, l, overlap):
+    print(f"Level {l}")
+    results_dir = os.path.join(root_results_dir, f"{l}")
+    os.mkdir(results_dir)
+
+    state_l = state.project_level(l).copy(overlap=True)
+    b = gt.contiguous_map(state_l.b)
+    label_map = {}
+    for v in g.vertices():
+        label_map[state_l.b[v]] = b[v]
+
+    with open(os.path.join(results_dir, "label_map"), "wb") as f:
+        pickle.dump(label_map, f)
+    del label_map
+
+    state_l = state_l.copy(b=b)
+
+    state_l_edges = state_l.get_edge_blocks()  ## labeled half-edges
+
+    ## count labeled half-edges, group-memberships
+    B = state_l.get_nonempty_B()
+
+    n_wb = np.zeros(
+        (V, B)
+    )  ## number of half-edges incident on word-node w and labeled as word-group tw
+    n_db = np.zeros(
+        (D, B)
+    )  ## number of half-edges incident on document-node d and labeled as document-group td
+    n_dbw = np.zeros(
+        (D, B)
+    )  ## number of half-edges incident on document-node d and labeled as word-group tw
+    n_td_tw = np.zeros(
+        (B, B)
+    )  ## number of half-edges labeled as document-group td and as word-group tw
+
+    if not overlap:
+        eweight = g.ep["count"]
+    else:
+        eweight = g.new_ep("int", 1)
+
+    ze = gt.ungroup_vector_property(state_l_edges, [0, 1])
+    for v1, v2, z1, z2, w in g.get_edges([ze[0], ze[1], eweight]):
+        n_db[v1, z1] += w
+        n_dbw[v1, z2] += w
+        n_wb[v2 - D, z2] += w
+        n_td_tw[z1, z2] += w
+
+    p_w = np.sum(n_wb, axis=1) / float(np.sum(n_wb))
+
+    ind_d = np.where(np.sum(n_db, axis=0) > 0)[0]
+    Bd = len(ind_d)
+    n_db = n_db[:, ind_d]
+
+    ind_w = np.where(np.sum(n_wb, axis=0) > 0)[0]
+    Bw = len(ind_w)
+    n_wb = n_wb[:, ind_w]
+
+    ind_w2 = np.where(np.sum(n_dbw, axis=0) > 0)[0]
+    n_dbw = n_dbw[:, ind_w2]
+
+    n_td_tw = n_td_tw[:Bd, Bd:]
+
+    ## group-membership distributions
+    # group membership of each word-node P(t_w | w)
+    p_tw_w = (n_wb / np.sum(n_wb, axis=1)[:, np.newaxis]).T
+
+    # group membership of each doc-node P(t_d | d)
+    p_td_d = (n_db / np.sum(n_db, axis=1)[:, np.newaxis]).T
+
+    ## topic-distribution for words P(w | t_w)
+    p_w_tw = n_wb / np.sum(n_wb, axis=0)[np.newaxis, :]
+
+    ## Mixture of word-groups into documetns P(t_w | d)
+    p_tw_d = (n_dbw / np.sum(n_dbw, axis=1)[:, np.newaxis]).T
+
+    ## Group-Group matrix
+    p_td_tw = n_td_tw / np.sum(n_td_tw)
+
+    with open(os.path.join(results_dir, "Bd"), "w") as f:
+        f.write(f"{Bd}")
+
+    with open(os.path.join(results_dir, "Bw"), "w") as f:
+        f.write(f"{Bw}")
+
+    np.savez_compressed(
+        os.path.join(results_dir, "Ps"),
+        p_w=p_w,
+        p_tw_w=p_tw_w,
+        p_td_d=p_td_d,
+        p_w_tw=p_w_tw,
+        p_tw_d=p_tw_d,
+        p_td_tw=p_td_tw,
+    )
+
+
+def dump_tm(
+    graph_input="graph.gt.gz",
+    input_prefix="state",
+    output_prefix="results",
+    seeds=[1000, 1001, 1002, 1003, 1004],
+    overlap=False,
+):
+    print("Load Graph...")
+    g = gt.load_graph(graph_input)
+    print("Loaded!")
+
+    V = int(np.sum(g.vp["kind"].a == 1))
+    D = int(np.sum(g.vp["kind"].a == 0))
+
+    for s in seeds:
+        print(f"Seed {s}")
+        with open(f"{input_prefix}_{s}.pkl", "rb") as f:
+            state = pickle.load(f)
+        root_results_dir = f"{output_prefix}_{s}"
+        os.mkdir(root_results_dir)
+
+        with open(os.path.join(root_results_dir, "mdl"), "w") as f:
+            f.write(f"{state.entropy()}")
+
+        for l in range(len(state.levels)):
+            dump_level(g, V, D, state, root_results_dir, l, overlap)
