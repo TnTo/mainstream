@@ -1,0 +1,1 @@
+Pieces of code are taken from [hSBM_TopicModel](https://github.com/martingerlach/hSBM_Topicmodel) under GPL-3.0 license
