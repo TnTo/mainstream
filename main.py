@@ -2,11 +2,11 @@
 from mainstream import *
 
 # %%
-min_year = 1946  # 1946
-max_year = 1949  # 2016
+# min_year = 1946  # 1946
+# max_year = 1949  # 2016
 suffix = "_small"  # ""
 verbose = False
-seeds = [1000, 1001]
+seeds = [1000, 1001, 1002, 1003, 1004]
 
 # %%
 print("json2sql")
@@ -31,18 +31,18 @@ print("create graph")
 
 # %%
 print("infer topic model")
-infer_tm(
-    input=f"graph{suffix}.gt.gz",
-    output_prefix=f"state{suffix}",
-    verbose=verbose,
-    seeds=seeds,
-)
+# infer_tm(
+#    input=f"graph{suffix}.gt.gz",
+#    output_prefix=f"state{suffix}",
+#    verbose=verbose,
+#    seeds=seeds,
+# )
 
 # %%
 print("dump topic model")
-dump_tm(
-    graph_input=f"graph{suffix}.gt.gz",
-    input_prefix=f"state{suffix}",
-    output_prefix=f"results{suffix}",
-    seeds=seeds,
-)
+# dump_tm(
+#    graph_input=f"graph{suffix}.gt.gz",
+#    input_prefix=f"state{suffix}",
+#    output_prefix=f"results{suffix}",
+#    seeds=seeds,
+# )

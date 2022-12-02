@@ -13,6 +13,6 @@ dependencies:
   - graph-tool
   - pandas
   # analysis
-  # - seaborn
+  - seaborn
   # - pingouin
-
+  - scikit-learn
