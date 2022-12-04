@@ -183,9 +183,9 @@ for T in ["D", "W"]:
         df[f"AMI{T}{m}"] = (df[f"MI{T}{m}"] - df[f"E{T}{m}"]) / (
             df[f"Norm{T}{m}"] - df[f"E{T}{m}"]
         )
-    df[f"dMI{T}"] = df[f"MI{T}Model"] - df[f"MI{T}Random"]
-    df[f"dNMI{T}"] = df[f"NMI{T}Model"] - df[f"NMI{T}Random"]
-    df[f"dAMI{T}"] = df[f"AMI{T}Model"] - df[f"AMI{T}Random"]
+    df[f"dMI{T}"] = (df[f"MI{T}Model"] - df[f"MI{T}Random"]) / df[f"MI{T}Model"]
+    df[f"dNMI{T}"] = (df[f"NMI{T}Model"] - df[f"NMI{T}Random"]) / df[f"NMI{T}Model"]
+    df[f"dAMI{T}"] = (df[f"AMI{T}Model"] - df[f"AMI{T}Random"])
 
 df = df.query(
     "BestNDGroups > 1 and BestNWGroups > 1 and BenchmarkNDGroups > 1 and BenchmarkNWGroups > 1"
@@ -221,3 +221,5 @@ for T in ["D", "W"]:
     for ax in g.axes.ravel():
         ax.set_xscale("log")
     plt.show()
+
+# %%
