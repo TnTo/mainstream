@@ -1,0 +1,222 @@
+Topic:  0
+Topic                     Probability over Expected
+----------------------  ---------------------------
+GameTheory-Information                  0.0364137
+WelfareTheorems                         0.0210717
+Voting                                  0.015763
+GameTheory-Auctions                     0.0138383
+Public-Empirical                        0.0103488
+SW1                                     0.00970064
+GameTheory-Empirical?                   0.00859432
+Theory?                                 0.00813577
+GameTheory-Folk                         0.00275723
+Micro-Theory                            0.0027123
+Risk                                    0.00200215
+Incentives?                             0.00148566
+Finance-Assets                          0.000435774
+
+
+
+Topic:  1
+Topic                     Probability over Expected
+----------------------  ---------------------------
+LaTeX                                   0.0178104
+GameTheory-Information                  0.0111321
+Micro-Utility                           0.0105939
+Public-Empirical                        0.00662954
+Theory?                                 0.00567318
+WelfareTheorems                         0.00545189
+SW1                                     0.00329734
+Voting                                  0.00190598
+GameTheory-Empirical?                   0.000676376
+Land                                    0.00024546
+Finance-Trading                         0.000204026
+Micro-Theory                            0.00017182
+Finance-Assets                          0.000104914
+
+
+
+Topic:  2
+Topic                Probability over Expected
+-----------------  ---------------------------
+Monetary                           0.0159269
+SW2                                0.0067614
+Macro-Taxation                     0.00651747
+Industrial?                        0.00415723
+Theory?                            0.00349074
+Micro-Utility                      0.003335
+Trade?                             0.00308407
+SW1                                0.00215899
+Micro-Theory                       0.00199449
+Macro-VAR                          0.0018991
+Monetary-Assets                    0.00132895
+Finance-Trading                    0.000409226
+Finance-Assets                     0.000247734
+CapitalGoods                       0.000118743
+Monetary-Deposits                  5.42441e-05
+
+
+
+Topic:  3
+Topic                     Probability over Expected
+----------------------  ---------------------------
+HealthFamily-Empirical                  0.0343131
+Insurance-Empirical                     0.0318952
+Labour-Estimation                       0.0203123
+Demography?-Empirical                   0.0164921
+Land                                    0.00334923
+Risk                                    0.00256314
+GameTheory-Empirical?                   0.00184755
+Oil                                     0.00133493
+?-Empirical                             0.000998239
+Development-Empirical                   0.000584445
+
+
+
+Topic:  4
+Topic                     Probability over Expected
+----------------------  ---------------------------
+WelfareTheorems                         0.0217973
+GameTheory-Information                  0.0206947
+Theory?                                 0.0159794
+Micro-Theory                            0.0106636
+SW1                                     0.00914066
+Voting                                  0.00586982
+Micro-Utility                           0.00452548
+GameTheory-Auctions                     0.00385654
+Public-Empirical                        0.00284672
+Finance-Assets                          0.00140032
+GameTheory-Empirical?                   0.00117328
+Finance-Trading                         0.000872845
+Incentives?                             0.000872716
+GameTheory-Folk                         0.0005497
+
+
+
+Topic:  5
+Topic                     Probability over Expected
+----------------------  ---------------------------
+SW2                                     0.00989778
+Labour-Estimation                       0.00933336
+Macro-Taxation                          0.0064976
+Industrial?                             0.00622824
+Trade?                                  0.00622587
+Monetary                                0.00605869
+Land                                    0.00562997
+Oil                                     0.00293059
+?-Empirical                             0.00125559
+Macro-VAR                               0.000325435
+CapitalGoods                            0.000289691
+Monetary-Assets                         0.000137384
+HealthFamily-Empirical                  0.00011842
+Development-Empirical                   0.000112594
+
+
+
+Topic:  6
+Topic                Probability over Expected
+-----------------  ---------------------------
+Monetary                           0.0177071
+SW2                                0.0135745
+Macro-Taxation                     0.00866495
+Theory?                            0.00483112
+Industrial?                        0.00470306
+SW1                                0.00383436
+Trade?                             0.00318658
+Macro-VAR                          0.0030368
+Monetary-Assets                    0.00215525
+Micro-Theory                       0.00101407
+Finance-Trading                    0.00054438
+Micro-Utility                      0.000493919
+Monetary-Deposits                  0.000444106
+Finance-Assets                     0.000269403
+Oil                                0.000241695
+CapitalGoods                       8.3471e-05
+
+
+
+Topic:  7
+Topic                  Probability over Expected
+-------------------  ---------------------------
+LaTeX                                0.0137878
+Monetary                             0.00362027
+Industrial?                          0.00299086
+WelfareTheorems                      0.00294806
+Micro-Theory                         0.00237525
+Macro-VAR                            0.00147379
+Micro-Utility                        0.00125681
+Finance-Trading                      0.00102429
+Finance-Assets                       0.000922332
+Monetary-Assets                      0.000665698
+Macro-Taxation                       0.000410868
+Theory?                              0.000223403
+Incentives?                          0.000190076
+Voting                               0.000150578
+CapitalGoods                         6.0428e-05
+GameTheory-Auctions                  5.04984e-05
+
+
+
+Topic:  8
+Topic                     Probability over Expected
+----------------------  ---------------------------
+HealthFamily-Empirical                  0.0199257
+Labour-Estimation                       0.0166082
+Insurance-Empirical                     0.0154387
+Demography?-Empirical                   0.00936052
+Land                                    0.00462359
+LaTeX                                   0.00364003
+GameTheory-Empirical?                   0.0027448
+Risk                                    0.00227277
+?-Empirical                             0.00164631
+Oil                                     0.00110884
+Voting                                  0.0011051
+Public-Empirical                        0.000964294
+Development-Empirical                   0.000624427
+Incentives?                             5.20479e-05
+
+
+
+Topic:  9
+Topic                     Probability over Expected
+----------------------  ---------------------------
+HealthFamily-Empirical                  0.00654712
+Insurance-Empirical                     0.00592088
+Labour-Estimation                       0.00574567
+SW1                                     0.00484598
+WelfareTheorems                         0.00461305
+Demography?-Empirical                   0.00428997
+Public-Empirical                        0.00408128
+GameTheory-Information                  0.00379913
+Voting                                  0.00371748
+Micro-Utility                           0.00263241
+GameTheory-Empirical?                   0.00146774
+Risk                                    0.00127941
+GameTheory-Auctions                     0.00118607
+Land                                    0.00116738
+?-Empirical                             0.000717502
+Development-Empirical                   0.000172159
+
+
+
+Topic:  10
+Topic                     Probability over Expected
+----------------------  ---------------------------
+LaTeX                                   0.0509066
+Insurance-Empirical                     0.0132724
+HealthFamily-Empirical                  0.0121124
+Demography?-Empirical                   0.00591981
+Labour-Estimation                       0.0050643
+Land                                    0.00280821
+GameTheory-Empirical?                   0.00243268
+Risk                                    0.0022273
+Voting                                  0.00188999
+?-Empirical                             0.00188639
+Public-Empirical                        0.000920387
+Development-Empirical                   0.000900535
+GameTheory-Information                  0.000289198
+Incentives?                             5.2098e-05
+WelfareTheorems                         2.84894e-06
+
+
+

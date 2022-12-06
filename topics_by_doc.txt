@@ -1,0 +1,286 @@
+Topic:  0
+--  -------------  ------  -
+ 0  productioni    281779  0
+ 1  both           210152  0
+ 2  outside        109008  0
+ 3  fetal           63703  0
+ 4  result          51318  0
+ 5  loes            44949  0
+ 6  novel           44676  0
+ 7  collective      43263  0
+ 8  manufacturing   41441  0
+ 9  adjustment      41106  0
+10  rudolf          39631  0
+11  scrutinize      36046  0
+12  rothschild      35517  0
+13  brings          35331  0
+14  economists      32582  0
+15  gales           31808  0
+16  established     29740  0
+17  enterprises     29600  0
+18  why             27660  0
+19  income          26622  0
+--  -------------  ------  -
+
+
+
+Topic:  1
+--  ------------  ------  -
+ 0  all           615960  0
+ 1  productioni   311301  0
+ 2  both          277393  0
+ 3  outside       146334  0
+ 4  reviews        70221  0
+ 5  result         69918  0
+ 6  been           57991  0
+ 7  brings         49244  0
+ 8  generous       38809  0
+ 9  paucity        38714  0
+10  start          37610  0
+11  novel          35163  0
+12  necessity      33278  0
+13  attached       29725  0
+14  please         28917  0
+15  construction   25827  0
+16  effect         24714  0
+17  bowman         23266  0
+18  easing         21701  0
+19  much           21016  0
+--  ------------  ------  -
+
+
+
+Topic:  2
+--  -------------  -----  -
+ 0  efficiency     74248  0
+ 1  difficulties   73139  0
+ 2  reviews        65363  0
+ 3  journal        51407  0
+ 4  johnson        47728  0
+ 5  rger           42104  0
+ 6  generous       34652  0
+ 7  ten-           34245  0
+ 8  proximate      33822  0
+ 9  consecutively  33002  0
+10  scott          32933  0
+11  remittance     32822  0
+12  inch           31114  0
+13  faculty        30891  0
+14  choice         29556  0
+15  founded        28366  0
+16  add            27963  0
+17  postage        27709  0
+18  ment           27647  0
+19  nash-          26813  0
+--  -------------  -----  -
+
+
+
+Topic:  3
+--  ----------  ------  -
+ 0  both        302140  0
+ 1  obviously   192243  0
+ 2  johnson      69438  0
+ 3  edwin        62834  0
+ 4  edit         62003  0
+ 5  eliminate    51252  0
+ 6  lessons      45556  0
+ 7  risk         44789  0
+ 8  transit      44156  0
+ 9  blunted      44117  0
+10  archives     42790  0
+11  parameter    40825  0
+12  bidding      40292  0
+13  john         40003  0
+14  interurban   39275  0
+15  denote       39211  0
+16  primarily    37324  0
+17  themselves   36029  0
+18  economie     34962  0
+19  shortage     33187  0
+--  ----------  ------  -
+
+
+
+Topic:  4
+--  -------------  ------  -
+ 0  productioni    370279  0
+ 1  pear           162680  0
+ 2  price           95584  0
+ 3  result          76562  0
+ 4  fetal           76197  0
+ 5  novel           74025  0
+ 6  difficulties    71709  0
+ 7  repartition     66768  0
+ 8  loes            61710  0
+ 9  adjustment      57489  0
+10  manufacturing   51598  0
+11  brings          50860  0
+12  collective      47432  0
+13  been            46701  0
+14  rudolf          45896  0
+15  scrutinize      45681  0
+16  paucity         42406  0
+17  generous        41559  0
+18  lack            40468  0
+19  scott           40201  0
+--  -------------  ------  -
+
+
+
+Topic:  5
+--  -------------  ------  -
+ 0  year           121702  0
+ 1  edit           120754  0
+ 2  interindustry  116776  0
+ 3  edwin           98755  0
+ 4  risk            88689  0
+ 5  journal         79427  0
+ 6  thereof         78492  0
+ 7  proximate       76861  0
+ 8  scott           72763  0
+ 9  rger            72437  0
+10  academicians    69835  0
+11  funds           68790  0
+12  analysis        65437  0
+13  archives        64062  0
+14  countries       62789  0
+15  exchange        62692  0
+16  consecutively   56411  0
+17  are             56284  0
+18  hollander       56079  0
+19  choice          53490  0
+--  -------------  ------  -
+
+
+
+Topic:  6
+--  -------------  ------  -
+ 0  price          148688  0
+ 1  efficiency     117556  0
+ 2  repartition     95013  0
+ 3  authors         87433  0
+ 4  difficulties    85519  0
+ 5  homi            84887  0
+ 6  journal         75556  0
+ 7  interindustry   75551  0
+ 8  founded         63891  0
+ 9  rger            60249  0
+10  ment            56974  0
+11  analysis        56572  0
+12  faculty         55273  0
+13  postage         53445  0
+14  funds           49932  0
+15  proximate       47963  0
+16  remittance      44971  0
+17  consecutively   44458  0
+18  approaches      42560  0
+19  hollander       42111  0
+--  -------------  ------  -
+
+
+
+Topic:  7
+--  ------------  -----  -
+ 0  reviews       39051  0
+ 1  difficulties  36914  0
+ 2  scott         25309  0
+ 3  rger          21228  0
+ 4  lack          19850  0
+ 5  ten-          19727  0
+ 6  inch          17852  0
+ 7  missing       16567  0
+ 8  members       13407  0
+ 9  ne-            9587  0
+10  pearance       8904  0
+11  harnett        8884  0
+12  moreno         8884  0
+13  finkel         8884  0
+14  terje          8884  0
+15  hopkin         8884  0
+16  stot           8884  0
+17  itor           8884  0
+18  pa-            6911  0
+19  -bu            6686  0
+--  ------------  -----  -
+
+
+
+Topic:  8
+--  -------------  -----  -
+ 0  johnson        57277  0
+ 1  edwin          56056  0
+ 2  eliminate      48845  0
+ 3  transit        38249  0
+ 4  lessons        33567  0
+ 5  archives       31611  0
+ 6  somewhat       31102  0
+ 7  interurban     30398  0
+ 8  parameter      30372  0
+ 9  contributions  28848  0
+10  denote         28250  0
+11  shortage       28135  0
+12  optimum        27680  0
+13  economie       26120  0
+14  lee            24290  0
+15  primarily      23538  0
+16  blunted        23517  0
+17  exception      23435  0
+18  xci            20612  0
+19  themselves     20057  0
+--  -------------  -----  -
+
+
+
+Topic:  9
+--  ----------------  ----  ------------
+ 0  qll                229  0
+ 1  price-of-time      283  5.05958e-313
+ 2  shoals             252  7.93617e-299
+ 3  physical          1573  8.47658e-280
+ 4  standards          688  8.98304e-263
+ 5  turbulence         179  3.03684e-232
+ 6  divided            995  3.59826e-221
+ 7  modifies           283  4.30574e-219
+ 8  months            1065  1.37955e-213
+ 9  bent               816  1.11904e-204
+10  sixteenth          248  3.5007e-200
+11  harriss            258  8.0377e-171
+12  produiction        224  1.3201e-157
+13  superi-            168  3.10807e-157
+14  labor-augmenting   126  9.02424e-144
+15  variables          807  2.29453e-141
+16  somewhat          1714  5.63964e-141
+17  ferred             414  1.02872e-134
+18  whittlesey         250  4.6561e-133
+19  nonprohibitive      81  2.08121e-132
+--  ----------------  ----  ------------
+
+
+
+Topic:  10
+--  ----------  ----  ------------
+ 0  pearance    5775  0
+ 1  harnett     5763  0
+ 2  moreno      5763  0
+ 3  finkel      5763  0
+ 4  terje       5763  0
+ 5  hopkin      5763  0
+ 6  stot        5763  0
+ 7  itor        5763  0
+ 8  john        3291  0
+ 9  months      2998  0
+10  divided     2213  0
+11  mony        1811  0
+12  ridiculous  1030  0
+13  riage        918  0
+14  wreck        864  0
+15  rmi          797  0
+16  sequencing   489  0
+17  valtie       349  0
+18  fooo         341  0
+19  tionship     456  4.94066e-324
+--  ----------  ----  ------------
+
+
+

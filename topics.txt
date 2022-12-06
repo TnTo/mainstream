@@ -1,0 +1,1274 @@
+Topic:  0
+--------  ----------
+the       0.297183
+and       0.114992
+that      0.0551363
+for       0.050227
+are       0.0313865
+this      0.0273992
+with      0.0255359
+all       0.010273
+can       0.0102557
+model     0.00961309
+than      0.00957758
+more      0.00955899
+these     0.00952239
+will      0.00900756
+one       0.00898824
+economic  0.00862824
+but       0.00856676
+there     0.00809505
+may       0.00804198
+would     0.00782699
+--------  ----------
+----------------------------------------  -----------------------------------  ------------------------------  ----
+A Nonlinear Input-Output Model of a       ["I. W. Sandberg"]                   Econometrica                    1973
+Multisectored Economy
+Alternative Incompatible Conditions for   ["Ken-Ichi Inada"]                   Econometrica                    1955
+a Social Welfare Function
+An Analysis of a Macro-Econometric Model  ["Ray C. Fair"]                      The American Economic Review    1979
+with Rational Expectations in the Bond
+and Stock Markets
+A Comment on the General Theorem of the   ["G. Santoni", "A. Church"]          The Review of Economic Studies  1972
+Second Best
+The Capacity of the Smithies Model to     ["J\u00fcrgen Kromphardt", "Joachim  Econometrica                    1974
+Explain the Growth Trend by Endogenous    D\u00f6rfner"]
+Forces
+----------------------------------------  -----------------------------------  ------------------------------  ----
+
+
+
+Topic:  1
+--------  ----------
+from      0.0248315
+not       0.0232987
+which     0.0204017
+have      0.016157
+where     0.00876992
+each      0.00874492
+two       0.00867759
+time      0.00805252
+first     0.00752365
+value     0.00728281
+given     0.00716404
+case      0.00703146
+function  0.00677336
+since     0.00657831
+period    0.00654668
+both      0.00628353
+see       0.00589152
+same      0.00581583
+per       0.00550885
+thus      0.00541661
+--------  ----------
+----------------------------------------  --------------------------------  ----------------------------------  ----
+The Marginal Utility Theory in the        ["Edward Francis Schr\u00f6der"]  Journal of Political Economy        1949
+United States of America: A Reply to
+James S. Earley
+Testing Economic Assumptions: A Comment   ["T. W. Hutchison"]               Journal of Political Economy        1966
+The Neoclassical Maximization             ["Lawrence A. Boland"]            The American Economic Review        1983
+Hypothesis: Reply
+On Keynes's Quotations From Mill: A Note  ["Pascal Bridel"]                 The Economic Journal                1979
+Economic Theory as a Language             ["Louis De Alessi"]               The Quarterly Journal of Economics  1965
+----------------------------------------  --------------------------------  ----------------------------------  ----
+
+
+
+Topic:  2
+----------  ----------
+price       0.0301983
+then        0.0236108
+market      0.022099
+results     0.0202915
+any         0.0194163
+table       0.019402
+its         0.0179633
+effect      0.0174738
+effects     0.0158957
+cost        0.0156726
+been        0.0152866
+average     0.0141894
+equation    0.0134353
+use         0.0132862
+while       0.0113046
+should      0.0111313
+relative    0.0107794
+states      0.0105388
+assumption  0.00928142
+let         0.00909881
+----------  ----------
+----------------------------------------  --------------------------------------  ------------------------------  ----
+Kernels of Preference Structures          ["D. J. White"]                         Econometrica                    1977
+On the Two Theorems of Growth Economics:  ["Michio Morishima"]                    Econometrica                    1965
+A Mathematical Exercise
+Consistency, Rationality and Collective   ["Georges Bordes"]                      The Review of Economic Studies  1976
+Choice
+Long-Run Scale Adjustments of a           ["C. E. Ferguson", "Thomas R. Saving"]  The American Economic Review    1969
+Perfectly Competitive Firm and Industry
+Generalized Solutions to Continuous-Time  ["Zvi Artstein"]                        Econometrica                    1980
+Allocation Processes
+----------------------------------------  --------------------------------------  ------------------------------  ----
+
+
+
+Topic:  3
+------------  ----------
+data          0.032174
+were          0.0275839
+labor         0.0196559
+wage          0.0191509
+variables     0.0170828
+using         0.016794
+estimates     0.0163432
+percent       0.0156894
+distribution  0.0152295
+sample        0.0145879
+variable      0.0139436
+real          0.013889
+workers       0.012797
+social        0.011305
+size          0.0104163
+estimated     0.0103344
+estimate      0.00975648
+group         0.00940623
+ratio         0.00911147
+study         0.00831034
+------------  ----------
+----------------------------------------  ---------------------------------------  --------------------------------------  ----
+Error Components in Grouped Data: Is It   ["William T. Dickens"]                   The Review of Economics and Statistics  1990
+Ever Worth Weighting?
+Regional Wage Differentials: Has the      ["Carol Horton Tremblay"]                The Review of Economics and Statistics  1986
+South Risen Again?: A Comment
+A Comparison of Two-Stage Estimators of   ["Thomas W. Zuehlke", "Allen R. Zeman"]  The Review of Economics and Statistics  1991
+Censored Regression Models
+Estimation of a Linear Sur Model with     ["Hae-shin Hwang"]                       The Review of Economics and Statistics  1990
+Unequal Numbers of Observations
+Sample Selection Bias as a Specification  ["James J. Heckman"]                     Econometrica                            1979
+Error
+----------------------------------------  ---------------------------------------  --------------------------------------  ----
+
+
+
+Topic:  4
+------------  ---------
+capital       0.0699218
+growth        0.0545167
+tax           0.0430834
+consumption   0.0427654
+interest      0.0387986
+countries     0.0371399
+money         0.0353053
+united        0.0260566
+current       0.0235711
+unemployment  0.0213355
+financial     0.0211049
+consistent    0.01922
+bank          0.0184249
+labour        0.0173446
+reported      0.0153977
+credit        0.0151698
+correlation   0.0132441
+federal       0.012561
+expenditure   0.0115556
+expenditures  0.0105335
+------------  ---------
+---------------------------------------  --------------------------------------  ----------------------------------  ----
+Toward a Consumption Tax, and Beyond     ["Roger Gordon", "Laura Kalambokidis",  The American Economic Review        2004
+                                         "Jeffrey Rohaly", "Joel Slemrod"]
+Finance and Growth: Schumpeter Might be  ["Robert G. King", "Ross Levine"]       The Quarterly Journal of Economics  1993
+Right
+How Big Are Total Individual Income Tax  ["Leonard E. Burman", "Christopher      The American Economic Review        2008
+Expenditures, and Who Benefits from      Geissler", "Eric J. Toder"]
+Them?
+Strategic Behaviour and the Rules for    ["Eric W. Bond", "Larry Samuelson"]     The Economic Journal                1989
+International Taxation of Capital
+Corporate Taxation and Methods of        ["Donald C. Miller"]                    The American Economic Review        1952
+Corporate Financing
+---------------------------------------  --------------------------------------  ----------------------------------  ----
+
+
+
+Topic:  5
+-----------  ---------
+firm         0.0872362
+consumer     0.0324835
+consumers    0.0296945
+curve        0.0296117
+competition  0.0278098
+efficient    0.024794
+equilibria   0.0210795
+scale        0.0210197
+mechanism    0.0176658
+action       0.0169028
+derived      0.0164771
+know         0.0149745
+monopoly     0.0125262
+step         0.0123792
+curves       0.01206
+open         0.0120556
+actions      0.0116175
+decreasing   0.0109448
+objective    0.0108924
+optimum      0.0102496
+-----------  ---------
+----------------------------------------  -----------------  ----------------------------------  ----
+François Divisia, 1889-1964               ["Ren\u00e9 Roy"]  Econometrica                        1965
+Georges Darmois, 1888-1960                ["Ren\u00e9 Roy"]  Econometrica                        1961
+Comptabilite Nationale et Tableaux        ["R. Mercier"]     Econometrica                        1953
+Economiques
+The Role of Spending in Physiocratic      ["Jerah Johnson"]  The Quarterly Journal of Economics  1966
+Theory
+Puissance et Dangers de l'Utilisation de  ["M. Allais"]      Econometrica                        1954
+l'Outil Mathematique en Economique
+----------------------------------------  -----------------  ----------------------------------  ----
+
+
+
+Topic:  6
+-------------  ---------
+exchange       0.125273
+portfolio      0.0398091
+volatility     0.0394381
+loans          0.0337927
+producers      0.0326353
+securities     0.0310113
+concentration  0.0306802
+gnp            0.0244768
+forecasts      0.0220822
+customers      0.0196662
+treasury       0.01883
+var            0.0188014
+innovations    0.018693
+transport      0.0184903
+dividend       0.0181578
+entrepreneurs  0.0174172
+dividends      0.0169149
+borrowers      0.0148485
+forecasting    0.0145303
+lucas          0.0127336
+-------------  ---------
+---------------------------------------  ----------------------------------------  --------------------------------------  ----
+An Error Analysis of Econometric and     ["Vincent Su"]                            The American Economic Review            1978
+Noneconometric Forecasts
+A Comparison of the Forecasting Ability  ["James P. LeSage"]                       The Review of Economics and Statistics  1990
+of ECM and VAR Models
+Permanent and Transitory Components of   ["John H. Cochrane"]                      The Quarterly Journal of Economics      1994
+GNP and Stock Prices
+Modeling and Forecasting Realized        ["Torben G. Andersen", "Tim Bollerslev",  Econometrica                            2003
+Volatility                               "Francis X. Diebold", "Paul Labys"]
+Who Are China's Entrepreneurs?           ["Simeon Djankov", "Yingyi Qian",         The American Economic Review            2006
+                                         "G\u00e9rard Roland", "Ekaterina
+                                         Zhuravskaya"]
+---------------------------------------  ----------------------------------------  --------------------------------------  ----
+
+
+
+Topic:  7
+------------  ----------
+information   0.0592916
+optimal       0.0445301
+proposition   0.0257786
+proof         0.0252042
+game          0.0212378
+agent         0.0202356
+random        0.0182126
+strategy      0.0180802
+vector        0.0178099
+choose        0.0159911
+denote        0.0144421
+sufficient    0.0129868
+complete      0.012466
+rules         0.0116458
+games         0.0111368
+space         0.0109599
+finite        0.0107008
+strategies    0.00995778
+sufficiently  0.0099473
+beliefs       0.00969771
+------------  ----------
+-------------------------------------  -------------------------------------  ------------  ----
+Transitive Multi-Stage Majority        ["Raveendra Batra", "Prasanta K.       Econometrica  1972
+Decisions with Quasi-Transitive        Pattanaik"]
+Individual Preferences
+On Forward Induction                   ["Srihari Govindan", "Robert Wilson"]  Econometrica  2009
+The Relationship Between Transitive    ["Hugo Sonnenschein"]                  Econometrica  1965
+Preference and the Structure of the
+Choice Space
+Probabilistic Sophistication and       ["Massimo Marinacci"]                  Econometrica  2002
+Multiple Priors
+The "Folk Theorem" for Repeated Games  ["Quan Wen"]                           Econometrica  1994
+with Complete Information
+-------------------------------------  -------------------------------------  ------------  ----
+
+
+
+Topic:  8
+------------  ----------
+year          0.0566677
+employment    0.0528096
+test          0.0474063
+country       0.0422102
+productivity  0.0403886
+statistics    0.0354993
+estimation    0.0279299
+tests         0.0224881
+union         0.0183419
+statistical   0.0179677
+land          0.0171287
+housing       0.0153508
+columns       0.0137307
+agricultural  0.0110748
+econometric   0.0108612
+testing       0.00992528
+regime        0.00839754
+agriculture   0.00798814
+squares       0.00788559
+unions        0.00732459
+------------  ----------
+----------------------------------------  ----------------------------------------  --------------------------------------  ----
+GEOGRAPHIC VARIATION IN SUBPRIME LOAN     ["Morgan J. Rose"]                        The Review of Economics and Statistics  2013
+FEATURES, FORECLOSURES, AND PREPAYMENTS
+The Impact of Global Warming on           ["Robert Mendelsohn", "William            The American Economic Review            1999
+Agriculture: A Ricardian Analysis: Reply  Nordhaus"]
+Dues and Initiation Fees in Labor Unions  ["Philip Taft"]                           The Quarterly Journal of Economics      1946
+USING HEDONIC MODELS OF SOLAR RADIATION   ["Orley Ashenfelter", "Karl Storchmann"]  The Review of Economics and Statistics  2010
+AND WEATHER TO ASSESS THE ECONOMIC
+EFFECT OF CLIMATE CHANGE: THE CASE OF
+MOSEL VALLEY VINEYARDS
+The Impact of Global Warming on           ["Roy Darwin"]                            The American Economic Review            1999
+Agriculture: A Ricardian Analysis:
+Comment
+----------------------------------------  ----------------------------------------  --------------------------------------  ----
+
+
+
+Topic:  9
+-------------  ----------
+players        0.0710496
+payoff         0.0707842
+subjects       0.0542176
+bound          0.0472265
+auction        0.0434207
+bid            0.0418066
+payoffs        0.0386518
+applications   0.0307675
+auctions       0.0275733
+bidders        0.0259789
+bids           0.0252382
+independence   0.0214467
+bidder         0.0205266
+behavioral     0.0197196
+bidding        0.0181108
+ordering       0.0163083
+binary         0.0146942
+object         0.0131553
+valuations     0.0120721
+computational  0.00936747
+-------------  ----------
+----------------------------------------  ----------------------------------------  ----------------------------  ----
+Demand Reduction in Multi-Unit Auctions:  ["Richard Engelbrecht-Wiggans", "John A.  The American Economic Review  2005
+Evidence from a Sportscard Field          List", "David H. Reiley"]
+Experiment: Reply
+Demand Reduction in Multiunit Auctions:   ["John A. List", "David Lucking-Reiley"]  The American Economic Review  2000
+Evidence from a Sportscard Field
+Experiment
+A Note on Sequential Auctions             ["Dan Bernhardt", "David Scoones"]        The American Economic Review  1994
+The Amsterdam Auction                     ["Jacob K. Goeree", "Theo Offerman"]      Econometrica                  2004
+Using Field Experiments to Test           ["David Lucking-Reiley"]                  The American Economic Review  1999
+Equivalence between Auction Formats:
+Magic on the Internet
+----------------------------------------  ----------------------------------------  ----------------------------  ----
+
+
+
+Topic:  10
+----------  ---------
+prices      0.0435114
+demand      0.04168
+economy     0.0296101
+utility     0.0245751
+positive    0.0238795
+risk        0.0201486
+zero        0.0199191
+studies     0.019508
+equal       0.0193184
+fixed       0.0179588
+condition   0.016928
+functions   0.0159073
+returns     0.0135107
+series      0.0127849
+appendix    0.0121751
+initial     0.0115326
+additional  0.0111148
+linear      0.0110933
+solution    0.0110215
+shocks      0.0103475
+----------  ---------
+---------------------------------------  ---------------------------------  ------------------------------  ----
+Utility Function Transformations and     ["Richard Dusansky"]               The American Economic Review    1980
+Money Illusion: Reply and Further
+Results
+Risk Aversion and Demand Functions       ["Robert Deschamps"]               Econometrica                    1973
+Additive Utility Functions and Linear    ["Robert A. Pollak"]               The Review of Economic Studies  1971
+Engel Curves
+SIEVE WALD AND QLR INFERENCES ON         ["Xiaohong Chen", "Demian Pouzo"]  Econometrica                    2015
+SEMI/NONPARAMETRIC CONDITIONAL MOMENT
+MODELS
+ESTIMATION OF NONPARAMETRIC CONDITIONAL  ["Xiaohong Chen", "Demian Pouzo"]  Econometrica                    2012
+MOMENT MODELS WITH POSSIBLY NONSMOOTH
+GENERALIZED RESIDUALS
+---------------------------------------  ---------------------------------  ------------------------------  ----
+
+
+
+Topic:  11
+-----------  ----------
+equilibrium  0.0718934
+firms        0.0632225
+welfare      0.0235875
+agents       0.0222383
+theorem      0.0219741
+amount       0.0179992
+suppose      0.0169054
+contract     0.0152285
+lemma        0.0136747
+competitive  0.0132922
+exists       0.0131062
+allocation   0.0130421
+contracts    0.0119516
+effort       0.0109806
+strictly     0.0106225
+offer        0.0100898
+pricing      0.0100467
+sets         0.00999252
+shall        0.00974818
+date         0.00945594
+-----------  ----------
+---------------------------------------  -------------------------------------  ----------------------------------  ----
+Incomplete Information Bargaining with   ["Drew Fudenberg", "David K. Levine",  The Quarterly Journal of Economics  1987
+Outside Opportunities                    "Jean Tirole"]
+Fooling All of the People Some of the    ["Thomas H. Noe", "Jun Wang"]          The Review of Economic Studies      2004
+Time: A Theory of Endogenous Sequencing
+in Confidential Negotiations
+Sequential Bargaining with Correlated    ["Robert Evans"]                       The Review of Economic Studies      1989
+Values
+Sequential Bargaining with Incomplete    ["Drew Fudenberg", "Jean Tirole"]      The Review of Economic Studies      1983
+Information
+Strategic Delay in Bargaining            ["Anat R. Admati", "Motty Perry"]      The Review of Economic Studies      1987
+---------------------------------------  -------------------------------------  ----------------------------------  ----
+
+
+
+Topic:  12
+-------------  ----------
+local          0.024986
+people         0.0175002
+preference     0.0169992
+incentives     0.0141474
+rational       0.0133285
+distributions  0.0124386
+off            0.0122611
+observe        0.0115653
+density        0.0114522
+transfers      0.0107703
+principal      0.0102161
+aversion       0.0101301
+design         0.00959946
+receive        0.00933241
+weak           0.00893261
+she            0.00888592
+organization   0.0084757
+convergence    0.00822833
+maximize       0.00821946
+slope          0.00799524
+-------------  ----------
+--------------------------------------  ----------------------------------------  ----------------------------  ----
+Persuading Voters                       ["Ricardo Alonso", "Odilon C\u00e2mara"]  The American Economic Review  2016
+Mixed Motives and the Optimal Size of   ["John Morgan", "Felix V\u00e1rdy"]       Journal of Political Economy  2012
+Voting Bodies
+Beyond the Median: Voter Preferences,   ["Elisabeth\u00a0R. Gerber",              Journal of Political Economy  2004
+District Heterogeneity, and Political   "Jeffrey\u00a0B. Lewis"]
+Representation
+Measuring Vote-Selling: Field Evidence  ["Allen Hicken", "Stephen Leider", "Nico  The American Economic Review  2015
+from the Philippines                    Ravanilla", "Dean Yang"]
+The Swing Voter's Curse                 ["Timothy J. Feddersen", "Wolfgang        The American Economic Review  1996
+                                        Pesendorfer"]
+--------------------------------------  ----------------------------------------  ----------------------------  ----
+
+
+
+Topic:  13
+------------  ----------
+models        0.0368286
+probability   0.0302573
+public        0.0302017
+private       0.0230855
+individuals   0.0222224
+coefficients  0.0191439
+parameters    0.0172879
+method        0.0120254
+ability       0.0109466
+property      0.0109062
+outcome       0.0103776
+prior         0.0103563
+strong        0.0102307
+limited       0.0101445
+why           0.0100832
+outcomes      0.00998344
+economies     0.00981074
+procedure     0.00951681
+fraction      0.00936173
+minimum       0.00914466
+------------  ----------
+----------------------------------------  -----------------------------  ------------------------------  ----
+Public versus Private Initiative in       ["Jonathan M. Karpoff"]        Journal of Political Economy    2001
+Arctic Exploration: The Effects of
+Incentives and Organizational Structure
+Hostile versus Friendly Takeovers         ["Monika Schnitzer"]           Economica                       1996
+Auditing Standards, Legal Liability, and  ["Ronald A. Dye"]              Journal of Political Economy    1993
+Auditor Wealth
+The Disciplinary Role of Takeovers        ["David Scharfstein"]          The Review of Economic Studies  1988
+Is Tiger Woods Loss Averse? Persistent    ["Devin G. Pope", "Maurice E.  The American Economic Review    2011
+Bias in the Face of Experience,           Schweitzer"]
+Competition, and High Stakes
+----------------------------------------  -----------------------------  ------------------------------  ----
+
+
+
+Topic:  14
+------------  ----------
+industry      0.0463744
+taxes         0.0209939
+expectations  0.0205215
+payments      0.0161269
+saving        0.0156469
+input         0.0150734
+commodity     0.0150012
+imports       0.0149094
+capacity      0.0148085
+exports       0.0146184
+surplus       0.0141584
+export        0.01265
+setting       0.0125524
+flow          0.0112802
+tariff        0.0112352
+import        0.0105114
+liquidity     0.0100239
+stocks        0.00960813
+commodities   0.00955408
+econ          0.00947753
+------------  ----------
+---------------------------------------  ------------------------------------  --------------------------------------  ----
+THE HIDDEN COSTS OF DOWNSIZING           ["Frank Drzensky", "Matthias Heinz"]  The Economic Journal                    2016
+Patent Citations as a Measure of         ["Juan Alc\u00e1cer", "Michelle       The Review of Economics and Statistics  2006
+Knowledge Flows: The Influence of        Gittelman"]
+Examiner Citations
+STRATEGIC CITATION                       ["Ryan Lampe"]                        The Review of Economics and Statistics  2012
+Airline Mergers, Airport Dominance, and  ["Severin Borenstein"]                The American Economic Review            1990
+Market Power
+Network Effects, Congestion              ["Christopher Mayer", "Todd Sinai"]   The American Economic Review            2003
+Externalities, and Air Traffic Delays:
+Or Why Not All Delays Are Evil
+---------------------------------------  ------------------------------------  --------------------------------------  ----
+
+
+
+Topic:  15
+-------------  ---------
+world          0.0386747
+sector         0.0363824
+international  0.0339235
+foreign        0.0335336
+cent           0.0323187
+industries     0.0320784
+domestic       0.0262027
+industrial     0.021776
+entry          0.0216264
+savings        0.0183738
+substitution   0.0183495
+free           0.0173224
+capita         0.0167122
+inputs         0.0166228
+war            0.0163595
+sectors        0.0156053
+stable         0.014439
+stability      0.0136903
+sign           0.0122625
+expansion      0.0119277
+-------------  ---------
+----------------------------------------  -------------------------------------  ------------  ----
+Les Elasticities de la Demande Relative   ["Ren\u00e9 Roy"]                      Econometrica  1952
+aux Biens de Consommation et aux Groupes
+de Biens
+Application de l'Hypothese de             ["E. Baudier"]                         Econometrica  1968
+Comportement Minimax a la Prevision des
+Prix
+Note sur les Fonctions de Consommation    ["F. Carlevaro"]                       Econometrica  1977
+en Prix et Revenu Reels de Fourgeaud et
+Nataf
+L'Extension des Theories de l'Equilibre   ["M. Allais"]                          Econometrica  1953
+Economique General et du Rendement
+Social au Cas du Risque
+Remarques et Suggestions Relatives aux    ["Andr\u00e9 Nataf", "Ren\u00e9 Roy"]  Econometrica  1948
+Nombres-indices
+----------------------------------------  -------------------------------------  ------------  ----
+
+
+
+Topic:  16
+------------  ---------
+preferences   0.0565978
+search        0.038504
+bargaining    0.0319481
+correlated    0.0270585
+plan          0.0236988
+instruments   0.019066
+nash          0.0189368
+experimental  0.017555
+person        0.0164021
+aid           0.016362
+hazard        0.0142762
+cohort        0.0136523
+center        0.0132092
+profile       0.0131258
+network       0.0124283
+round         0.0123318
+collective    0.0123179
+exit          0.012125
+employers     0.0119778
+leisure       0.0119647
+------------  ---------
+----------------------------------------  ------------------------------------  ----------------------------  ----
+Ethnic Inequality                         ["Alberto Alesina", "Stelios          Journal of Political Economy  2016
+                                          Michalopoulos", "Elias Papaioannou"]
+Minimax Play at Wimbledon: Comment        ["Shih-Hsun Hsu", "Chen-Ying Huang",  The American Economic Review  2007
+                                          "Cheng-Tao Tang"]
+Winning Isn't Everything: Corruption in   ["Mark Duggan", "Steven D. Levitt"]   The American Economic Review  2002
+Sumo Wrestling
+PRE-COLONIAL ETHNIC INSTITUTIONS AND      ["Stelios Michalopoulos", "Elias      Econometrica                  2013
+CONTEMPORARY AFRICAN DEVELOPMENT          Papaioannou"]
+Cognitive Ability, Character Skills, and  ["David Gill", "Victoria Prowse"]     Journal of Political Economy  2016
+Learning to Play Equilibrium
+----------------------------------------  ------------------------------------  ----------------------------  ----
+
+
+
+Topic:  17
+----------  ---------
+rate        0.0764002
+policy      0.0382927
+rates       0.0378639
+output      0.0335628
+production  0.0330852
+trade       0.0328212
+investment  0.031119
+goods       0.026337
+supply      0.0246031
+government  0.0231318
+political   0.0194407
+stock       0.018735
+product     0.0183452
+aggregate   0.0180597
+net         0.0170815
+monetary    0.0169722
+inflation   0.0162498
+return      0.0150237
+index       0.0143093
+wealth      0.0138938
+----------  ---------
+----------------------------------------  ---------------------------------------  ----------------------------------  ----
+Inflation, Bank Profits, and Government   ["Jeremy J. Siegel"]                     The American Economic Review        1981
+Seigniorage
+The Demand for Index Bonds                ["Stanley Fischer"]                      Journal of Political Economy        1975
+Liquidity Preference v. Loanable Funds:   ["Jo Fisher Freeman"]                    The Economic Journal                1963
+A New Approach to the Problem
+The Sovereign-Bank Diabolic Loop and      ["Markus K. Brunnermeier", "Luis         The American Economic Review        2016
+ESBies                                    Garicano", "Philip R. Lane", "Marco
+                                          Pagano", "Ricardo Reis", "Tano Santos",
+                                          "David Thesmar", "Stijn Van
+                                          Nieuwerburgh", "Dimitri Vayanos"]
+Monetary Policy in an Inside-Money, Open  ["Donald J. Mathieson"]                  The Quarterly Journal of Economics  1975
+Economy
+----------------------------------------  ---------------------------------------  ----------------------------------  ----
+
+
+
+Topic:  18
+-----------  ----------
+income       0.0862524
+years        0.0338345
+wages        0.0239367
+age          0.0234315
+share        0.0221661
+population   0.020936
+school       0.0196069
+education    0.0182376
+household    0.0159614
+groups       0.0157969
+column       0.0144922
+family       0.0123633
+worker       0.0116013
+insurance    0.0114913
+variation    0.0113657
+children     0.0109538
+women        0.0103808
+force        0.0103264
+regressions  0.00976809
+yes          0.00901419
+-----------  ----------
+----------------------------------------  ---------------------------------------  ----------------------------------  ----
+EARTHQUAKES, RELIGION, AND TRANSITION TO  ["Marianna Belloc", "Francesco Drago",   The Quarterly Journal of Economics  2016
+SELF-GOVERNMENT IN ITALIAN CITIES         "Roberto Galbiati"]
+Labor Supply, Family Income, and          ["Jacob Mincer"]                         The American Economic Review        1960
+Consumption
+Is the Impact of Health Shocks Cushioned  ["Janet Currie", "Rosemary Hyson"]       The American Economic Review        1999
+by Socioeconomic Status? The Case of Low
+Birthweight
+A Note on Equality of Educational         ["Lewis C. Solmon"]                      The American Economic Review        1970
+Opportunity
+The More the Merrier? The Effect of       ["Sandra E. Black", "Paul J. Devereux",  The Quarterly Journal of Economics  2005
+Family Size and Birth Order on            "Kjell G. Salvanes"]
+Children's Education
+----------------------------------------  ---------------------------------------  ----------------------------------  ----
+
+
+
+Topic:  19
+-------------  ---------
+manufacturing  0.0367713
+spending       0.0356943
+security       0.0298247
+measurement    0.0266939
+gap            0.0233259
+reform         0.0230344
+oil            0.0209015
+month          0.0192479
+farm           0.0190759
+categories     0.0176549
+quarter        0.0159912
+schedule       0.015191
+commercial     0.0148415
+europe         0.0146852
+spread         0.0137057
+pension        0.0131695
+inventory      0.0129561
+origin         0.0117062
+rose           0.010826
+consume        0.0106421
+-------------  ---------
+---------------------------------------  ----------------------------------------  ----------------------------  ----
+Valuing Alternative-Fuel Vehicles in     ["Camilla Kazimi"]                        The American Economic Review  1997
+Southern California
+Are There Environmental Benefits from    ["Stephen P. Holland", "Erin T. Mansur",  The American Economic Review  2016
+Driving Electric Vehicles? The           "Nicholas Z. Muller", "Andrew J. Yates"]
+Importance of Local Factors
+Using Loopholes to Reveal the Marginal   ["Soren T. Anderson", "James M. Sallee"]  The American Economic Review  2011
+Cost of Regulation: The Case of Fuel-
+Economy Standards
+Efficient Pollution Regulation: Getting  ["Nicholas Z. Muller", "Robert            The American Economic Review  2012
+the Prices Right: Reply                  Mendelsohn"]
+Road Damage Externalities and Road User  ["David M. Newbery"]                      Econometrica                  1988
+Charges
+---------------------------------------  ----------------------------------------  ----------------------------  ----
+
+
+
+Topic:  20
+-------------  ---------
+participation  0.0401611
+ols            0.0351124
+probabilities  0.0337864
+party          0.0266548
+subsidy        0.0221519
+leave          0.0209257
+risky          0.0187468
+lifetime       0.0180442
+subsidies      0.0166392
+externalities  0.0161712
+reservation    0.0150358
+communication  0.0148089
+impacts        0.0143268
+adoption       0.0140935
+candidate      0.0126754
+probit         0.0120533
+unskilled      0.0118277
+computer       0.0118238
+heckman        0.011597
+owned          0.0115426
+-------------  ---------
+---------------------------------------  ---------------------------------------  ----------------------------------  ----
+An Examination of the Determinants of    ["Alistair C. Bruce", "Johnnie E. V.     Economica                           2009
+Biased Behaviour in a Market for State   Johnson", "John D. Peirson", "Jiejun
+Contingent Claims                        Yu"]
+Betting and Equilibrium                  ["Richard E. Quandt"]                    The Quarterly Journal of Economics  1986
+Is Racetrack Betting on Exactas          ["F. Trenery Dolbear, Jr"]               Economica                           1993
+Efficient?
+An Examination of Market Efficiency in   ["Paul E. Gabriel", "James R. Marsden"]  Journal of Political Economy        1990
+British Racetrack Betting
+Explaining the Favorite–Long Shot Bias:  ["Erik Snowberg", "Justin Wolfers"]      Journal of Political Economy        2010
+Is it Risk-Love or Misperceptions?
+---------------------------------------  ---------------------------------------  ----------------------------------  ----
+
+
+
+Topic:  21
+---------------  ---------
+characteristics  0.0382412
+hours            0.0307381
+students         0.0275824
+census           0.0193967
+black            0.0183672
+urban            0.0159181
+employees        0.0151889
+skill            0.0137157
+duration         0.0135471
+majority         0.0128922
+dummies          0.0125428
+house            0.0121242
+community        0.0119324
+discrimination   0.0119033
+student          0.0118878
+educational      0.0118207
+rank             0.0115178
+retirement       0.0115132
+worked           0.0110037
+mortality        0.0108189
+---------------  ---------
+----------------------------------------  -------------------------------------  --------------------------------------  ----
+Criminal Deterrence, Geographic           ["Stephen G. Bronars", "John R. Lott,  The American Economic Review            1998
+Spillovers, and the Right to Carry        Jr."]
+Concealed Handguns
+Crime and the Depenalization of Cannabis  ["J\u00e9r\u00f4me Adda", "Brendon     Journal of Political Economy            2014
+Possession: Evidence from a Policing      McConnell", "Imran Rasul"]
+Experiment
+Reexamining Criminal Behavior: The        ["David B. Mustard"]                   The Review of Economics and Statistics  2003
+Importance of Omitted Variable Bias
+Juvenile Crime and Punishment             ["Steven D. Levitt"]                   Journal of Political Economy            1998
+A Time-Series Analysis of Crime,          ["Hope Corman", "H. Naci Mocan"]       The American Economic Review            2000
+Deterrence, and Drug Abuse in New York
+City
+----------------------------------------  -------------------------------------  --------------------------------------  ----
+
+
+
+Topic:  22
+----------  ----------
+earnings    0.0432687
+households  0.0304222
+job         0.0274934
+treatment   0.0251474
+health      0.0235634
+human       0.0220377
+program     0.0200799
+life        0.0181046
+college     0.0163786
+status      0.0158164
+areas       0.0157525
+care        0.0126664
+white       0.0119793
+jobs        0.011673
+robust      0.0109207
+schools     0.010653
+mobility    0.0093989
+young       0.00916228
+parents     0.00872937
+migration   0.00852693
+----------  ----------
+----------------------------------------  ---------------------------------------  ----------------------------  ----
+Tradeoffs from Integrating Diagnosis and  ["Christopher C. Afendulis", "Daniel P.  The American Economic Review  2007
+Treatment in Markets for Health Care      Kessler"]
+Low Take-up in Medicaid: Does Outreach    ["Anna Aizer"]                           The American Economic Review  2003
+Matter and for Whom?
+Converging to American: Healthy           ["M\u00f3nica Garc\u00eda-P\u00e9rez"]   The American Economic Review  2016
+Immigrant Effect in Children of
+Immigrants
+Immigrants and Human-Capital Investment   ["Harriet Orcutt Duleep", "Mark C.       The American Economic Review  1999
+                                          Regets"]
+The Effect of Insurance Coverage on       ["Jean M. Mitchell", "Jack Hadley"]      The American Economic Review  1997
+Breast Cancer Patients' Treatment and
+Hospital Choices
+----------------------------------------  ---------------------------------------  ----------------------------  ----
+
+
+
+Topic:  23
+--------------  ----------
+incentive       0.127469
+living          0.0538833
+parties         0.0517263
+sell            0.0495225
+items           0.0405727
+signals         0.0398205
+durable         0.0369612
+water           0.0327175
+coalition       0.0309058
+border          0.0188508
+recipients      0.0184235
+leader          0.0169075
+youth           0.0164597
+branch          0.015807
+compilation     0.0151339
+lender          0.013056
+payroll         0.0117799
+scientists      0.011739
+downstream      0.0111331
+intermediation  0.00989514
+--------------  ----------
+----------------------------------------  ----------------------------------  --------------------------------------  ----
+Groundwater: Focusing on the Real Issue   ["Micha Gisser"]                    Journal of Political Economy            1983
+Optimal Water Allocation: The North       ["G. S. Tolley", "V. S. Hastings"]  The Quarterly Journal of Economics      1960
+Platte River
+Does Border Enforcement Protect U.S.      ["Gordon H. Hanson", "Raymond       The Review of Economics and Statistics  2002
+Workers from Illegal Immigration?         Robertson", "Antonio Spilimbergo"]
+Illegal Immigration, Border Enforcement,  ["Gordon H. Hanson", "Antonio       The American Economic Review            1999
+and Relative Wages: Evidence from         Spilimbergo"]
+Apprehensions at the U.S.-Mexico Border
+LEAD AND MORTALITY                        ["Karen Clay", "Werner Troesken",   The Review of Economics and Statistics  2014
+                                          "Michael Haines"]
+----------------------------------------  ----------------------------------  --------------------------------------  ----
+
+
+
+Topic:  24
+-----------------  ----------
+profit             0.211171
+asset              0.191895
+cash               0.116788
+pareto             0.0670691
+incumbent          0.0327969
+continuation       0.0293855
+markov             0.0257765
+markup             0.0208833
+liberalization     0.020508
+motion             0.0193192
+playing            0.0167343
+entrant            0.0163293
+markups            0.0143536
+pass-through       0.0116436
+profit-maximizing  0.0112089
+martingale         0.00997409
+deterrence         0.00902903
+staiger            0.00584813
+punishments        0.00501174
+self-enforcing     0.00482075
+-----------------  ----------
+----------------------------------------  ----------------------------------------  ----------------------------------  ----
+Debt Financing in Asset Markets           ["Zhiguo He", "Wei Xiong"]                The American Economic Review        2012
+A Rationalization of the Precautionary    ["Edward L. Whalen"]                      The Quarterly Journal of Economics  1966
+Demand for Cash
+On the Irrelevance of Input Prices for    ["David E. M. Sappington"]                The American Economic Review        2005
+Make-or-Buy Decisions
+Markup and Cost Dispersion across Firms:  ["David Atkin", "Azam Chaudhry",          The American Economic Review        2015
+Direct Evidence from Producer Surveys in  "Shamyla Chaudry", "Amit K. Khandelwal",
+Pakistan                                  "Eric Verhoogen"]
+$1,000 Cash Back: The Pass-Through of     ["Meghan Busse", "Jorge Silva-Risso",     The American Economic Review        2006
+Auto Manufacturer Promotions              "Florian Zettelmeyer"]
+----------------------------------------  ----------------------------------------  ----------------------------------  ----
+
+
+
+Topic:  25
+---------------  ----------
+discount         0.13203
+trading          0.131659
+steady           0.106753
+default          0.0728945
+traders          0.067991
+multiplier       0.0537544
+traded           0.0498069
+posterior        0.0393172
+portfolios       0.0362957
+trader           0.0266468
+ramsey           0.0147658
+internationally  0.00816814
+sharpe           0.006858
+endow-           0.00578257
+betas            0.00528753
+nyse             0.0051595
+overconfidence   0.00507842
+dynamical        0.00495892
+issuers          0.0045407
+bid-ask          0.00420356
+---------------  ----------
+-------------------------------------  ---------------------------------------  --------------------------------------  ----
+Bias From Nonsynchronous Trading in    ["Robert A. Wood", "Thomas H. McInish"]  The Review of Economics and Statistics  1985
+Tests of the Levhari-Levy Hypothesis
+Competing with the New York Stock      ["William O. Brown, Jr.", "J. Harold     The Quarterly Journal of Economics      2008
+Exchange                               Mulherin", "Marc D. Weidenmier"]
+Price-conveyed Information versus      ["Jeffrey S. Banks"]                     Journal of Political Economy            1985
+Observed Insider Behavior: A Note on
+Rational Expectations Convergence
+Returns to Individual Traders of       ["Michael L. Hartzmark"]                 Journal of Political Economy            1987
+Futures: Aggregate Results
+To Buy or Not to Buy? An Experimental  ["Jean-Robert Tyran", "Dirk Engelmann"]  Economica                               2005
+Study of Consumer Boycotts in Retail
+Markets
+-------------------------------------  ---------------------------------------  --------------------------------------  ----
+
+
+
+Topic:  26
+--------------  ---------
+funds           0.0924537
+currency        0.0729636
+loan            0.053387
+gold            0.0429954
+accumulation    0.041952
+deficit         0.0343296
+inventories     0.0264425
+futures         0.0225485
+inflationary    0.0222815
+arrangements    0.0216114
+disequilibrium  0.0166765
+deficits        0.0144167
+leverage        0.0142881
+collateral      0.0133189
+currencies      0.0132373
+deflator        0.0131805
+holders         0.0129308
+congestion      0.0122286
+deflated        0.0119171
+lump-sum        0.0118553
+--------------  ---------
+----------------------------------------  -----------------------------------  --------------------------------------  ----
+Repo Market Effects of the Term           ["Michael J. Fleming", "Warren B.    The American Economic Review            2010
+Securities Lending Facility               Hrung", "Frank M. Keane"]
+Gresham's Law, Asset Preferences, and     ["Robert Z. Aliber"]                 The Quarterly Journal of Economics      1967
+the Demand for International Reserves
+Violations of the Gold Points, 1890-1908  ["Truman A. Clark"]                  Journal of Political Economy            1984
+Cross Hedging                             ["Ronald W. Anderson", "Jean-Pierre  Journal of Political Economy            1981
+                                          Danthine"]
+Gold Sales as an Anti-Inflationary        ["Raymond F. Mikesell"]              The Review of Economics and Statistics  1946
+Device
+----------------------------------------  -----------------------------------  --------------------------------------  ----
+
+
+
+Topic:  27
+------------  ----------
+player        0.783296
+folk          0.0252344
+abreu         0.0204001
+two-player    0.0109201
+belief-free   0.00737147
+lehrer        0.00720004
+cripps        0.00673718
+automaton     0.00567432
+yildiz        0.00565718
+matsushima    0.00526289
+stage-game    0.0052286
+forges        0.00466288
+olszewski     0.00409717
+vieille       0.00284573
+sorin         0.00246859
+asynchronous  0.00241716
+yamamoto      0.00233144
+obara         0.00217716
+nachbar       0.00212573
+-player       0.00202287
+------------  ----------
+----------------------------------------  --------------------------------------  ----------------------------------  ----
+A Bargaining Model with Incomplete        ["Sushil Bikhchandani"]                 The Review of Economic Studies      1992
+Information
+REPUTATION WITH ANALOGICAL REASONING      ["Philippe Jehiel", "Larry Samuelson"]  The Quarterly Journal of Economics  2012
+Maintaining a Reputation Against a Long-  ["Marco Celetani", "Drew Fudenberg",    Econometrica                        1996
+Lived Opponent                            "David K. Levine", "Wolfgang
+                                          Pesendorfer"]
+Reputation and Commitment in Two-Person   ["Martin W. Cripps", "Jonathan P.       Econometrica                        1995
+Repeated Games Without Discounting        Thomas"]
+The "Folk Theorem" for Repeated Games     ["Quan Wen"]                            Econometrica                        1994
+with Complete Information
+----------------------------------------  --------------------------------------  ----------------------------------  ----
+
+
+
+Topic:  28
+-------------  ----------
+equipment      0.233554
+coordination   0.10201
+stabilization  0.0967147
+firm-level     0.049067
+firm-specific  0.0428327
+cooper         0.0346111
+harvest        0.0313902
+linkages       0.0309098
+trap           0.0284969
+colin          0.0201007
+obsolescence   0.018714
+compustat      0.0180262
+brain          0.0157442
+denison        0.011628
+pig            0.0113223
+zingales       0.0107764
+euros          0.010558
+firm-          0.00941161
+surcharge      0.00686764
+micro-level    0.00670386
+-------------  ----------
+----------------------------------------  --------------------------------------  ----------------------------------  ----
+Efficiency Gains from Team-Based          ["Francesco Feri", "Bernd Irlenbusch",  The American Economic Review        2010
+Coordination—Large-Scale Experimental     "Matthias Sutter"]
+Evidence
+Labour Unrest and the Quality of          ["Alexandre Mas"]                       The Review of Economic Studies      2008
+Production: Evidence from the
+Construction Equipment Resale Market
+The Value of Invested Capital             ["D. G. Champernowne", "R. F. Kahn"]    The Review of Economic Studies      1953
+The Measurement of Hirschmanian Linkages  ["Leroy P. Jones"]                      The Quarterly Journal of Economics  1976
+Equipment Investment and Economic Growth  ["J. Bradford De Long", "Lawrence H.    The Quarterly Journal of Economics  1991
+                                          Summers"]
+----------------------------------------  --------------------------------------  ----------------------------------  ----
+
+
+
+Topic:  29
+-----------------  ----------
+log                0.180832
+food               0.0699617
+city               0.0675937
+cities             0.0511408
+intensity          0.0452516
+rural              0.0373334
+india              0.0308582
+gas                0.0209581
+africa             0.0205415
+cotton             0.0191457
+membership         0.017218
+farms              0.0159116
+conservative       0.0136449
+chinese            0.0134519
+rainfall           0.00902207
+textile            0.00893498
+industrialization  0.00833477
+allocative         0.00791108
+ships              0.00771101
+province           0.00712727
+-----------------  ----------
+----------------------------------------  ----------------------------------------  ------------------------------  ----
+The Heckscher-Ohlin Model and Traded      ["Albert G. Schweinberger"]               The Review of Economic Studies  1975
+Intermediate Products
+On the Choice of Tenancy Contracts in     ["Ananish Chaudhuri", "Pushkar Maitra"]   Economica                       2002
+Rural India
+The Theory of Share Tenancy Revisited--   ["Joseph D. Reid, Jr."]                   Journal of Political Economy    1977
+Again
+The Fogel-Engerman Iron Model: A          ["Paul L. Joskow", "Edward F. McKelvey"]  Journal of Political Economy    1973
+Clarifying Note
+Food Stamps as Money: The Macroeconomics  ["Daniel S. Hamermesh", "James M.         Journal of Political Economy    1985
+of a Transfer Program                     Johannes"]
+----------------------------------------  ----------------------------------------  ------------------------------  ----
+
+
+
+Topic:  30
+--------------  ----------
+parent          0.0923492
+civil           0.0819307
+democracy       0.0805245
+village         0.0803648
+villages        0.0579832
+disability      0.0542228
+affiliates      0.0319051
+peace           0.0304777
+affiliate       0.0252898
+awards          0.0206132
+multinationals  0.0195372
+dependency      0.0190792
+survivors       0.0114944
+muslim          0.0106422
+davies          0.00936381
+repression      0.00849028
+delhi           0.00847963
+elites          0.00845833
+ravallion       0.00814939
+markusen        0.00802156
+--------------  ----------
+---------------------------------------  --------------------------------------  --------------------------------------  ----
+The Role of Local Officials in New       ["Monica Martinez-Bravo"]               The American Economic Review            2014
+Democracies: Evidence from Indonesia
+Wages and International Rent Sharing in  ["John W. Budd", "Jozef Konings",       The Review of Economics and Statistics  2005
+Multinational Firms                      "Matthew J. Slaughter"]
+Clientelism in Indian Villages           ["Siwan Anderson", "Patrick Francois",  The American Economic Review            2015
+                                         "Ashok Kotwal"]
+Consolidation of New Democracy, Mass     ["Adi Brender", "Allan Drazen"]         The American Economic Review            2009
+Attitudes, and Clientelism
+The Measurement of International Trade   ["F. Steb Hipple"]                      The American Economic Review            1990
+Related to Multinational Companies
+---------------------------------------  --------------------------------------  --------------------------------------  ----
+
+
+
+Topic:  31
+--------------------------------  ---------
+landscape                         0.0403337
+newcommandcyr                     0.0400416
+renewcommandencodingdefaultot     0.0400416
+usepackageamsbsy                  0.0400416
+normalfont                        0.0400416
+usepackageototfontenc             0.0400416
+usepackagepifont                  0.0400416
+usepackageamsmathamsxtra          0.0400416
+pagestyleempty                    0.0400416
+selectfont                        0.0400416
+declaretextfontcommandtextcyrcyr  0.0400416
+usepackagetextcomp                0.0400416
+declaremathsizes                  0.0400416
+usepackagemathrsfs                0.0400416
+usepackagebm                      0.0400416
+renewcommandsfdefaultwncyss       0.0400416
+begindocument                     0.0400416
+documentclassaastex               0.0400416
+renewcommandrmdefaultwncyr        0.0400416
+usepackageamsfonts                0.0400416
+--------------------------------  ---------
+----------------------------------------  ----------------------------------------  ----------------------------  ----
+A Theory of Partially Directed Search     ["Guido Menzio"]                          Journal of Political Economy  2007
+A Unified Framework for Monetary Theory   ["Ricardo Lagos", "Randall Wright"]       Journal of Political Economy  2005
+and Policy Analysis
+An Operational Measure of Riskiness       ["Dean\u00a0P. Foster", "Sergiu Hart"]    Journal of Political Economy  2009
+A Note on Convergence of Adaptive         ["John Conlisk"]                          Journal of Political Economy  2003
+Satisficing to Optimal Stopping
+Signaling in a Global Game: Coordination  ["George\u2010Marios Angeletos",          Journal of Political Economy  2006
+and Policy Traps                          "Christian Hellwig", "Alessandro Pavan"]
+----------------------------------------  ----------------------------------------  ----------------------------  ----
+
+
+
+Topic:  32
+------------  ----------
+deposits      0.638725
+publics       0.0470938
+high-powered  0.0386555
+nonbank       0.0304972
+non-bank      0.0197129
+gurley        0.0172969
+eurodollar    0.0103641
+benston       0.0092437
+unborrowed    0.00917367
+gilt          0.00885854
+wallich       0.00868347
+hester        0.00784314
+angell        0.0072479
+negotiable    0.0067577
+near-money    0.00647759
+cuthbertson   0.00619748
+nha           0.00612745
+circula-      0.00528711
+f-m           0.00434174
+latane        0.00381653
+------------  ----------
+----------------------------------------  -------------------------------------  --------------------------------------  ----
+Demand and Supply Functions for Stocks    ["John H. Makin"]                      The Review of Economics and Statistics  1975
+of Eurodollar Deposits: Reply
+Demand and Supply Functions for Stocks    ["Ann-Marie Meulendyke"]               The Review of Economics and Statistics  1975
+of Euro-Dollar Deposits: An Empirical
+Study: Comment
+Commercial Banks and Financial            ["Leland J. Pritchard"]                Journal of Political Economy            1960
+Intermediaries: Fallacies and Policy
+Implications--A Comment
+The Degree of Moneyness of Savings        ["Gurcharan S. Laumas"]                The American Economic Review            1968
+Deposits
+Time Deposits in the Definition of Money  ["Richard H. Timberlake, Jr.", "James  The American Economic Review            1967
+                                          Fortson"]
+----------------------------------------  -------------------------------------  --------------------------------------  ----
+
+
+
