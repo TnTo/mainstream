@@ -1,12 +1,13 @@
 # %%
-import pandas
-import seaborn
-import numpy as np
-import matplotlib.pyplot as plt
-from tabulate import tabulate
 import sqlite3
-import scipy.stats
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas
 import scipy.sparse
+import scipy.stats
+import seaborn
+from tabulate import tabulate
 
 # %%
 seaborn.set_style("whitegrid")
@@ -23,8 +24,8 @@ while True:
     try:
         print(
             l,
-            int(open(f"results_{seeds[idx]}/{l}/Bw").read()),
-            int(open(f"results_{seeds[idx]}/{l}/Bd").read()),
+            int(open(f"hsbm/results_{seeds[idx]}/{l}/Bw").read()),
+            int(open(f"hsbm/results_{seeds[idx]}/{l}/Bd").read()),
         )
         l += 1
     except:
@@ -38,7 +39,7 @@ docs = pandas.read_sql_table("document", "sqlite:///data.db", index_col="id")
 words = pandas.read_sql_table("vocabulary", "sqlite:///data.db", index_col="id")
 # %%
 for l in ls:
-    groups = np.load(f"results_{seeds[idx]}/{l}/Ps.npz")["p_td_d"]
+    groups = np.load(f"hsbm/results_{seeds[idx]}/{l}/Ps.npz")["p_td_d"]
     fig, ax1 = plt.subplots()
     ax1.plot(np.sort(groups.sum(axis=1)), ls="", marker="D")
     ax2 = ax1.twinx()
@@ -52,7 +53,7 @@ dt = (
     docs[["year"]]
     .join(
         pandas.DataFrame(
-            np.load(f"results_{seeds[idx]}/{l}/Ps.npz")["p_td_d"].T, dtype=int
+            np.load(f"hsbm/results_{seeds[idx]}/{l}/Ps.npz")["p_td_d"].T, dtype=int
         )
     )
     .groupby("year")
@@ -65,7 +66,9 @@ dt.rolling(window=10).mean().dropna().plot()
 # %%
 twd = (
     docs[["year"]]
-    .join(pandas.DataFrame(np.load(f"results_{seeds[idx]}/{l}/Ps.npz")["p_tw_d"].T))
+    .join(
+        pandas.DataFrame(np.load(f"hsbm/results_{seeds[idx]}/{l}/Ps.npz")["p_tw_d"].T)
+    )
     .groupby("year")
     .sum()
 )
@@ -75,12 +78,12 @@ twd.rolling(window=10).mean().dropna().plot()
 
 
 # %%
-pwtw = np.load(f"results_{seeds[idx]}/{l}/Ps.npz")["p_w_tw"]
+pwtw = np.load(f"hsbm/results_{seeds[idx]}/{l}/Ps.npz")["p_w_tw"]
 topicTopWords = np.argsort(pwtw, axis=0)[-20:, :].T
 topicTopDocs = np.argsort(
-    np.load(f"results_{seeds[idx]}/{l}/Ps.npz")["p_tw_d"], axis=1
+    np.load(f"hsbm/results_{seeds[idx]}/{l}/Ps.npz")["p_tw_d"], axis=1
 )[:, -5:]
-with open("topics.txt", "w") as f:
+with open("hsbm/hsbm_topics.txt", "w") as f:
     for i, (w, d) in enumerate(zip(topicTopWords, topicTopDocs)):
         w = topicTopWords[i, :]
         d = topicTopDocs[i, :]
@@ -103,29 +106,29 @@ with open("topics.txt", "w") as f:
 
 # %%
 pandas.DataFrame(
-    np.load(f"results_{seeds[idx]}/{l}/Ps.npz")["p_td_d"].argmax(axis=0),
+    np.load(f"hsbm/results_{seeds[idx]}/{l}/Ps.npz")["p_td_d"].argmax(axis=0),
     dtype=int,
     columns=["DocGroup"],
 ).to_sql(
     "Groups",
-    "sqlite:///model.db",
+    "sqlite:///hsbm/model.db",
     index=True,
     index_label="document_id",
     chunksize=10000,
 )
 pandas.DataFrame(
-    np.load(f"results_{seeds[idx]}/{l}/Ps.npz")["p_w_tw"].argmax(axis=1),
+    np.load(f"hsbm/results_{seeds[idx]}/{l}/Ps.npz")["p_w_tw"].argmax(axis=1),
     dtype=int,
     columns=["Topic"],
 ).to_sql(
     "Topics",
-    "sqlite:///model.db",
+    "sqlite:///hsbm/model.db",
     index=True,
     index_label="word_id",
     chunksize=10000,
 )
 # %%
-with sqlite3.connect("model.db") as db:
+with sqlite3.connect("hsbm/model.db") as db:
     cur = db.cursor()
     cur.executescript(
         f"""
@@ -135,7 +138,7 @@ with sqlite3.connect("model.db") as db:
             """
     )
 # %%
-with sqlite3.connect("model.db") as db:
+with sqlite3.connect("hsbm/model.db") as db:
     cur = db.cursor()
     cur.executescript(
         f"""
@@ -145,9 +148,9 @@ with sqlite3.connect("model.db") as db:
             """
     )
 # %%
-pwtd = pandas.read_sql_table("w_td", "sqlite:///model.db")
+pwtd = pandas.read_sql_table("w_td", "sqlite:///hsbm/model.db")
 pw = pandas.DataFrame(
-    np.load(f"results_{seeds[idx]}/{l}/Ps.npz")["p_w"], columns=["pw"]
+    np.load(f"hsbm/results_{seeds[idx]}/{l}/Ps.npz")["p_w"], columns=["pw"]
 )
 
 # %%
@@ -164,13 +167,13 @@ btest["pvalue"] = np.vectorize(
 
 # %%
 btest[["word_id", "DocGroup", "word_count", "pvalue"]].to_sql(
-    "pvalue", "sqlite:///model.db", index=False, chunksize=10000
+    "pvalue", "sqlite:///hsbm/model.db", index=False, chunksize=10000
 )
 # %%
-btest = pandas.read_sql_table("pvalue", "sqlite:///model.db")
+btest = pandas.read_sql_table("pvalue", "sqlite:///hsbm/model.db")
 
 # %%
-with open("topics_by_doc.txt", "w") as f:
+with open("hsbm/hsbm_topics_by_doc.txt", "w") as f:
     for i in range(btest.DocGroup.max() + 1):
         print("Topic: ", i, file=f)
         print(
@@ -189,7 +192,7 @@ with open("topics_by_doc.txt", "w") as f:
         print("\n\n", file=f)
 
 # %%
-twtd = pandas.read_sql("tw_td", "sqlite:///model.db")
+twtd = pandas.read_sql("tw_td", "sqlite:///hsbm/model.db")
 twtd = scipy.sparse.coo_array((twtd["count"], (twtd.Topic, twtd.DocGroup))).toarray()
 # %%
 Group_by_Topic = (
@@ -198,11 +201,11 @@ Group_by_Topic = (
 seaborn.heatmap(Group_by_Topic)
 
 # %%
-TopicLabels = pandas.read_csv("topics.csv")
+TopicLabels = pandas.read_csv("hsbm/hsbm_topics.csv")
 
 
 # %%
-with open("topics_by_group.txt", "w") as f:
+with open("hsbm/hsbm_topics_by_group.txt", "w") as f:
     for i in range(Group_by_Topic.shape[0]):
         print("Topic: ", i, file=f)
         print(
@@ -218,7 +221,7 @@ with open("topics_by_group.txt", "w") as f:
                     ["Topic_y", "P_over_exp"]
                 ],
                 showindex=False,
-                headers=["Topic", "Probability over Expected"]
+                headers=["Topic", "Probability over Expected"],
             ),
             file=f,
         )
