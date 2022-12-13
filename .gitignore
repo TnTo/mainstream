@@ -6,4 +6,5 @@ data/*
 *.db
 *.gt.gz
 *.pkl
+sparse.npz
 results_*

@@ -27,22 +27,26 @@ print("clean data")
 
 # %%
 print("create graph")
-# create_graph(input=f"data{suffix}.db", output=f"graph{suffix}.gt.gz", overlap=False)
+# create_graph(input=f"data{suffix}.db", output=f"hsbm/graph{suffix}.gt.gz", overlap=False)
 
 # %%
-print("infer topic model")
-# infer_tm(
-#    input=f"graph{suffix}.gt.gz",
-#    output_prefix=f"state{suffix}",
+print("create matrix")
+create_sparse()
+
+# %%
+print("infer hsbm topic model")
+# infer_hsbm_tm(
+#    input=f"hsbm/graph{suffix}.gt.gz",
+#    output_prefix=f"hsbm/state{suffix}",
 #    verbose=verbose,
 #    seeds=seeds,
 # )
 
 # %%
-print("dump topic model")
-# dump_tm(
-#    graph_input=f"graph{suffix}.gt.gz",
-#    input_prefix=f"state{suffix}",
-#    output_prefix=f"results{suffix}",
+print("dump hsbm topic model")
+# dump_hsbm_tm(
+#    graph_input=f"hsbm/graph{suffix}.gt.gz",
+#    input_prefix=f"hsbm/state{suffix}",
+#    output_prefix=f"hsbm/results{suffix}",
 #    seeds=seeds,
 # )

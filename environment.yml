@@ -10,8 +10,13 @@ dependencies:
   - ipywidgets
   # data
   - sqlalchemy
-  - graph-tool
   - pandas
+  - nltk
+  # hsbm
+  - graph-tool
+  # umap-hdbscan
+  - umap-learn
+  - hdbscan
   # analysis
   - seaborn
   # - pingouin

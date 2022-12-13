@@ -7,8 +7,11 @@ import sqlite3
 from collections import defaultdict
 
 import graph_tool.all as gt
+import hdbscan
 import numpy as np
 import pandas
+import scipy.sparse
+import umap
 
 
 def json2sql(input="data", output="raw.db"):
@@ -193,7 +196,6 @@ def clean_raw(
     del vocabulary
     del words
 
-    # %%
     with sqlite3.connect(output) as db:
         cur = db.cursor()
         cur.executescript(
@@ -296,7 +298,21 @@ def create_graph(input="data.db", output="graph.gt.gz", overlap=False):
     g.save(output)
 
 
-def infer_tm(
+def create_sparse(input="data.db", output="sparse.npz"):
+    with sqlite3.connect(input) as db:
+        cur = db.cursor()
+        ND = cur.execute("SELECT MAX(document_id) FROM graph").fetchone()[0] + 1
+        NW = cur.execute("SELECT MAX(word_id) FROM graph").fetchone()[0] + 1
+    m = scipy.sparse.coo_array((ND, NW))
+    data = pandas.read_sql("graph", f"sqlite:///{input}", chunksize=500000)
+    for d in data:
+        m = m + scipy.sparse.coo_array(
+            (d["count"], (d.document_id, d.word_id)), shape=(ND, NW)
+        )
+    scipy.sparse.save_npz(output, m)
+
+
+def infer_hsbm_tm(
     input="graph.gt.gz",
     output_prefix="state",
     overlap=False,
@@ -434,7 +450,7 @@ def dump_level(g, V, D, state, root_results_dir, l, overlap):
     )
 
 
-def dump_tm(
+def dump_hsbm_tm(
     graph_input="graph.gt.gz",
     input_prefix="state",
     output_prefix="results",
@@ -460,3 +476,35 @@ def dump_tm(
 
         for l in range(len(state.levels)):
             dump_level(g, V, D, state, root_results_dir, l, overlap)
+
+
+def infer_uh_model(
+    input="sparse.npz",
+    output_prefix="uh",
+    n_neighbors=15,
+    min_dist=0.1,
+    n_components=2,
+    metric="cosine",
+    min_cluster_size=5,
+    min_samples=1,
+    cluster_selection_method="leaf",
+    seeds=[1000, 1001, 1002, 1003, 1004],
+):
+    for s in seeds:
+        m = scipy.sparse.load_npz(input)
+        u = umap.UMAP(
+            random_state=s,
+            n_neighbors=n_neighbors,
+            min_dist=min_dist,
+            n_components=n_components,
+            metric=metric,
+        )
+        e = u.fit_transform(m)
+        c = hdbscan.HDBSCAN(
+            min_cluster_size=min_cluster_size,
+            min_samples=min_samples,
+            cluster_selection_method=cluster_selection_method,
+        )
+        l = c.fit_predict(e)
+        np.savez_compressed(f"uh/{output_prefix}_{s}.npz", e=e, l=l)
+        return u, e, c, l
