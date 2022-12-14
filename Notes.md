@@ -76,3 +76,6 @@ Constallate ids:
 
 ## Impact Factor
 [https://github.com/clarivate/wosjournals-python-client]
+
+## Citations
+https://api.semanticscholar.org/graph/v1/paper/{doi}?fields=citationCount
