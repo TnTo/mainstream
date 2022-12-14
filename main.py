@@ -2,11 +2,11 @@
 from mainstream import *
 
 # %%
-# min_year = 1946  # 1946
-# max_year = 1949  # 2016
-suffix = "_small"  # ""
-verbose = False
-seeds = [1000, 1001, 1002, 1003, 1004]
+min_year = 1946
+max_year = 2016
+suffix = "_stem_sw"
+# verbose = False
+# seeds = [1000, 1001, 1002, 1003, 1004]
 
 # %%
 print("json2sql")
@@ -14,16 +14,23 @@ print("json2sql")
 
 # %%
 print("clean raw")
-# clean_raw(
-#    min_year=min_year,
-#    max_year=max_year,
-#    output=f"clean{suffix}.db",
-#    tmp=f"merge{suffix}.db",
-# )
+clean_raw(
+    min_year=min_year,
+    max_year=max_year,
+    output=f"clean{suffix}.db",
+    tmp=f"merge{suffix}.db",
+    min_word_len=3,
+    clean_fn=clean_and_stem,
+)
 
 # %%
 print("clean data")
-# clean_data(input=f"clean{suffix}.db", output=f"data{suffix}.db")
+# clean_data(
+#    input=f"clean{suffix}.db",
+#    output=f"data{suffix}.db",
+#    min_doc_occurencies=5,
+#    max_doc_occurencies=20000,
+# )
 
 # %%
 print("create graph")
@@ -31,7 +38,7 @@ print("create graph")
 
 # %%
 print("create matrix")
-create_sparse()
+# create_sparse(input=f"data{suffix}.db", output=f"sparse{suffix}.npz")
 
 # %%
 print("infer hsbm topic model")

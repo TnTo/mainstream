@@ -8,12 +8,15 @@ from collections import defaultdict
 
 import graph_tool.all as gt
 import hdbscan
+import nltk
 import numpy as np
 import pandas
 import scipy.sparse
 import umap
 
+stemmer = nltk.stem.SnowballStemmer(language="english")
 
+# Get Constallate Data and Tabulate them into SQLite
 def json2sql(input="data", output="raw.db"):
     paths = glob.glob(f"{input}/*.jsonl")
     with sqlite3.connect(f"{output}") as db:
@@ -126,6 +129,16 @@ def clean_str(s: str) -> str:
     return re.sub(r"[^a-zA-Z\-]", "", s).lower()
 
 
+def clean_and_stem(s: str) -> str:
+    return stemmer.stem(clean_str(s))
+
+
+# Perform basic cleaning operation
+# WORDS
+# Delete non alphabetical (plus -) characters
+# Drop single character words
+# DOCS
+# require author, jstor, research-article, and timespan
 def clean_raw(
     input="raw.db",
     output="clean.db",
@@ -142,6 +155,8 @@ def clean_raw(
     ],
     min_year=1946,
     max_year=2016,
+    clean_fn=clean_str,
+    min_word_len=2,
 ):
     docs = (
         pandas.read_sql_table(
@@ -168,11 +183,10 @@ def clean_raw(
 
     del docs
 
-    # %%
     words = pandas.read_sql("vocabulary", f"sqlite:///{input}", index_col="id")
-    words = words.assign(word_clean=words.word.apply(clean_str))
+    words = words.assign(word_clean=words.word.apply(clean_fn))
     vocabulary = pandas.Series(
-        words.query("word_clean.str.len() > 1").word_clean.unique(),
+        words.query("word_clean.str.len() >= @min_word_len").word_clean.unique(),
         name="word",
     )
     vocabulary.to_sql(
@@ -226,21 +240,40 @@ def clean_data(
     min_doc_len=1000,
     min_word_len=3,
     min_word_freq=10,
+    min_doc_occurencies=None,
+    max_doc_occurencies=None,
 ):
     d = pandas.read_sql("SELECT * FROM doc_len;", f"sqlite:///{input}")
     w = pandas.read_sql("SELECT * FROM word_count;", f"sqlite:///{input}")
     dmeta = pandas.read_sql("document", f"sqlite:///{input}")
 
-    d[d.len >= min_doc_len].reset_index(drop=True)[["document_id"]].merge(
-        dmeta, how="inner", left_on="document_id", right_on="id"
-    ).drop(columns=["id"]).to_sql(
-        "document", f"sqlite:///{output}", index=True, index_label="id"
-    )
+    if min_doc_occurencies or max_doc_occurencies:
+        g = pandas.read_sql_query(
+            "SELECT word_id, COUNT(DISTINCT document_id) AS n_docs FROM graph GROUP BY word_id",
+            f"sqlite:///{input}",
+        )
+        if not min_doc_occurencies:
+            min_doc_occurencies = 0
+        if not max_doc_occurencies:
+            max_doc_occurencies = 0
+        w = w.merge(
+            g[
+                (g.n_docs < max_doc_occurencies) & (g.n_docs >= min_doc_occurencies)
+            ].word_id,
+            how="inner",
+            on="word_id",
+        )
 
     w[(w.word.str.len() >= min_word_len) & (w.freq >= min_word_freq)][
         ["word_id", "word"]
     ].reset_index(drop=True).to_sql(
         "vocabulary", f"sqlite:///{output}", index=True, index_label="id"
+    )
+
+    d[d.len >= min_doc_len].reset_index(drop=True)[["document_id"]].merge(
+        dmeta, how="inner", left_on="document_id", right_on="id"
+    ).drop(columns=["id"]).to_sql(
+        "document", f"sqlite:///{output}", index=True, index_label="id"
     )
 
     with sqlite3.connect(output) as db:
@@ -487,7 +520,6 @@ def infer_uh_model(
     metric="cosine",
     min_cluster_size=5,
     min_samples=1,
-    cluster_selection_method="leaf",
     seeds=[1000, 1001, 1002, 1003, 1004],
 ):
     for s in seeds:
