@@ -14,23 +14,24 @@ print("json2sql")
 
 # %%
 print("clean raw")
-clean_raw(
-    min_year=min_year,
-    max_year=max_year,
-    output=f"clean{suffix}.db",
-    tmp=f"merge{suffix}.db",
-    min_word_len=3,
-    clean_fn=clean_and_stem,
-)
+# clean_raw(
+#     min_year=min_year,
+#     max_year=max_year,
+#     output=f"clean{suffix}.db",
+#     tmp=f"merge{suffix}.db",
+#     min_word_len=3,
+#     clean_fn=clean_and_stem,
+# )
 
 # %%
 print("clean data")
-# clean_data(
-#    input=f"clean{suffix}.db",
-#    output=f"data{suffix}.db",
-#    min_doc_occurencies=5,
-#    max_doc_occurencies=20000,
-# )
+clean_data(
+    input=f"clean{suffix}.db",
+    output=f"data{suffix}.db",
+    min_doc_occurencies=20,
+    max_doc_occurencies=10000,
+    min_word_freq=0,
+)
 
 # %%
 print("create graph")
@@ -38,7 +39,7 @@ print("create graph")
 
 # %%
 print("create matrix")
-# create_sparse(input=f"data{suffix}.db", output=f"sparse{suffix}.npz")
+create_sparse(input=f"data{suffix}.db", output=f"sparse{suffix}.npz")
 
 # %%
 print("infer hsbm topic model")

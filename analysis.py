@@ -94,6 +94,21 @@ for i in range(1, 11):
             f"min_freq: {i}; min_len: {j+1}; preserved vocab: {len(w0) / l}; preserved mass: {w0.freq.sum() / s}"
         )
 
+# SECOND ATTEMPT
+g = pandas.read_sql_query(
+    "SELECT word_id, COUNT(DISTINCT document_id) AS n_docs FROM graph GROUP BY word_id",
+    f"sqlite:///clean_stem_sw.db",
+)
+M = g.freq.sum()
+W = len(g.word_id.unique())
+
+print("Min_doc", "Preserved Mass", "Preserved Voc")
+for i in range(2, 21):
+    tmp = g[g.n_docs >= i]
+    print(
+        i, "{:.3f}".format((tmp.freq.sum()) / M), "{0:.3f}".format(len(tmp.word_id) / W)
+    )
+
 # %%
 # IMPACT FACTOR
 

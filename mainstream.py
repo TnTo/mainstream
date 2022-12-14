@@ -264,9 +264,9 @@ def clean_data(
             on="word_id",
         )
 
-    w[(w.word.str.len() >= min_word_len) & (w.freq >= min_word_freq)][
-        ["word_id", "word"]
-    ].reset_index(drop=True).to_sql(
+    if min_word_len or min_word_freq:
+        w = w[(w.word.str.len() >= min_word_len) & (w.freq >= min_word_freq)]
+    w[["word_id", "word"]].reset_index(drop=True).to_sql(
         "vocabulary", f"sqlite:///{output}", index=True, index_label="id"
     )
 
