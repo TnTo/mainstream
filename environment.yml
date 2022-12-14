@@ -2,7 +2,7 @@ name: mainstream
 channels:
   - conda-forge
 dependencies:
-  - python
+  - python >= 3.10
   # dev
   - black
   - jupyter
@@ -17,6 +17,12 @@ dependencies:
   # umap-hdbscan
   - umap-learn
   - hdbscan
+  # umap.plot
+  - datashader
+  - bokeh
+  - holoviews >= 1.15
+  - scikit-image 
+  - colorcet 
   # analysis
   - seaborn
   # - pingouin
