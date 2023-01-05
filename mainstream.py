@@ -520,6 +520,7 @@ def infer_uh_model(
     metric="cosine",
     min_cluster_size=5,
     min_samples=1,
+    cluster_selection_method='eom',
     seeds=[1000, 1001, 1002, 1003, 1004],
 ):
     for s in seeds:

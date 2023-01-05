@@ -1,16 +1,28 @@
 # %%
-import mainstream
+import scipy.sparse
+import umap
+import hdbscan
 import umap.plot
 
 # %%
-u, e, c, l = mainstream.infer_uh_model(
-    input="sparse_sw.npz",
-    output_prefix="sw",
-    # n_neighbors=30,
-    # min_dist=0.01,
-    min_cluster_size=1000,
-    seeds=[None],
+m = scipy.sparse.load_npz("sparse_stem_sw.npz")
+u = umap.UMAP(
+    n_components=2,
+    metric="cosine",
 )
+e = u.fit_transform(m)
+# %%
+c = hdbscan.HDBSCAN(
+    min_cluster_size=min_cluster_size,
+    min_samples=min_samples,
+)
+l = c.fit_predict(e)
+
+####
+# Stem + SW
+# min_cluster_size, min_samples
+# 155,155 #47 clusters
+# 380,1 #25 clusters
 
 # %%
 umap.plot.points(u, labels=l)
