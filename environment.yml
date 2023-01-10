@@ -27,3 +27,7 @@ dependencies:
   - seaborn
   # - pingouin
   - scikit-learn
+  # polars
+  - polars
+  - pyarrow
+  - connectorx
