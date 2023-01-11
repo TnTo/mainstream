@@ -10,9 +10,26 @@ import graph_tool.all as gt
 import hdbscan
 import nltk
 import numpy as np
-import pandas
 import scipy.sparse
+
 import umap
+
+### modin ###
+import modin.pandas as pandas
+import ray
+
+
+def my_to_sql(self, *args, **kwargs):
+    return pandas.dataframe.DataFrame._to_pandas(self).to_sql(*args, **kwargs)
+
+
+pandas.base.BasePandasDataset.to_sql = my_to_sql
+
+ray.init(
+    ignore_reinit_error=True,
+    runtime_env={"env_vars": {"__MODIN_AUTOIMPORT_PANDAS__": "1"}},
+)
+### end modin ###
 
 stemmer = nltk.stem.SnowballStemmer(language="english")
 
@@ -126,7 +143,7 @@ def json2sql(input="data", output="raw.db"):
 
 
 def clean_str(s: str) -> str:
-    return re.sub(r"[^a-zA-Z\-]", "", s).lower()
+    return re.sub(r"[^a-zA-Z]", "", s).lower()
 
 
 def clean_and_stem(s: str) -> str:
@@ -237,14 +254,15 @@ def clean_raw(
 def clean_data(
     input="clean.db",
     output="data.db",
-    min_doc_len=1000,
+    min_doc_len=1500,
     min_word_len=3,
     min_word_freq=10,
     min_doc_occurencies=None,
     max_doc_occurencies=None,
+    sw=None,
 ):
-    d = pandas.read_sql("SELECT * FROM doc_len;", f"sqlite:///{input}")
-    w = pandas.read_sql("SELECT * FROM word_count;", f"sqlite:///{input}")
+    d = pandas.read_sql("SELECT * FROM doc_len", f"sqlite:///{input}")
+    w = pandas.read_sql("SELECT * FROM word_count", f"sqlite:///{input}")
     dmeta = pandas.read_sql("document", f"sqlite:///{input}")
 
     if min_doc_occurencies or max_doc_occurencies:
@@ -266,12 +284,19 @@ def clean_data(
 
     if min_word_len or min_word_freq:
         w = w[(w.word.str.len() >= min_word_len) & (w.freq >= min_word_freq)]
+
+    if sw:
+        w = w[~(w.word.isin(pandas.read_csv(sw, header=None)[0]))]
+
     w[["word_id", "word"]].reset_index(drop=True).to_sql(
         "vocabulary", f"sqlite:///{output}", index=True, index_label="id"
     )
 
-    d[d.len >= min_doc_len].reset_index(drop=True)[["document_id"]].merge(
-        dmeta, how="inner", left_on="document_id", right_on="id"
+    d.reset_index(drop=True)[["document_id"]].merge(
+        dmeta[dmeta.lenght >= min_doc_len],
+        how="inner",
+        left_on="document_id",
+        right_on="id",
     ).drop(columns=["id"]).to_sql(
         "document", f"sqlite:///{output}", index=True, index_label="id"
     )
@@ -520,7 +545,7 @@ def infer_uh_model(
     metric="cosine",
     min_cluster_size=5,
     min_samples=1,
-    cluster_selection_method='eom',
+    cluster_selection_method="eom",
     seeds=[1000, 1001, 1002, 1003, 1004],
 ):
     for s in seeds:
