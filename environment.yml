@@ -1,4 +1,4 @@
-name: mainstream
+name: mainstream2
 channels:
   - conda-forge
 dependencies:
@@ -27,7 +27,7 @@ dependencies:
   # analysis
   - seaborn
   # - pingouin
-  # - scikit-learn
+  - scikit-learn
   # polars
   # - polars
   # - pyarrow
