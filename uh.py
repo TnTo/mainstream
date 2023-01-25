@@ -5,16 +5,16 @@ import hdbscan
 import umap.plot
 
 # %%
-m = scipy.sparse.load_npz("sparse_stem_sw.npz")
+m = scipy.sparse.load_npz("sparse.npz")
 u = umap.UMAP(
-    n_components=2,
+    n_components=3,
     metric="cosine",
 )
 e = u.fit_transform(m)
 # %%
 c = hdbscan.HDBSCAN(
-    min_cluster_size=min_cluster_size,
-    min_samples=min_samples,
+    min_cluster_size=1000,
+    min_samples=1,
 )
 l = c.fit_predict(e)
 

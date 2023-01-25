@@ -1,40 +1,55 @@
 # %%
-import numpy as np
 import hdbscan
 import matplotlib.pylab as plt
+import numpy as np
 import pandas
+import scipy.sparse
 import seaborn
+import umap
 
 # %%
-path = "uh/stem_sw_None.npz"
-# %%
-e = np.load(path)["e"]
+m = scipy.sparse.load_npz("sparse.npz")
+u = umap.UMAP(
+    n_components=2,
+    metric="cosine",
+)
+e = u.fit_transform(m)
 # %%
 plt.scatter(e[:, 0], e[:, 1], s=3)
 # %%
-df = pandas.DataFrame(
-    [
-        (
-            lambda l: (
-                i,
-                j,
-                l.max() + 1,
-                np.round(1 - ((l == -1).sum() / l.shape[0]), 3),
+cs = 400
+for r in [100, 50, 25, 10, 1]:
+    print(cs)
+    df = pandas.DataFrame(
+        [
+            (
+                lambda l: (
+                    i,
+                    l.max() + 1,
+                    np.round(1 - ((l == -1).sum() / l.shape[0]), 3),
+                )
+            )(
+                hdbscan.HDBSCAN(
+                    min_cluster_size=i,
+                    min_samples=1,
+                ).fit_predict(e)
             )
-        )(
-            hdbscan.HDBSCAN(
-                min_cluster_size=i,
-                min_samples=j,
-            ).fit_predict(e)
+            for i in range(max(2, cs - 10 * r), min(3000, cs + 10 * r), r)
+        ],
+        columns=["min_cluster_size", "n_cluster", "pct_classified"],
+    )
+    print(
+        df[(df.n_cluster <= 10) & (df.n_cluster >= 5)].sort_values(
+            "pct_classified", ascending=False
         )
-        for i in range(10, 1001, 50)
-        for j in [1, 10, 100, 250, 500, None]
-    ],
-    columns=["min_cluster_size", "min_sample", "n_cluster", "pct_classified"],
-)
-# %%
-df["log_n_cluster"] = np.log10(df.n_cluster)
-df.min_sample = df.min_sample.fillna("None")
+    )
+    cs = int(
+        df[(df.n_cluster <= 10) & (df.n_cluster >= 5)]
+        .sort_values("pct_classified", ascending=False)
+        .iloc[0]
+        .min_cluster_size
+    )
+
 # %%
 seaborn.FacetGrid(
     data=df.melt(id_vars=["min_cluster_size", "min_sample"]),
