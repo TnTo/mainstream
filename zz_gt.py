@@ -5,9 +5,11 @@ import pandas
 from multiprocessing import Pool
 import sklearn.metrics
 import scipy.sparse
+import numpy
 import numpy.random
 import math
 import os
+import seaborn
 
 # %%
 numpy.random.seed(8686)
@@ -15,7 +17,7 @@ numpy.random.seed(8686)
 # %%
 seeds = [1000, 1001, 1002]
 
-
+# %%
 def load(s):
     return pickle.load(open(f"state_{s}.pkl", "rb"))
 
@@ -111,6 +113,7 @@ df[(df.seed == 1002)].groupby("kind").nunique()[["group"]]
 #%%
 m = scipy.sparse.load_npz("sparse.npz")
 words = pandas.read_sql("vocabulary", "sqlite:///data.db").sort_values("id")
+docs = pandas.read_sql("document", "sqlite:///data.db").sort_values("id")
 try:
     os.mkdir("out")
 except:
@@ -139,15 +142,26 @@ for s in seeds:
     word_topic["freq"] = m.sum(axis=0).T.astype(int)
     word_topic = word_topic.sort_values("freq", ascending=False)
 
-    for i in range(word_topic["topic"].nunique()):
+    T = word_topic["topic"].nunique()
+    G = groups.group.nunique()
+
+    for i in range(T):
         word_topic.query("topic == @i")[["word", "freq"]].to_csv(
             f"out/{s}/topic_{i}.csv", index=False
         )
     # Word-Group
-    for i in range(groups.group.nunique()):
+    for i in range(G):
         words.assign(
             freq=(m[groups.iloc[i].id, :].sum(axis=0) / m[groups.iloc[i].id, :].sum()).T
         ).sort_values("freq", ascending=False)[["word", "freq"]].to_csv(
             f"out/{s}/group_words_{i}.csv", index=False
         )
+    # Topic-Group
+    tg = numpy.zeros((G, T))
+    for t in range(word_topic["topic"].nunique()):
+        for g in range(groups.group.nunique()):
+            tg[g, t] = m[groups.iloc[g].id, :][:, topics.iloc[t].id].sum()
+    tg = tg / m.sum()
+    pandas.DataFrame(tg).to_csv(f"out/{s}/group_topic.csv")
+
     # %%
