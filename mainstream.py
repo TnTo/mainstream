@@ -14,21 +14,23 @@ import scipy.sparse
 
 import umap
 
+import pandas
+
 ### modin ###
-import modin.pandas as pandas
-import ray
+# import modin.pandas as pandas
+# import ray
 
 
-def my_to_sql(self, *args, **kwargs):
-    return pandas.dataframe.DataFrame._to_pandas(self).to_sql(*args, **kwargs)
+# def my_to_sql(self, *args, **kwargs):
+#    return pandas.dataframe.DataFrame._to_pandas(self).to_sql(*args, **kwargs)
 
 
-pandas.base.BasePandasDataset.to_sql = my_to_sql
+# pandas.base.BasePandasDataset.to_sql = my_to_sql
 
-ray.init(
-    ignore_reinit_error=True,
-    runtime_env={"env_vars": {"__MODIN_AUTOIMPORT_PANDAS__": "1"}},
-)
+# ray.init(
+#    ignore_reinit_error=True,
+#    runtime_env={"env_vars": {"__MODIN_AUTOIMPORT_PANDAS__": "1"}},
+# )
 ### end modin ###
 
 stemmer = nltk.stem.SnowballStemmer(language="english")
@@ -373,7 +375,6 @@ def create_sparse(input="data.db", output="sparse.npz"):
 def infer_hsbm_tm(
     input="graph.gt.gz",
     output_prefix="state",
-    overlap=False,
     verbose=False,
     seeds=[1000, 1001, 1002, 1003, 1004],
 ):
@@ -384,19 +385,17 @@ def infer_hsbm_tm(
     label = g.vp["kind"]
 
     state_args = {"clabel": label}
-    if not overlap:
-        state_args["pclabel"] = label
-        state_args["eweight"] = g.ep.count
+    state_args["pclabel"] = label
+    state_args["eweight"] = g.ep.count
 
     for s in seeds:
         np.random.seed(s)
         gt.seed_rng(s)
 
         print(f"Seed {s}")
-        base_type = gt.OverlapBlockState if overlap else gt.BlockState
         state = gt.minimize_nested_blockmodel_dl(
             g,
-            state_args=dict(base_type=base_type, **state_args),
+            state_args=dict(base_type=gt.BlockState, **state_args),
             multilevel_mcmc_args=dict(verbose=verbose),
         )
         L = 0
@@ -408,9 +407,38 @@ def infer_hsbm_tm(
         print(state)
         print("Saving...")
         with open(f"{output_prefix}_{s}.pkl", "wb") as f:
-            pickle.dump(state, f)
+            pickle.dump(state, f, -1)
         print("Saved!")
         del state
+
+
+def infer_hsbm_tm_soft(
+    input_prefix="state",
+    output_prefix="state_o",
+    niter=100,
+    seeds=[1000, 1001, 1002, 1003, 1004],
+):
+    for s in seeds:
+        print(f"Seed {s}")
+        np.random.seed(s)
+        gt.seed_rng(s)
+        state = pickle.load(open(f"{input_prefix}_{s}.pkl", "rb")).copy(
+            state_args=dict(overlap=True)
+        )
+        print("Loaded!")
+        dS, nmoves = 0, 0
+        for i in range(niter):
+            if i % 10 == 0:
+                print(i, "of", niter)
+            ret = state.multiflip_mcmc_sweep(niter=10, verbose=True)
+            dS += ret[0]
+            nmoves += ret[1]
+
+        print("Change in description length:", dS)
+        print("Number of accepted vertex moves:", nmoves)
+        with open(f"{output_prefix}_{s}.pkl", "wb") as f:
+            pickle.dump(state, f)
+        print("Saved!")
 
 
 def dump_level(g, V, D, state, root_results_dir, l, overlap):
