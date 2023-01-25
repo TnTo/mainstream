@@ -1,4 +1,4 @@
-name: mainstream2
+name: mainstream
 channels:
   - conda-forge
 dependencies:
@@ -19,16 +19,16 @@ dependencies:
   - umap-learn
   - hdbscan
   # umap.plot
-  # - datashader
-  # - bokeh
-  # - holoviews >= 1.15
-  # - scikit-image 
-  # - colorcet 
+  - datashader
+  - bokeh
+  - holoviews >= 1.15
+  - scikit-image 
+  - colorcet 
   # analysis
   - seaborn
-  # - pingouin
+  - pingouin
   - scikit-learn
   # polars
-  # - polars
-  # - pyarrow
-  # - connectorx
+  - polars
+  - pyarrow
+  - connectorx
