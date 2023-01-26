@@ -10,3 +10,4 @@ sparse*.npz
 results_*
 *.db-journal
 <*>
+.env
