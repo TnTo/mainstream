@@ -32,3 +32,5 @@ dependencies:
   - polars
   - pyarrow
   - connectorx
+  # metadata
+  - python-dotenv
