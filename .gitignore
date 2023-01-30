@@ -11,3 +11,4 @@ results_*
 *.db-journal
 <*>
 .env
+*.ods
