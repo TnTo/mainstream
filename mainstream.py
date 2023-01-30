@@ -1,6 +1,5 @@
 import glob
 import json
-import os
 import pickle
 import re
 import sqlite3
@@ -16,20 +15,20 @@ import scipy.sparse
 import umap
 
 ### modin ###
-# import modin.pandas as pandas
-# import ray
+import modin.pandas as pandas
+import ray
 
 
-# def my_to_sql(self, *args, **kwargs):
-#    return pandas.dataframe.DataFrame._to_pandas(self).to_sql(*args, **kwargs)
+def my_to_sql(self, *args, **kwargs):
+    return pandas.dataframe.DataFrame._to_pandas(self).to_sql(*args, **kwargs)
 
 
-# pandas.base.BasePandasDataset.to_sql = my_to_sql
+pandas.base.BasePandasDataset.to_sql = my_to_sql
 
-# ray.init(
-#    ignore_reinit_error=True,
-#    runtime_env={"env_vars": {"__MODIN_AUTOIMPORT_PANDAS__": "1"}},
-# )
+ray.init(
+    ignore_reinit_error=True,
+    runtime_env={"env_vars": {"__MODIN_AUTOIMPORT_PANDAS__": "1"}},
+)
 ### end modin ###
 
 stemmer = nltk.stem.SnowballStemmer(language="english")
