@@ -27,48 +27,43 @@ with Pool(4) as p:
 states
 
 # %%
-S = [state.entropy() for state in states]
-S
-
-# %%
-levels = [
-    states[0].levels[3],
-    states[1].levels[3],
-    states[2].levels[3],
-]
-levels
-
-# %%
-lS = [l.entropy() for l in levels]
-lS
-
-# %%
-pickle.dump(levels, open("levels.pkl", "wb"), -1)
+S = []
+for i, s in enumerate(seeds):
+    S.append((s, None, states[i].entropy()))
+    for j, l in enumerate(states[i].get_levels()):
+        S.append((s, j, l.entropy()))
+pandas.DataFrame(S, columns=["seed", "level", "entropy"]).to_csv(
+    "entropy.csv", index=False
+)
 
 # %%
 g = gt.load_graph("graph.gt.gz")
 
 # %%
-def get_groups(state, seed):
-    level = state.levels[3]
+def get_groups(state, seed, l):
+    level = state.levels[l]
     b = gt.contiguous_map(level.b)
     label_map = {}
     for v in g.vertices():
         label_map[level.b[v]] = b[v]
     return pandas.DataFrame(
         {
+            "seed": seed,
+            "level": l,
             "id": g.vp["id"].a,
             "kind": g.vp["kind"].a,
-            "group": [label_map[b] for b in state.project_level(3).get_blocks()],
-            "seed": seed,
+            "group": [label_map[b] for b in state.project_level(l).get_blocks()],
         }
     )
 
 
-df = pandas.concat([get_groups(state, 1000 + i) for i, state in enumerate(states)])
-
-
-# %%
+df = pandas.concat(
+    [
+        get_groups(states[i], s, l)
+        for i, s in enumerate(seeds)
+        for l, _ in enumerate(states[i].get_levels())
+    ]
+)
 df.to_csv("groups.csv", index=False)
 
 # %%
