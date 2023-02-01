@@ -1,8 +1,26 @@
 # %%
 ## IMPORT
+import os
+
 import matplotlib
 import pandas
 import seaborn
+import numpy
+import scipy.sparse
+import sklearn.metrics
+
+seaborn.set_style("whitegrid")
+seaborn.set_context("paper")
+seaborn.set_palette("colorblind")
+numpy.random.seed(8686)
+
+
+def mkdir(p):
+    try:
+        os.mkdir(p)
+    except:
+        pass
+
 
 # %%
 ## JOURNAL CHOICE
@@ -131,3 +149,219 @@ def plot_journals(df):
 plot_journals(df2)
 
 # %%
+## MODEL SELECTION
+model = pandas.read_sql("model", "sqlite:///model.db")
+model.kind = model.kind.replace({0: "D", 1: "W"})
+
+# %%
+print(
+    model.groupby(["seed", "level"])
+    .group.nunique()
+    .reset_index()
+    .pivot(index="level", columns="seed", values="group")
+    .astype("Int64")
+)
+
+# %%
+S = pandas.read_csv("entropy.csv")
+print(
+    S[S.level.isna()]
+    .sort_values("entropy")[["seed", "entropy"]]
+    .merge(S[S.level == 3].sort_values("entropy")[["seed", "entropy"]], on="seed")
+    .rename(columns={"entropy_x": "Model Entropy", "entropy_y": "Level 3 Entropy"})
+)
+
+# %%
+## MODEL ANALYSIS
+Ns = (
+    model.groupby(["seed", "level", "kind", "group"])
+    .count()
+    .reset_index()
+    .rename(columns={"id": "N"})
+)
+
+print(Ns[Ns.level == 4])
+
+# %%
+seaborn.FacetGrid(Ns[Ns.level == 3], col="seed", hue="kind").map_dataframe(
+    seaborn.histplot, x="N", kde=True, element="step", stat="percent"
+).add_legend()
+
+# %%
+seaborn.FacetGrid(Ns[Ns.level == 2], col="seed", hue="kind").map_dataframe(
+    seaborn.histplot, x="N", kde=True, element="step", stat="percent"
+).add_legend()
+
+# %%
+Egroup = model.groupby("level").group.mean().apply(numpy.ceil)
+
+
+def mi(data, l):
+    m = data[data.level == l].pivot(
+        index=["id", "kind"], columns="seed", values="group"
+    )
+    m = m.assign(random=numpy.random.randint(Egroup.loc[l], size=len(m)))
+    mi = numpy.zeros((len(m.columns), len(m.columns)))
+    for i in range(len(m.columns)):
+        for j in range(len(m.columns)):
+            mi[i, j] = sklearn.metrics.normalized_mutual_info_score(
+                m.iloc[:, i].values, m.iloc[:, j].values
+            )
+    return mi
+
+
+labels = model.seed.unique().tolist() + ["RND"]
+
+# %%
+seaborn.heatmap(mi(model, 3), annot=True, xticklabels=labels, yticklabels=labels)
+# %%
+seaborn.heatmap(mi(model, 2), annot=True, xticklabels=labels, yticklabels=labels)
+
+# %%
+## MODEL INTERPRETATION
+m = scipy.sparse.load_npz("sparse.npz")
+words = pandas.read_sql("vocabulary", "sqlite:///data.db").sort_values("id")
+docs = pandas.read_sql("document", "sqlite:///data.db").sort_values("id")
+
+# %%
+def dump(s, l):
+    mkdir("out")
+    mkdir(f"out/{s}")
+    mkdir(f"out/{s}/{l}")
+    mkdir(f"out/{s}/{l}/W")
+    mkdir(f"out/{s}/{l}/D")
+
+    df = model[(model.seed == s) & (model.level == l)]
+
+    T = (
+        df[df.kind == "W"]
+        .merge(words, on="id")[["group", "id", "word"]]
+        .merge(
+            pandas.Series(numpy.asarray(m.sum(axis=0)).squeeze(), name="n").astype(int),
+            left_on="id",
+            right_index=True,
+        )
+    )
+    T["freq"] = T.n / T.groupby("group").n.transform("sum")
+    for g in T.group.unique():
+        print("Topic: ", g)
+        print(
+            T[T.group == g][["word", "freq"]]
+            .sort_values("freq", ascending=False)
+            .head(10)
+        )
+        T[T.group == g][["word", "freq"]].sort_values("freq", ascending=False).to_csv(
+            f"out/{s}/{l}/W/{g}.csv", index=False
+        )
+
+    G = df[df.kind == "D"].groupby("group").id.agg(list)
+    for g in G.index:
+        print("Group: ", g)
+        print(
+            words.merge(
+                pandas.Series(
+                    numpy.asarray(
+                        m[G.loc[g], :].sum(axis=0) / m[G.loc[g], :].sum()
+                    ).squeeze(),
+                    name="freq",
+                ),
+                left_on="id",
+                right_index=True,
+            )[["word", "freq"]]
+            .sort_values("freq", ascending=False)
+            .head(10)
+        )
+        words.merge(
+            pandas.Series(
+                numpy.asarray(
+                    m[G.loc[g], :].sum(axis=0) / m[G.loc[g], :].sum()
+                ).squeeze(),
+                name="freq",
+            ),
+            left_on="id",
+            right_index=True,
+        )[["word", "freq"]].sort_values("freq", ascending=False).to_csv(
+            f"out/{s}/{l}/D/{g}.csv", index=False
+        )
+
+
+# %%
+dump(1000, 3)
+dump(1001, 3)
+dump(1002, 3)
+# %%
+def plot(s, l, labels=None):
+
+    df = (
+        model[(model.seed == s) & (model.level == l) & (model.kind == "D")]
+        .merge(docs, on="id")
+        .groupby(["year", "group"])
+        .count()
+        .id.rename("N")
+        .reset_index()
+    )
+
+    if labels:
+        df.group = df.group.replace(labels)
+
+    # seaborn.lineplot(
+    #     data=df.astype({"group": "category"}),
+    #     x="year",
+    #     y="N",
+    #     hue="group",
+    #     color="colorblind",
+    # )
+
+    # matplotlib.pyplot.show()
+
+    seaborn.lineplot(
+        data=df.sort_values("year")
+        .set_index("year")
+        .groupby("group")
+        .rolling(10, center=True)
+        .N.mean()
+        .reset_index()
+        .astype({"group": "category"}),
+        x="year",
+        y="N",
+        hue="group",
+        color="colorblind",
+    )
+
+    matplotlib.pyplot.show()
+
+
+# %%
+labels = {
+    0: "Industrial Organization",  # D
+    1: "Labour",  # W
+    2: "Game Theory",  # D
+    3: "Applied Microeconomics - Labour",  # D
+    4: "Labour",  # D
+    5: "Production",  # W
+    6: "Mathematics",  # W
+    7: "International - Development",  # D
+    8: "Microdata",  # W
+    9: "Macro - Trade - Growth",  # D
+    10: "Game Theory",  # W
+    11: "Applied Microeconomics",  # D
+    12: "Macroeconomics",  # D
+    13: "Credit",  # W
+    14: "Mathematics",  # D
+    15: "Industrial Organization",  # W
+    16: "StopWords1",  # W
+    17: "Econometrics - Time",  # W
+    18: "Macroeconomics",  # W
+    19: "Econometrics",  # W
+    20: "StopWords2",  # W
+}
+
+# %%
+plot(1000, 3, labels)
+plot(1001, 3)
+plot(1002, 3)
+# %%
+
+### G-T Composition
+
+###
