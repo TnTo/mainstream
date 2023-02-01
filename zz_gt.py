@@ -11,60 +11,6 @@ import math
 import os
 import seaborn
 
-# %%
-numpy.random.seed(8686)
-
-# %%
-seeds = [1000, 1001, 1002]
-
-# %%
-def load(s):
-    return pickle.load(open(f"state_{s}.pkl", "rb"))
-
-
-with Pool(4) as p:
-    states = p.map(load, seeds)
-states
-
-# %%
-S = []
-for i, s in enumerate(seeds):
-    S.append((s, None, states[i].entropy()))
-    for j, l in enumerate(states[i].get_levels()):
-        S.append((s, j, l.entropy()))
-pandas.DataFrame(S, columns=["seed", "level", "entropy"]).to_csv(
-    "entropy.csv", index=False
-)
-
-# %%
-g = gt.load_graph("graph.gt.gz")
-
-# %%
-def get_groups(state, seed, l):
-    level = state.levels[l]
-    b = gt.contiguous_map(level.b)
-    label_map = {}
-    for v in g.vertices():
-        label_map[level.b[v]] = b[v]
-    return pandas.DataFrame(
-        {
-            "seed": seed,
-            "level": l,
-            "id": g.vp["id"].a,
-            "kind": g.vp["kind"].a,
-            "group": [label_map[b] for b in state.project_level(l).get_blocks()],
-        }
-    )
-
-
-df = pandas.concat(
-    [
-        get_groups(states[i], s, l)
-        for i, s in enumerate(seeds)
-        for l, _ in enumerate(states[i].get_levels())
-    ]
-)
-df.to_csv("groups.csv", index=False)
 
 # %%
 df[(df.kind == 1)].groupby("seed").nunique()[["group"]]
