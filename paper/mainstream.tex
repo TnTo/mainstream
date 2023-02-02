@@ -1,0 +1,94 @@
+\documentclass[a4paper, headings=standardclasses]{scrartcl}
+
+\usepackage{authblk}
+\renewcommand{\Affilfont}{\small}
+\usepackage[style=authoryear, backend=biber, sorting=nyt, useprefix=true]{biblatex}
+\usepackage[autostyle=false, style=english]{csquotes}
+\MakeOuterQuote{"}
+\usepackage[english]{babel}
+\usepackage{appendix}
+
+%\addbibresource{mainstream.bib}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\title{How is the Mainstream changed? \let\thefootnote\relax\footnotetext{This is footnote}}
+\subtitle{A Topic Model insight}
+\author{Michele Ciruzzi\thanks{mciruzzi@uninsubria.it - https://orcid.org/0000-0003-1485-1204}}
+
+\begin{document}
+	
+	\maketitle
+	
+  %\begin{abstract}
+	%\end{abstract}
+
+  \section{Why studiyng the mainstream?}
+  % The tyranny of the top five
+  % Theology in economics
+
+  \section{The interpretative hypothesis}
+  % Mainstream pluralism
+  % Empirical turn
+
+  \section{Distant Reading and quantitative methods in the History of Economic Thought}
+  % Distant Reading
+  % Brief lit review
+
+  \section{The choice of the corpus}
+  % JSTOR
+  % IF
+  % Older papers
+  
+  \subsection{A first qualitative description}
+
+  \section{A strategy of analysis: the Topic Models}
+  % From questions to methods
+  
+  \subsection{The choice of the algorithm}
+  % Brief lit review on TM
+  % Latent variable vs clustering
+
+  \subsection{Model selection, validation and description}
+
+  \section{Interpreting the model}
+
+  \subsection{The empirical turn}
+
+  \subsection{Mainstream pluralism?}
+
+  \section{Limitations}
+  \subsection{Chosing the corpus}
+  % Data availability
+
+  \subsection{The quest for a good Topic Modelling algorithm}
+
+  \subsection{Interpreting the topics}
+  % Mixing sources
+
+  \subsection{Assess the robustness}
+  % Preprocessing
+  % Clustering
+  % Interpretation
+
+  \section{What's next?}
+  \subsection{Rephrasing the questions for a theory-driven Distant Reading}
+
+  \subsection{Enhancing the database}
+  % Citations, JEL, Missing journals
+
+  \clearpage
+  \printbibliography
+  \clearpage
+
+  \begin{appendices}
+  \section{Results from different random seeds}
+
+  \end{appendices}
+
+\end{document}
