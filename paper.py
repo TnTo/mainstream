@@ -468,14 +468,14 @@ similar_papers(1001, 3)
 similar_papers(1002, 3)
 
 # %%
+graph = pandas.read_sql("graph", "sqlite:///data.db")
+# %%
 def plot_word_N(s, l, labels=None):
     df = model[(model.seed == s) & (model.level == l) & (model.kind == "D")]
     if labels:
         df.group = df.group.replace(labels)
     df = df.merge(docs, on="id")
-    df = pandas.read_sql("graph", "sqlite:///data.db").merge(
-        df[["year", "group", "id"]], left_on="document_id", right_on="id"
-    )
+    df = graph.merge(df[["year", "group", "id"]], left_on="document_id", right_on="id")
     data1 = (
         df.groupby(["year", "group"])
         .word_id.nunique()
@@ -508,4 +508,85 @@ def plot_word_N(s, l, labels=None):
 plot_word_N(1000, 3, labels)
 plot_word_N(1001, 3)
 plot_word_N(1002, 3)
+# %%
+def plot_word_n(s, l, labels=None):
+    df = model[(model.seed == s) & (model.level == l) & (model.kind == "D")]
+    if labels:
+        df.group = df.group.replace(labels)
+    df1 = df.merge(docs, on="id")
+    df2 = graph.merge(
+        df1[["year", "group", "id"]], left_on="document_id", right_on="id"
+    )
+
+    seaborn.lineplot(
+        data=(
+            df2.groupby(["year", "group"])
+            .word_id.nunique()
+            .reset_index()
+            .set_index(["group", "year"])
+            .word_id
+            / df1.groupby(["year", "group"])
+            .id.count()
+            .reset_index()
+            .set_index(["group", "year"])
+            .id
+        )
+        .reset_index()
+        .sort_values("year")
+        .set_index("year")
+        .groupby("group")
+        .rolling(10, center=True)[0]
+        .mean()
+        .reset_index(),
+        x="year",
+        y=0,
+        hue="group",
+    )
+    matplotlib.pyplot.show()
+
+
+# %%
+plot_word_n(1000, 3, labels)
+plot_word_n(1001, 3)
+plot_word_n(1002, 3)
+# %%
+def plot_word_y():
+
+    seaborn.lineplot(
+        data=(
+            graph.merge(docs[["year", "id"]], left_on="document_id", right_on="id")
+            .groupby("year")
+            .word_id.nunique()
+            .reset_index()
+            .set_index("year")
+            .word_id
+            / docs.groupby("year").id.count().reset_index().set_index("year").id
+        )
+        .reset_index()
+        .sort_values("year")
+        .set_index("year")
+        .rolling(10, center=True)[0]
+        .mean()
+        .reset_index(),
+        x="year",
+        y=0,
+    )
+    ax2 = matplotlib.pyplot.twinx()
+    seaborn.lineplot(
+        data=docs.groupby("year")
+        .id.count()
+        .reset_index()
+        .sort_values("year")
+        .set_index("year")
+        .rolling(10, center=True)
+        .id.mean()
+        .reset_index(),
+        x="year",
+        y="id",
+        ax=ax2,
+        dashes=(2, 2),
+    )
+
+
+plot_word_y()
 # %%
