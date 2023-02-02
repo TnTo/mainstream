@@ -224,7 +224,32 @@ words = pandas.read_sql("vocabulary", "sqlite:///data.db").sort_values("id")
 docs = pandas.read_sql("document", "sqlite:///data.db").sort_values("id")
 
 # %%
-def dump(s, l):
+labels = {
+    0: "Industrial Organization",  # D
+    1: "Labour",  # W
+    2: "Game Theory",  # D
+    3: "Applied Microeconomics - Labour",  # D
+    4: "Labour",  # D
+    5: "Production",  # W
+    6: "Mathematics",  # W
+    7: "International - Development",  # D
+    8: "Microdata",  # W
+    9: "Macro - Trade - Growth",  # D
+    10: "Game Theory",  # W
+    11: "Applied Microeconomics",  # D
+    12: "Macroeconomics",  # D
+    13: "Credit",  # W
+    14: "Mathematics",  # D
+    15: "Industrial Organization",  # W
+    16: "StopWords1",  # W
+    17: "Econometrics - Time",  # W
+    18: "Macroeconomics",  # W
+    19: "Econometrics",  # W
+    20: "StopWords2",  # W
+}
+
+# %%
+def dump(s, l, labels=None):
     mkdir("out")
     mkdir(f"out/{s}")
     mkdir(f"out/{s}/{l}")
@@ -245,6 +270,8 @@ def dump(s, l):
     T["freq"] = T.n / T.groupby("group").n.transform("sum")
     for g in T.group.unique():
         print("Topic: ", g)
+        if labels:
+            print(labels[g])
         print(
             T[T.group == g][["word", "freq"]]
             .sort_values("freq", ascending=False)
@@ -257,6 +284,8 @@ def dump(s, l):
     G = df[df.kind == "D"].groupby("group").id.agg(list)
     for g in G.index:
         print("Group: ", g)
+        if labels:
+            print(labels[g])
         print(
             words.merge(
                 pandas.Series(
@@ -286,7 +315,7 @@ def dump(s, l):
 
 
 # %%
-dump(1000, 3)
+dump(1000, 3, labels)
 dump(1001, 3)
 dump(1002, 3)
 # %%
@@ -332,36 +361,151 @@ def plot(s, l, labels=None):
 
 
 # %%
-labels = {
-    0: "Industrial Organization",  # D
-    1: "Labour",  # W
-    2: "Game Theory",  # D
-    3: "Applied Microeconomics - Labour",  # D
-    4: "Labour",  # D
-    5: "Production",  # W
-    6: "Mathematics",  # W
-    7: "International - Development",  # D
-    8: "Microdata",  # W
-    9: "Macro - Trade - Growth",  # D
-    10: "Game Theory",  # W
-    11: "Applied Microeconomics",  # D
-    12: "Macroeconomics",  # D
-    13: "Credit",  # W
-    14: "Mathematics",  # D
-    15: "Industrial Organization",  # W
-    16: "StopWords1",  # W
-    17: "Econometrics - Time",  # W
-    18: "Macroeconomics",  # W
-    19: "Econometrics",  # W
-    20: "StopWords2",  # W
-}
-
-# %%
 plot(1000, 3, labels)
 plot(1001, 3)
 plot(1002, 3)
 # %%
-
 ### G-T Composition
+def gt(s, l, labels=None):
+    df = model[(model.seed == s) & (model.level == l)]
+    if labels:
+        df.group = df.group.replace(labels)
+    G = df[df.kind == "D"].groupby("group").id.agg(list)
+    T = df[df.kind == "W"].groupby("group").id.agg(list)
+    data = pandas.DataFrame(
+        [(g, t, m[G.loc[g], :][:, T.loc[t]].sum()) for g in G.index for t in T.index],
+        columns=["Group", "Topic", "N"],
+    )
+    data.N = data.N / data.groupby("Group").N.transform("sum")
+    data = data.sort_values("N", ascending=False)
+    for g in data.Group.unique():
+        buffer = f"{g} ="
+        for t in data[data.Group == g].itertuples():
+            if t.N >= 0.1:
+                buffer += f" {t.N:.2f}*{t.Topic} +"
+        print(buffer[:-2])
 
-###
+
+# %%
+gt(1000, 3, labels)
+
+# %%
+# Topic over time
+def plot_topics(s, l, labels=None):
+    df = model[(model.seed == s) & (model.level == l)]
+    if labels:
+        df.group = df.group.replace(labels)
+    Y = df[df.kind == "D"].merge(docs, on="id").groupby("year").id.agg(list)
+    T = df[df.kind == "W"].groupby("group").id.agg(list)
+    data = pandas.DataFrame(
+        [(y, t, m[Y.loc[y], :][:, T.loc[t]].sum()) for y in Y.index for t in T.index],
+        columns=["Year", "Topic", "N"],
+    )
+    data.N = data.N / data.groupby("Year").N.transform("sum")
+
+    seaborn.lineplot(
+        data=data.sort_values("Year")
+        .set_index("Year")
+        .groupby("Topic")
+        .rolling(10, center=True)
+        .N.mean()
+        .reset_index()
+        .astype({"Topic": "category"}),
+        x="Year",
+        y="N",
+        hue="Topic",
+        color="colorblind",
+    )
+
+    matplotlib.pyplot.show()
+
+
+# %%
+plot_topics(1000, 3, labels)
+
+# %%
+### Most similar papers
+def similar_papers(s, l, labels=None, n=5):
+    df = model[(model.seed == s) & (model.level == l)]
+    if labels:
+        df.group = df.group.replace(labels)
+    G = df[df.kind == "D"].groupby("group").id.agg(list)
+
+    simil = (
+        pandas.DataFrame(
+            sklearn.metrics.pairwise.cosine_similarity(
+                m,
+                numpy.array(
+                    [
+                        numpy.asarray(m[G.loc[g], :].sum(axis=0)).squeeze()
+                        for g in G.index
+                    ]
+                ),
+            ),
+            columns=G.index,
+        )
+        .reset_index()
+        .melt(id_vars=("index",))
+    )
+    simil.columns = ["id", "group", "sim"]
+    simil = (
+        simil.set_index("id")
+        .groupby("group")
+        .sim.nlargest(n)
+        .reset_index()
+        .rename(columns={"level_1": "id"})
+        .merge(docs, on="id")
+    )
+
+    for g in simil.group.unique():
+        print(g)
+        print(simil[simil.group == g][["title", "authors", "journal", "year", "sim"]])
+
+
+# %%
+similar_papers(1000, 3, labels)
+similar_papers(1001, 3)
+similar_papers(1002, 3)
+
+# %%
+def plot_word_N(s, l, labels=None):
+    df = model[(model.seed == s) & (model.level == l) & (model.kind == "D")]
+    if labels:
+        df.group = df.group.replace(labels)
+    df = df.merge(docs, on="id")
+    df = pandas.read_sql("graph", "sqlite:///data.db").merge(
+        df[["year", "group", "id"]], left_on="document_id", right_on="id"
+    )
+    data1 = (
+        df.groupby(["year", "group"])
+        .word_id.nunique()
+        .reset_index()
+        .sort_values("year")
+        .set_index("year")
+        .groupby("group")
+        .rolling(10, center=True)
+        .word_id.mean()
+        .reset_index()
+    )
+    data2 = (
+        docs.groupby("year")
+        .id.count()
+        .reset_index()
+        .sort_values("year")
+        .set_index("year")
+        .rolling(10, center=True)
+        .id.mean()
+        .reset_index()
+    )
+
+    seaborn.lineplot(data=data1, x="year", y="word_id", hue="group")
+    ax2 = matplotlib.pyplot.twinx()
+    seaborn.lineplot(data=data2, x="year", y="id", ax=ax2, dashes=(2, 2))
+    matplotlib.pyplot.show()
+
+
+# %%
+plot_word_N(1000, 3, labels)
+plot_word_N(1001, 3)
+plot_word_N(1002, 3)
+# %%
