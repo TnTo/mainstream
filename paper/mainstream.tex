@@ -36,7 +36,7 @@
 To understand the reasons of this work and, eventually, its scientific relevance a premise is needed.
 
 Economics as discipline presents very strong social norms and a very hierarchical structure.
-As result, it is possible, and quite easy, to identify a small group of journals in which the scholars in the top US department often publish \parencite{card2013,kim2006,kim2009,dusansky1998,hamermesh2013}.
+As result, it is possible, and quite easy, to identify a small group of journals in which the scholars in the top US department often publish \parencite{card2013,kim2006,kim2009,dusansky1998,hamermesh2013,ellison2003,heck2006}.
 Those are the same journals that are able to assure a scholar the tenure by publishing one of their papers \parencite{heckman2020}.
 
 In other words there is a group of journals (the Top5 or the Blue Ribbon Eight) which are liked (and managed) by those who are liked (and cited and funded) by the discipline.
@@ -79,8 +79,40 @@ The mainstream pluralism hypothesis states that this process of specialization i
 In the quantitative exercise that constitute the core of this paper, I try to find some evidences in favour of these two hypotheses.
 
 \section{Distant Reading and quantitative methods in the History of Economic Thought}
-% Distant Reading
-% Brief lit review
+A common problem in the study of the history of ideas (of which the history of economic thought is surely part) is the impossibility to accurately read a big number of textual documents in a reasonable time. A first, and often adopted, solution is to select a sample of relevant works, like the books of a single author or a handful of representative masterpieces of a period, and analyse only them.
+An alternative approach is what Franco Moretti called Distant Reading \parencite{moretti2013}: instead of carefully (close) reading few works, a big number of documents are summarily analysed using statistical methods and the aid of computers.
+Different features of a text can be analysed, but generally the focus is on the textual content of the document (recovered by a digital version or through OCRing) or some metadata (title, citations, authors' list).
+
+The kind of data used and of research questions tackled, move Distant Reading close to bibliometrics and text mining studies. The fil rouge
+which ties together Distant Reading studies is their motivation: overcome with quantitative techniques the impossibility to (close) read thousands of document to reconstruct the history of some idea.
+
+The history of neoclassical economics as mainstream economics covers at least thirty years and many journals. Moreover, its influence has been systemic, it has shaped the social norms of the discipline as a whole, and sampling some "representative masterpieces" (assuming the existence of a good enough criterion to select them) would not be able to return all the shades I'm looking for.
+
+Since those are not groundbreaking truths, this is not the first attempt to apply quantitative methods to the history of economic thought in order to get a broad picture of the evolution of the discipline in the last half-century.
+
+In 2018, an entire special issue of the \textit{Journal of Economic Methodology} was dedicated to the topic \parencite{edwards2018a,cherrier2018a}, but the trail goes way back in the past \parencite{backhouse1997}.
+The following is a brief review of some interesting works which address similar questions to mine.
+
+\textcite{kelly2011}, using JEL codes\footnote{The \textit{Journal of Economic Literature} (JEL) codes are a widely used taxonomy system to classify economics subfields, but their reliability is discussed, since their use appears to be highly subjective \parencite{cherrier2017,kosnik2018}.}, observe a reduction of microeconomics and macroeconomics papers and an increasing of finance and development economics papers.
+Moreover, the top journals over-represent microeconomics, mathematical and quantitative methods and labour economics.
+
+\textcite{hamermesh2013} shows that the quota of empirical articles in some top journals is increasing.
+
+\textcite{card2013} observe a bias toward theoretical microeconomics papers (and to a lesser degree applied microeconomics and macroeconomics ones) in top journals, which is reducing in the last years as empirical papers become more frequent.
+
+\textcite{claveau2016} clusterize the citation network to highlight seven subfields which are present during the entire studied period (1956-2014): econometrics, financial economics, development and trade economics, industrial economics and game theory (the largest subfield after 2000), history of economics and macroeconomic policies, macroeconomics and monetary policies, labour economics.
+In addition, they observe some clusters only at the beginning of the sequence, which are not preserved in subsequent years, and one cluster (environmental economics) which appears toward the end of the studied period.
+The increase in published papers makes the recognition of clusters more difficult at the end of the series, and it is possible that some clusters went undetected in the most recent years.
+Finally, they observe that it is typical for economics scholars to publish in more than one subfield.
+
+\textcite{angrist2017} found that the share of microeconomics (mostly theoretical) papers is steadily increasing, as well as the share of development economics ones, while typical applied microeconomics fields (like labour economics or industrial organization) see their shares reducing over time.
+Moreover, they describe the increase of empirical papers as a methodological shift inside the subfields, more than a change in research topics.
+
+\textcite{ambrosino2018} explore the whole JSTOR database on a decade-per-decade basis, using a Topic Model, going deep in describing the possibilities of this kind of approach.
+
+\textcite{fontana2019} observe an increasing usage of treatment effects models at expense of time series, a growth of development economics, game theory and education economics and a decline of industrial economics and macroeconomics. This study uses LDA on papers' full-text.
+
+Except for \textcite{ambrosino2018}, all the studies listed focus on a small subset of the economic journals, usually the "Top5"\footnote{\textit{The American Economic Review}, \textit{Econometrica}, \textit{Journal of Political Economy}, \textit{Quarterly Journal of Economics} and \textit{Review of Economic Studies} \parencite{heckman2020}.} or the "Blue Ribbon Eight"\footnote{The Top5 plus \textit{International Economic Review}, \textit{Journal of Economic Theory} and \textit{Review of Economics and Statistics} \parencite{dusansky1998}.}.
 
 \section{The choice of the data}
 % JEL, Citations
