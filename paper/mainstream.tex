@@ -100,7 +100,7 @@ Moreover, the top journals over-represent microeconomics, mathematical and quant
 
 \textcite{card2013} observe a bias toward theoretical microeconomics papers (and to a lesser degree applied microeconomics and macroeconomics ones) in top journals, which is reducing in the last years as empirical papers become more frequent.
 
-\textcite{claveau2016} clusterize the citation network to highlight seven subfields which are present during the entire studied period (1956-2014): econometrics, financial economics, development and trade economics, industrial economics and game theory (the largest subfield after 2000), history of economics and macroeconomic policies, macroeconomics and monetary policies, labour economics.
+\textcite{claveau2016} clusterise the citation network to highlight seven subfields which are present during the entire studied period (1956-2014): econometrics, financial economics, development and trade economics, industrial economics and game theory (the largest subfield after 2000), history of economics and macroeconomic policies, macroeconomics and monetary policies, labour economics.
 In addition, they observe some clusters only at the beginning of the sequence, which are not preserved in subsequent years, and one cluster (environmental economics) which appears toward the end of the studied period.
 The increase in published papers makes the recognition of clusters more difficult at the end of the series, and it is possible that some clusters went undetected in the most recent years.
 Finally, they observe that it is typical for economics scholars to publish in more than one subfield.
@@ -112,15 +112,32 @@ Moreover, they describe the increase of empirical papers as a methodological shi
 
 \textcite{fontana2019} observe an increasing usage of treatment effects models at expense of time series, a growth of development economics, game theory and education economics and a decline of industrial economics and macroeconomics. This study uses LDA on papers' full-text.
 
+\textcite{montesinos2019} measure the most frequent words in the title of the most cited papers of the last seventy years, highlighting a shift from "theory" to "evidence" (and so empirical research).
+
 Except for \textcite{ambrosino2018}, all the studies listed focus on a small subset of the economic journals, usually the "Top5"\footnote{\textit{The American Economic Review}, \textit{Econometrica}, \textit{Journal of Political Economy}, \textit{Quarterly Journal of Economics} and \textit{Review of Economic Studies} \parencite{heckman2020}.} or the "Blue Ribbon Eight"\footnote{The Top5 plus \textit{International Economic Review}, \textit{Journal of Economic Theory} and \textit{Review of Economics and Statistics} \parencite{dusansky1998}.}.
 
 \section{The choice of the data}
-% JEL, Citations
-% JSTOR
+Going back to the aim of this paper, the two question to be answered pertain the evolution of economics at least since the seventies, but, ideally, since the post-war period to be able to observe both a pre- and a post-neoclassical period.
+
+Moreover, the focus is on the mainstream economics, which allows a strong hypothesis in choosing the data: the journals perceived by the research community as the top journals are a representative sample of what is mainstream in the community, i.e. what is considered shared knowledge, high quality research and a signal of a path to follow.
+
+To select the top journals one can rely on the "common knowledge" represented by the Blue Ribbon Eight, and the rankings published throughout the history of the discipline or looking at some bibliometric indicator. The choice is obviously restricted by the availability of different data type.
+
+There are three potential data types to be used: citation network, articles' metadata (particularly JEL codes) and the articles' own text (or their abstract).
+
+I exclude the JEL codes because they are highly subjective and can change multiple times during the editorial process \parencite{kosnik2018}, and they are used to signal the (desire of) belonging to a scientific community which can be interested in reading the paper. They are, indeed, more a way to observe where the scholars desire to be, and so the relations inside the discipline, rather than the evolution of the ideas.
+
+Similar reasoning can be done with the citation network. Since, especially in more recent times, citations have become a currency with which buys funding and (tenured) positions. According to the Goodhart's law, they have become a poor metrics to measure the relevance of a paper, since the scholars have started to play the game.
+
+This reasoning leads me toward the use of the text of the articles. This strategy has an obvious downside (textual documents are more difficult to be analysed than a network or a taxonomy) but reduces some disadvantages of the two previous ones.
+To be honest, the text of a document is still influenced by the community in which a researcher put himself (the same idea is expressed differently by scholars of different schools of thought) but it is harder to be gamed (and, sincerely, maybe it is not a real downside).
+Finally, the selection bias of the authors in writing the abstracts can be avoided by using the full text of the articles, thanks to JSTOR.
+
+This choice rises a problem: not every journal is indexed on JSTOR. Particularly, of the Blue Ribbon Eight the \textit{International Economic Review} and the \textit{Journal of Economic Theory} are missing. I believe this absence is not significant, since the Top5 are still available, those two have slightly worse bibliometric indicators than the others and the sample is still pretty large.
+
+
 % IF
 % Older papers
-
-\subsection{A first qualitative description}
 
 \section{A strategy of analysis: the Topic Models}
 % From questions to methods
@@ -128,6 +145,11 @@ Except for \textcite{ambrosino2018}, all the studies listed focus on a small sub
 \subsection{The choice of the algorithm}
 % Brief lit review on TM
 % Latent variable vs clustering
+
+\section{Preliminary steps}
+
+\subsection{Corpus cleaning}
+% descriptive analysis
 
 \subsection{Model selection, validation and description}
 
