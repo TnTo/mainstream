@@ -12,3 +12,6 @@ results_*
 <*>
 .env
 *.ods
+*.log
+*.blg
+*.synctex.gz
