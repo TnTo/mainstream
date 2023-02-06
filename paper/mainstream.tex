@@ -1,14 +1,18 @@
+% !TeX spellcheck = en_GB 
 \documentclass[a4paper, headings=standardclasses]{scrartcl}
 
 \usepackage{authblk}
 \renewcommand{\Affilfont}{\small}
-\usepackage[style=authoryear, backend=biber, sorting=nyt, useprefix=true]{biblatex}
+\usepackage[style=apa, backend=biber, sorting=ynt, useprefix=true]{biblatex}
 \usepackage[autostyle=false, style=english]{csquotes}
 \MakeOuterQuote{"}
-\usepackage[english]{babel}
+\usepackage[british]{babel}
 \usepackage{appendix}
+\usepackage[modulo]{lineno}
 
-%\addbibresource{mainstream.bib}
+\linenumbers
+
+\addbibresource{mainstream.bib}
 
 \newcommand\blfootnote[1]{%
   \begingroup
@@ -17,78 +21,128 @@
   \endgroup
 }
 
-\title{How is the Mainstream changed? \let\thefootnote\relax\footnotetext{This is footnote}}
+\title{How is the Mainstream changed? \let\thefootnote\relax\footnotetext{This version is intended to be submitted to the XV ESHET Conference}}
 \subtitle{A Topic Model insight}
 \author{Michele Ciruzzi\thanks{mciruzzi@uninsubria.it - https://orcid.org/0000-0003-1485-1204}}
 
 \begin{document}
-	
-	\maketitle
-	
-  %\begin{abstract}
-	%\end{abstract}
 
-  \section{Why studiyng the mainstream?}
-  % The tyranny of the top five
-  % Theology in economics
+\maketitle
 
-  \section{The interpretative hypothesis}
-  % Mainstream pluralism
-  % Empirical turn
+%\begin{abstract}
+%\end{abstract}
 
-  \section{Distant Reading and quantitative methods in the History of Economic Thought}
-  % Distant Reading
-  % Brief lit review
+\section{Why studying the mainstream?}
+To understand the reasons of this work and, eventually, its scientific relevance a premise is needed.
 
-  \section{The choice of the corpus}
-  % JSTOR
-  % IF
-  % Older papers
-  
-  \subsection{A first qualitative description}
+Economics as discipline presents very strong social norms and a very hierarchical structure.
+As result, it is possible, and quite easy, to identify a small group of journals in which the scholars in the top US department often publish \parencite{card2013,kim2006,kim2009,dusansky1998,hamermesh2013}.
+Those are the same journals that are able to assure a scholar the tenure by publishing one of their papers \parencite{heckman2020}.
 
-  \section{A strategy of analysis: the Topic Models}
-  % From questions to methods
-  
-  \subsection{The choice of the algorithm}
-  % Brief lit review on TM
-  % Latent variable vs clustering
+In other words there is a group of journals (the Top5 or the Blue Ribbon Eight) which are liked (and managed) by those who are liked (and cited and funded) by the discipline.
 
-  \subsection{Model selection, validation and description}
+This concentration of power and, as consequence, prestige have, inevitably, create a notion of prestige in every aspect of the discipline: there are more prestigious theories, more prestigious research topics, more prestigious departments and so on.
 
-  \section{Interpreting the model}
+But the step is short in the underfunded academia to make the post prestigious alternatives the only alternatives, inducing conformism and, as a matter of necessity, excluding less prestigious theories from scientific debate.
 
-  \subsection{The empirical turn}
+The prestigious economics is, politely, knows as \textit{mainstream economics} or, in a more colourful way, as \textit{orthodox economics}. The idea of an orthodoxy, and so of some competing heterodoxies, move the analysis to the semantic field of religion and faith. And it is wanted.
 
-  \subsection{Mainstream pluralism?}
+As many, mostly heterodox, scholars have pointed out many of the hypotheses which support the mainstream economics have to be accepted by faith, since there are not real-world evidences of their realism\footnote{Some orthodox scholars address this criticism by not considering realism as necessary in a scientific theory, but discussing this would be a too long digression.}.
+The consequence is that to pursue a career in economics and be able to get a prestigious (and so well-funded) position, a profession of faith is required to every (young) scholar\footnote{An example of this kind of "religious" reasoning is proposed by Galbraith: \textit{"Accepted in reputable market orthodoxy is, as noted, the inherent perfection of the market. The market can reflect contrived or frivolous wants; it can be subject to monopoly, imperfect competition, or errors of information, but, apart from these, it is intrinsically perfect. Yet clearly the speculative episode, with increases provoking increases, is within the market itself. And so is the culminating crash. Such a thought being theologically unacceptable, it is necessary to search for external influences—in more recent times, the downturn in the summer of 1929, the budget deficit of the 1980s, and the “market mechanisms” that brought the crash of 1987. In the absence of these factors, the market presumably would have remained high and gone on up or declined gently without inflicting pain. In such fashion, the market can be held guiltless as regards inherently compelled error. There is nothing in economic life so willfully misunderstood as the great speculative episode."} \parencite{galbraith1994}}.
 
-  \section{Limitations}
-  \subsection{Chosing the corpus}
-  % Data availability
+The last piece of the puzzle I require to justify this work is the role of economics in the society.
 
-  \subsection{The quest for a good Topic Modelling algorithm}
+Economics is a social science which influences the kind of politics are realized by the governments. It provides theoretical justification, it carries out the forecast on the real-world effects, it influences the public debate providing the words to convey different ideas of the economy (and so of the society), helping to move the Overton's window.
 
-  \subsection{Interpreting the topics}
-  % Mixing sources
+In other words, Economics is a scientific discipline with a strong impact on the society, and the social and political implications of any economic theory must not be overlooked\footnote{The conceptual framework provided by Keynes' theories is necessary to historically and politically understand Roosevelt and the European social state of the 50s. Similarly, Margaret Thatcher's and Ronald Reagan's economic reforms would never be realized without the theoretical background provided by Friedman.}.
 
-  \subsection{Assess the robustness}
-  % Preprocessing
-  % Clustering
-  % Interpretation
+So, critically studying the most common economics is necessary to understand with conceptual framework the discipline is providing to the society to understand its times, to unveil which cultural and political programme it is (more or less consciously) carried out by the discipline.
 
-  \section{What's next?}
-  \subsection{Rephrasing the questions for a theory-driven Distant Reading}
+Nevertheless, this work only tries to describe the mainstream economics, without arguing on the social consequences of the features highlighted. Which is still a necessary first step.
 
-  \subsection{Enhancing the database}
-  % Citations, JEL, Missing journals
+\section{The interpretative hypothesis}
+I'm clearly not the first to try to describe mainstream economics and neither the first to do it quantitatively (I review some previous attempts in the next section).
 
-  \clearpage
+Therefore, I can climb up on the shoulder of other scholars to be guided to what I can look for and which interpretative frameworks I can use.
+
+Two qualitative observation will be the core pieces to guide this work: the \textit{empirical turn} hypothesis and the \textit{mainstream pluralism} hypothesis.
+
+The first lens with which observe the mainstream economics is the progressive shift toward empirical research \parencite{backhouse2000,backhouse2016,backhouse2017,cherrier2022}.
+Neoclassical economics, which is the theoretical framework on which mainstream economics has been based in the second half of the XX century, built its fortune on the ability to provide clear models expressed using a very formal flavour of mathematics.
+In more recent times instead, in part as a reaction to the credibility crisis arose after the financial crises of the first decade of the XXI century, econometrics is becoming the standard mathematical tool of analysis and theory-driven models are being replaced by data-driven model.
+This empirical turn in the scientific practices of the discipline is moving researcher away from the comprehensive economic models of the past, towards a perilous land in which the only theory is the way in which data are analysed, and every economic insight can come only from data itself.
+
+The second lens is the mainstream pluralism hypothesis \parencite{davis2006,davis2019a,davis2019b,cedrini2018}. It has been observed that the domain of research of economics is widening and the number of different computational and mathematical tools used is increasing\footnote{This is also a consequence of the new data-driven methodologies, which are able to deal with a wider range of hypotheses than the neoclassical calculus-based approach \Parencite[see][]{cherrier2022}}. These two tendencies have allowed the emergence of many new fields in the discipline, which are very focused on a particular topic (like environmental or health economics) or on a particular method (like economic complexity or behavioural economics).
+Researchers who are specialized in one of these fields rarely engage with the other niches, creating an archipelago of unconnected islands and an appearance of pluralism in economics.
+The mainstream pluralism hypothesis states that this process of specialization is not developing pluralism as historically intended in economics (i.e. as a plurality of competing ontological views of the economy and the economics), but rather it is creating a plurality of loosely connected fields which shares a common ancestral set of hypothesis (the neoclassical one) and relax some of them to be able to tackle specific problems, putting themself in continuity rather than in contrast with neoclassical economics\footnote{In this sense they can view as subfields of a wider "post-neoclassical" economics, which aims to improve (or save) some parts of the neoclassical approach and legacy, rather than rebuild the discipline on completely different assumptions like the heterodoxies aim to do.}.
+
+In the quantitative exercise that constitute the core of this paper, I try to find some evidences in favour of these two hypotheses.
+
+\section{Distant Reading and quantitative methods in the History of Economic Thought}
+% Distant Reading
+% Brief lit review
+
+\section{The choice of the data}
+% JEL, Citations
+% JSTOR
+% IF
+% Older papers
+
+\subsection{A first qualitative description}
+
+\section{A strategy of analysis: the Topic Models}
+% From questions to methods
+
+\subsection{The choice of the algorithm}
+% Brief lit review on TM
+% Latent variable vs clustering
+
+\subsection{Model selection, validation and description}
+
+\section{Interpreting the model}
+
+\subsection{The empirical turn}
+
+\subsection{Mainstream pluralism?}
+
+\section{Limitations}
+\subsection{Choosing the corpus}
+% Data availability
+
+\subsection{The quest for a good Topic Modelling algorithm}
+
+\subsection{Interpreting the topics}
+% Mixing sources
+
+\subsection{Assess the robustness}
+% Preprocessing
+% Clustering
+% Interpretation
+
+\section{What's next?}
+\subsection{Rephrasing the questions for a theory-driven Distant Reading}
+
+\subsection{Delve into the hierarchy}
+
+\subsection{Enhancing the database}
+% Citations, JEL, Missing journals
+
+\section*{Acknowledgments}
+% Caselle Cedrini Durio
+% Diletta Carlo Alice
+% Paolo DR2
+% Eugenio Caverzasi
+% Eugenio Petrovich
+
+\clearpage
+\begin{refcontext}[sorting=nyt]
   \printbibliography
-  \clearpage
+\end{refcontext}
+\clearpage
 
-  \begin{appendices}
+\begin{appendices}
   \section{Results from different random seeds}
 
-  \end{appendices}
+\end{appendices}
 
 \end{document}
