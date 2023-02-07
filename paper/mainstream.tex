@@ -1,29 +1,34 @@
 % !TeX spellcheck = en_GB 
-\documentclass[a4paper, headings=standardclasses]{scrartcl}
+\documentclass[a4paper, 11pt, headings=standardclasses, tablecaptionsbelow]{scrartcl}
 
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{etoolbox}
 \usepackage{authblk}
 \renewcommand{\Affilfont}{\small}
-\usepackage[style=apa, backend=biber, sorting=ynt, useprefix=true]{biblatex}
-\usepackage[autostyle=false, style=english]{csquotes}
-\MakeOuterQuote{"}
-\usepackage[british]{babel}
-\usepackage{appendix}
-\usepackage[modulo]{lineno}
-
-\linenumbers
-
-\addbibresource{mainstream.bib}
-
 \newcommand\blfootnote[1]{%
   \begingroup
   \renewcommand\thefootnote{}\footnote{#1}%
   \addtocounter{footnote}{-1}%
   \endgroup
 }
+\usepackage[style=apa, backend=biber, sorting=ynt, useprefix=true]{biblatex}
+\addbibresource{mainstream.bib}
+\usepackage[autostyle=false, style=english]{csquotes}
+\MakeOuterQuote{"}
+\usepackage[british]{babel}
+\usepackage[modulo]{lineno}
+\linenumbers
+\usepackage{appendix}
+\usepackage[hidelinks]{hyperref}
+\usepackage[font=small]{caption}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\AtBeginEnvironment{tabularx}{\small}
 
-\title{How is the Mainstream changed? \let\thefootnote\relax\footnotetext{This version is intended to be submitted to the XV ESHET Conference}}
+\title{How is the Mainstream changed? \let\thefootnote\relax\footnotetext{This version is intended to be submitted to the XV ESHET Conference \\ An updated version of this paper and all the source code and the instructons required to replicate the paper are available at \url{https://github.com/TnTo/mainstream/}}}
 \subtitle{A Topic Model insight}
-\author{Michele Ciruzzi\thanks{mciruzzi@uninsubria.it - https://orcid.org/0000-0003-1485-1204}}
+\author{Michele Ciruzzi\thanks{mciruzzi@uninsubria.it - \url{https://orcid.org/0000-0003-1485-1204}}}
 
 \begin{document}
 
@@ -133,11 +138,18 @@ This reasoning leads me toward the use of the text of the articles. This strateg
 To be honest, the text of a document is still influenced by the community in which a researcher put himself (the same idea is expressed differently by scholars of different schools of thought) but it is harder to be gamed (and, sincerely, maybe it is not a real downside).
 Finally, the selection bias of the authors in writing the abstracts can be avoided by using the full text of the articles, thanks to JSTOR.
 
-This choice rises a problem: not every journal is indexed on JSTOR. Particularly, of the Blue Ribbon Eight the \textit{International Economic Review} and the \textit{Journal of Economic Theory} are missing. I believe this absence is not significant, since the Top5 are still available, those two have slightly worse bibliometric indicators than the others and the sample is still pretty large.
+\input{src/IF.tex}
 
+This choice rises a problem: not every journal is indexed on JSTOR. Particularly, of the Blue Ribbon Eight the \textit{International Economic Review} and the \textit{Journal of Economic Theory} are missing. I believe this absence is not significant, since the Top5 are still available, those two have slightly worse bibliometric indicators than the others and the sample is still pretty large\footnote{As shown in Table \ref{tab:IF}, the six remaining Blue Ribbon Journals are the only generalist journals in the Top20 of each of the three different bibliometric indicators computed by SCImago (average of the 1999-2021 period).}.
 
-% IF
-% Older papers
+The JSTOR database is particularly extended in time, going back to the early XX century. As said before, this allows to include in the study a period before the rise of neoclassical economics ad mainstream economics, the late Keynesianism of the fifties.
+On the other hand, the use of the Top5 as a proxy can suffer from recentism, since their prestige has been going to consolidate in time.
+
+Looking at some older journals' ranking \parencite[e.g.]{billings1972,hawkins1973,liebowitz1984,malouin1987,moore1972,coats1971} two other journals appears to be quite unanimously considered prestigious at the time: \textit{Economica} and \textit{The Economic Journal}. Luckily, both are available in JSTOR\footnote{There is a strong third candidate to be added to the sample: \textit{The Bell Journal of Economics}, later become \textit{The RAND Journal of Economics}. It was not included because I, the author, did not know the journal had changed its name and, so, I decided to exclude it because its publication period (as the Bell Journal of Economics) does not cover all the considered time-span. By the time I discovered the error the dataset was already consolidated. This is a brilliant example of path dependency in research and of the need of a strong domain knowledge to do quantitative studies. Nevertheless, it is the less strong candidate of the three.}.
+
+The resulting sample is composed by: the Top5 (\textit{The American Economic Review}, \textit{Econometrica}, \textit{Journal of Political Economy}, \textit{Quarterly Journal of Economics} and \textit{Review of Economic Studies}), one additional Blue Ribbon (\textit{Review of Economics and Statistics}) and two "old glories" (\textit{Economica} and \textit{The Economic Journal}).
+
+Finally, only the research article published between 1946 (the first year after the WWII) and 2016 (the last year for which the full-text of the articles was available for the eight journals in the sample) are considered.
 
 \section{A strategy of analysis: the Topic Models}
 % From questions to methods

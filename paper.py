@@ -86,7 +86,7 @@ with pandas.option_context("max_colwidth", 1000):
                 "",
             ],
             label="tab:IF",
-            position="",
+            position="p",
             caption=(
                 'The 20 journals with the highest average indicator in the period 1999-2021 for three different bibliometric indicators. Journals from the subject "Economics, Econometrics and Finance". Journals containing the words "Financ", "Marketing", "Account", "Business", "Entrepreneur" or "Consumer" are excluded. Sourced from \\url{https://www.scimagojr.com/journalrank.php}.',
                 "Bibliometrics indicator for top journals",
