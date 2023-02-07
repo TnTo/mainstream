@@ -14,6 +14,20 @@
   langid = {english}
 }
 
+@unpublished{angelov2020,
+  title = {{{Top2Vec}}: {{Distributed Representations}} of {{Topics}}},
+  shorttitle = {{{Top2Vec}}},
+  author = {Angelov, Dimo},
+  date = {2020-08-19},
+  eprint = {2008.09470},
+  eprinttype = {arxiv},
+  primaryclass = {cs, stat},
+  url = {http://arxiv.org/abs/2008.09470},
+  urldate = {2021-09-25},
+  abstract = {Topic modeling is used for discovering latent semantic structure, usually referred to as topics, in a large collection of documents. The most widely used methods are Latent Dirichlet Allocation and Probabilistic Latent Semantic Analysis. Despite their popularity they have several weaknesses. In order to achieve optimal results they often require the number of topics to be known, custom stop-word lists, stemming, and lemmatization. Additionally these methods rely on bag-of-words representation of documents which ignore the ordering and semantics of words. Distributed representations of documents and words have gained popularity due to their ability to capture semantics of words and documents. We present \$\textbackslash texttt\{top2vec\}\$, which leverages joint document and word semantic embedding to find \$\textbackslash textit\{topic vectors\}\$. This model does not require stop-word lists, stemming or lemmatization, and it automatically finds the number of topics. The resulting topic vectors are jointly embedded with the document and word vectors with distance between them representing semantic similarity. Our experiments demonstrate that \$\textbackslash texttt\{top2vec\}\$ finds topics which are significantly more informative and representative of the corpus trained on than probabilistic generative models.},
+  archiveprefix = {arXiv}
+}
+
 @article{angrist2017,
   title = {Economic {{Research Evolves}}: {{Fields}} and {{Styles}}},
   shorttitle = {Economic {{Research Evolves}}},
@@ -108,6 +122,41 @@
   url = {https://onlinelibrary.wiley.com/doi/10.1111/j.1465-7295.1972.tb01568.x},
   urldate = {2022-10-08},
   langid = {english}
+}
+
+@article{blei2003,
+  title = {Latent Dirichlet Allocation},
+  author = {Blei, David M. and Ng, Andrew Y. and Jordan, Michael I.},
+  date = {2003-03},
+  journaltitle = {Journal of Machine Learning Research},
+  shortjournal = {J. Mach. Learn. Res.},
+  volume = {3},
+  pages = {993--1022},
+  publisher = {{JMLR.org}},
+  issn = {1532-4435},
+  abstract = {We describe latent Dirichlet allocation (LDA), a generative probabilistic model for collections of discrete data such as text corpora. LDA is a three-level hierarchical Bayesian model, in which each item of a collection is modeled as a finite mixture over an underlying set of topics. Each topic is, in turn, modeled as an infinite mixture over an underlying set of topic probabilities. In the context of text modeling, the topic probabilities provide an explicit representation of a document. We present efficient approximate inference techniques based on variational methods and an EM algorithm for empirical Bayes parameter estimation. We report results in document modeling, text classification, and collaborative filtering, comparing to a mixture of unigrams model and the probabilistic LSI model.},
+  issue = {null},
+  issue_date = {3/1/2003},
+  pagetotal = {30}
+}
+
+@incollection{campello2013,
+  title = {Density-{{Based Clustering Based}} on {{Hierarchical Density Estimates}}},
+  booktitle = {Advances in {{Knowledge Discovery}} and {{Data Mining}}},
+  author = {Campello, Ricardo J. G. B. and Moulavi, Davoud and Sander, Joerg},
+  editor = {Pei, Jian and Tseng, Vincent S. and Cao, Longbing and Motoda, Hiroshi and Xu, Guandong},
+  date = {2013},
+  series = {Lecture {{Notes}} in {{Computer Science}}},
+  volume = {7819},
+  pages = {160--172},
+  publisher = {{Springer Berlin Heidelberg}},
+  location = {{Berlin, Heidelberg}},
+  doi = {10.1007/978-3-642-37456-2_14},
+  url = {http://link.springer.com/10.1007/978-3-642-37456-2_14},
+  urldate = {2021-09-25},
+  editorb = {Hutchison, David and Kanade, Takeo and Kittler, Josef and Kleinberg, Jon M. and Mattern, Friedemann and Mitchell, John C. and Naor, Moni and Nierstrasz, Oscar and Pandu Rangan, C. and Steffen, Bernhard and Sudan, Madhu and Terzopoulos, Demetri and Tygar, Doug and Vardi, Moshe Y. and Weikum, Gerhard},
+  editorbtype = {redactor},
+  isbn = {978-3-642-37455-5 978-3-642-37456-2}
 }
 
 @article{card2013,
@@ -346,6 +395,59 @@
   langid = {english}
 }
 
+@article{gerlach2018,
+  title = {A Network Approach to Topic Models},
+  author = {Gerlach, Martin and Peixoto, Tiago P. and Altmann, Eduardo G.},
+  date = {2018-07},
+  journaltitle = {Science Advances},
+  shortjournal = {Sci. Adv.},
+  volume = {4},
+  number = {7},
+  eprint = {1708.01677},
+  eprinttype = {arxiv},
+  pages = {eaaq1360},
+  issn = {2375-2548},
+  doi = {10/gdxnxq},
+  url = {http://arxiv.org/abs/1708.01677},
+  urldate = {2020-02-27},
+  abstract = {One of the main computational and scientific challenges in the modern age is to extract useful information from unstructured texts. Topic models are one popular machine-learning approach which infers the latent topical structure of a collection of documents. Despite their success --- in particular of its most widely used variant called Latent Dirichlet Allocation (LDA) --- and numerous applications in sociology, history, and linguistics, topic models are known to suffer from severe conceptual and practical problems, e.g. a lack of justification for the Bayesian priors, discrepancies with statistical properties of real texts, and the inability to properly choose the number of topics. Here we obtain a fresh view on the problem of identifying topical structures by relating it to the problem of finding communities in complex networks. This is achieved by representing text corpora as bipartite networks of documents and words. By adapting existing community-detection methods -- using a stochastic block model (SBM) with non-parametric priors -- we obtain a more versatile and principled framework for topic modeling (e.g., it automatically detects the number of topics and hierarchically clusters both the words and documents). The analysis of artificial and real corpora demonstrates that our SBM approach leads to better topic models than LDA in terms of statistical model selection. More importantly, our work shows how to formally relate methods from community detection and topic modeling, opening the possibility of cross-fertilization between these two fields.},
+  archiveprefix = {arXiv},
+  langid = {english}
+}
+
+@article{griffiths2004,
+  title = {Finding Scientific Topics},
+  author = {Griffiths, T. L. and Steyvers, M.},
+  date = {2004-04-06},
+  journaltitle = {Proceedings of the National Academy of Sciences},
+  shortjournal = {Proceedings of the National Academy of Sciences},
+  volume = {101},
+  pages = {5228--5235},
+  issn = {0027-8424, 1091-6490},
+  doi = {10.1073/pnas.0307752101},
+  url = {http://www.pnas.org/cgi/doi/10.1073/pnas.0307752101},
+  urldate = {2020-11-28},
+  issue = {Supplement 1},
+  langid = {english}
+}
+
+@misc{grootendorst2022,
+  title = {{{BERTopic}}: {{Neural}} Topic Modeling with a Class-Based {{TF-IDF}} Procedure},
+  shorttitle = {{{BERTopic}}},
+  author = {Grootendorst, Maarten},
+  date = {2022-03-11},
+  number = {arXiv:2203.05794},
+  eprint = {2203.05794},
+  eprinttype = {arxiv},
+  primaryclass = {cs},
+  publisher = {{arXiv}},
+  doi = {10.48550/arXiv.2203.05794},
+  url = {http://arxiv.org/abs/2203.05794},
+  urldate = {2023-02-07},
+  abstract = {Topic models can be useful tools to discover latent topics in collections of documents. Recent studies have shown the feasibility of approach topic modeling as a clustering task. We present BERTopic, a topic model that extends this process by extracting coherent topic representation through the development of a class-based variation of TF-IDF. More specifically, BERTopic generates document embedding with pre-trained transformer-based language models, clusters these embeddings, and finally, generates topic representations with the class-based TF-IDF procedure. BERTopic generates coherent topics and remains competitive across a variety of benchmarks involving classical models and those that follow the more recent clustering approach of topic modeling.},
+  archiveprefix = {arXiv}
+}
+
 @article{hamermesh2013,
   title = {Six {{Decades}} of {{Top Economics Publishing}}: {{Who}} and {{How}}?},
   shorttitle = {Six {{Decades}} of {{Top Economics Publishing}}},
@@ -415,6 +517,19 @@
   langid = {english}
 }
 
+@unpublished{hofmann1999,
+  title = {Probabilistic {{Latent Semantic Analysis}}},
+  author = {Hofmann, Thomas},
+  date = {1999},
+  eprint = {1301.6705},
+  eprinttype = {arxiv},
+  primaryclass = {cs, stat},
+  url = {http://arxiv.org/abs/1301.6705},
+  urldate = {2020-06-02},
+  abstract = {Probabilistic Latent Semantic Analysis is a novel statistical technique for the analysis of two-mode and co-occurrence data, which has applications in information retrieval and filtering, natural language processing, machine learning from text, and in related areas. Compared to standard Latent Semantic Analysis which stems from linear algebra and performs a Singular Value Decomposition of co-occurrence tables, the proposed method is based on a mixture decomposition derived from a latent class model. This results in a more principled approach which has a solid foundation in statistics. In order to avoid overfitting, we propose a widely applicable generalization of maximum likelihood model fitting by tempered EM. Our approach yields substantial and consistent improvements over Latent Semantic Analysis in a number of experiments.},
+  archiveprefix = {arXiv}
+}
+
 @article{kelly2011,
   title = {{{TREND OF SUBJECTS PUBLISHED IN ECONOMICS JOURNALS}} 1969-2007},
   author = {Kelly, Michael A. and Bruestle, Stephen},
@@ -445,6 +560,18 @@
   urldate = {2023-02-03},
   abstract = {Citations are one way that past research echoes through time. In this paper, we compile a list of articles published in major refereed economics journals in the last 35 years that have received more than 500 citations as of June 2006. We then use this list to examine various trends: what fields of economics are most in vogue; what types of articles generate the most interest; and which institutions host the production of these articles and train their authors.},
   langid = {english}
+}
+
+@report{kim2008,
+  type = {Technical Report},
+  title = {Sparse {{Nonnegative Matrix Factorization}} for {{Clustering}}},
+  author = {Kim, Jingu and Park, Haesun},
+  date = {2008},
+  institution = {{Georgia Institute of Technology}},
+  url = {https://smartech.gatech.edu/handle/1853/20058},
+  urldate = {2021-09-29},
+  abstract = {Properties of Nonnegative Matrix Factorization (NMF) as a clustering method are studied by relating  its formulation to other methods such as K-means clustering. We show how interpreting the objective  function of K-means as that of a lower rank approximation with special constraints allows comparisons  between the constraints of NMF and K-means and provides the insight that some constraints can be  relaxed from K-means to achieve NMF formulation. By introducing sparsity constraints on the coefficient  matrix factor in NMF objective function, we in term can view NMF as a clustering method. We tested  sparse NMF as a clustering method, and our experimental results with synthetic and text data shows  that sparse NMF does not simply provide an alternative to K-means, but rather gives much better and  consistent solutions to the clustering problem. In addition, the consistency of solutions further explains  how NMF can be used to determine the unknown number of clusters from data. We also tested with a  recently proposed clustering algorithm, Affinity Propagation, and achieved comparable results. A fast  alternating nonnegative least squares algorithm was used to obtain NMF and sparse NMF.},
+  langid = {american}
 }
 
 @article{kim2009,
@@ -481,6 +608,22 @@
   langid = {english}
 }
 
+@article{lancichinetti2015,
+  title = {High-{{Reproducibility}} and {{High-Accuracy Method}} for {{Automated Topic Classification}}},
+  author = {Lancichinetti, Andrea and Sirer, M. Irmak and Wang, Jane X. and Acuna, Daniel and Körding, Konrad and Amaral, Luís A. Nunes},
+  date = {2015-01-29},
+  journaltitle = {Physical Review X},
+  shortjournal = {Phys. Rev. X},
+  volume = {5},
+  number = {1},
+  pages = {011007},
+  issn = {2160-3308},
+  doi = {10/gfrbjc},
+  url = {https://link.aps.org/doi/10.1103/PhysRevX.5.011007},
+  urldate = {2020-02-27},
+  langid = {english}
+}
+
 @article{liebowitz1984,
   title = {Assessing the {{Relative Impacts}} of {{Economics Journals}}},
   author = {Liebowitz, S. J. and Palmer, J. P.},
@@ -509,6 +652,37 @@
   url = {https://linkinghub.elsevier.com/retrieve/pii/0148619587900221},
   urldate = {2022-10-08},
   langid = {english}
+}
+
+@article{mcinnes2017,
+  title = {Hdbscan: {{Hierarchical}} Density Based Clustering},
+  shorttitle = {Hdbscan},
+  author = {McInnes, Leland and Healy, John and Astels, Steve},
+  date = {2017-03-21},
+  journaltitle = {Journal of Open Source Software},
+  volume = {2},
+  number = {11},
+  pages = {205},
+  issn = {2475-9066},
+  doi = {10.21105/joss.00205},
+  url = {https://joss.theoj.org/papers/10.21105/joss.00205},
+  urldate = {2023-02-07},
+  abstract = {McInnes et al, (2017), hdbscan: Hierarchical density based clustering, Journal of Open Source Software, 2(11), 205, doi:10.21105/joss.00205},
+  langid = {english}
+}
+
+@unpublished{mcinnes2020,
+  title = {{{UMAP}}: {{Uniform Manifold Approximation}} and {{Projection}} for {{Dimension Reduction}}},
+  shorttitle = {{{UMAP}}},
+  author = {McInnes, Leland and Healy, John and Melville, James},
+  date = {2020-09-17},
+  eprint = {1802.03426},
+  eprinttype = {arxiv},
+  primaryclass = {cs, stat},
+  url = {http://arxiv.org/abs/1802.03426},
+  urldate = {2021-09-25},
+  abstract = {UMAP (Uniform Manifold Approximation and Projection) is a novel manifold learning technique for dimension reduction. UMAP is constructed from a theoretical framework based in Riemannian geometry and algebraic topology. The result is a practical scalable algorithm that applies to real world data. The UMAP algorithm is competitive with t-SNE for visualization quality, and arguably preserves more of the global structure with superior run time performance. Furthermore, UMAP has no computational restrictions on embedding dimension, making it viable as a general purpose dimension reduction technique for machine learning.},
+  archiveprefix = {arXiv}
 }
 
 @book{montesinos2019,
@@ -543,6 +717,33 @@
   isbn = {978-1-78168-084-1 978-1-78168-112-1},
   langid = {english},
   pagetotal = {244}
+}
+
+@unpublished{peixoto2019,
+  title = {Bayesian Stochastic Blockmodeling},
+  author = {Peixoto, Tiago P.},
+  date = {2019-11-23},
+  eprint = {1705.10225},
+  eprinttype = {arxiv},
+  primaryclass = {cond-mat, physics:physics, stat},
+  pages = {289--332},
+  doi = {10.1002/9781119483298.ch11},
+  url = {http://arxiv.org/abs/1705.10225},
+  urldate = {2021-09-25},
+  abstract = {This chapter provides a self-contained introduction to the use of Bayesian inference to extract large-scale modular structures from network data, based on the stochastic blockmodel (SBM), as well as its degree-corrected and overlapping generalizations. We focus on nonparametric formulations that allow their inference in a manner that prevents overfitting, and enables model selection. We discuss aspects of the choice of priors, in particular how to avoid underfitting via increased Bayesian hierarchies, and we contrast the task of sampling network partitions from the posterior distribution with finding the single point estimate that maximizes it, while describing efficient algorithms to perform either one. We also show how inferring the SBM can be used to predict missing and spurious links, and shed light on the fundamental limitations of the detectability of modular structures in networks.},
+  archiveprefix = {arXiv}
+}
+
+@inproceedings{teh2005,
+  title = {Sharing {{Clusters}} among {{Related Groups}}: {{Hierarchical Dirichlet Processes}}},
+  shorttitle = {Sharing {{Clusters}} among {{Related Groups}}},
+  booktitle = {Advances in {{Neural Information Processing Systems}}},
+  author = {Teh, Yee and Jordan, Michael and Beal, Matthew and Blei, David},
+  date = {2005},
+  volume = {17},
+  publisher = {{MIT Press}},
+  url = {https://papers.nips.cc/paper/2004/hash/fb4ab556bc42d6f0ee0f9e24ec4d1af0-Abstract.html},
+  urldate = {2021-09-24}
 }
 
 @article{wehrheim2019,

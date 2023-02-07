@@ -152,12 +152,31 @@ The resulting sample is composed by: the Top5 (\textit{The American Economic Rev
 Finally, only the research article published between 1946 (the first year after the WWII) and 2016 (the last year for which the full-text of the articles was available for the eight journals in the sample) are considered.
 
 \section{Strategies of analysis}
+The research question of this work (if mainstream economics is going through an empirical shift and a pattern of specialization) is about the topics dealt with in mainstream economics (using a sample of top journals as proxy).
+But classifying textual document based on their topics it is not an easy task. The common assumption is that if two papers use the same words, they probably are about the same topic. Even with this assumption, a set of lists of words (which is a more formal representation of a text) is still something without a clear and easy to manage mathematical abstraction.
 
+The strong hypothesis which is commonly used in this context is to assume that the information contained in the order of the words is negligible with regard to the information conveyed by the frequency of the words. This is known as Bag-of-Words (BoW) approximation, because it is like if the words composing every document would be put in a bag and shaken until reconstructing the order become impossible. This hypothesis is used also in this study.
 
+Using the BoW approximation the corpus can be represented as a matrix with the documents on the rows, the different words on the columns, and the frequencies as entries. The same matrix represents also a bipartite graph and a linear space of documents spanned by the words.
 
-\subsection{The choice of the algorithm}
-% Brief lit review on TM
-% Latent variable vs clustering
+With a mathematical object available, it is necessary to manipulate it to obtain some answers. Two alternatives are available: declining the broad research question in a very precise one, for which is easy to measure a proxy, or using an algorithm to transform the representation of our dataset and then take some measures on the new representation.
+Some results from both strategies will be presented.
+
+Before moving into the cleaning and the analysis of the data, it remains to discuss which algorithm can be used to obtain a new, and more useful, representation of the data. A representation able to highlight semantic similarities (i.e. the topic) among documents is known in literature as Topic Model.
+
+The common strategies in literature include inferring a latent stochastic process \parencite{blei2003,teh2005,griffiths2004,hofmann1999}, using clustering techniques on the bipartite network \parencite{gerlach2018} or on the vector space \parencite{angelov2020,grootendorst2022}, reducing the dimensionality of the matrix \parencite{kim2008}, or a combination of the previous \parencite{lancichinetti2015}\footnote{An attempt of comparison is available online at \url{https://github.com/TnTo/TopicModelBenchmark/}}.
+
+The oldest algorithms, and among them the very popular Latent Dirichlet Allocation \parencite[LDA][]{blei2003}, require the scholars to choose a priori the number of topic to be recognized, or equivalently in how many groups divide the documents. This is clearly a strong downside of these algorithms, and, as far as I know, there is not in literature any attempt to characterize the stability of these algorithms with regard to changes in the number of topics. Moreover, most of these algorithms show little stability for different random seed and initial condition.
+
+To overcome the limitation to not have to set a priori the number of topics two roads have been explored: improving LDA \parencite[like in][]{teh2005,lancichinetti2015} or going for a totally different paths.
+Neither HDP \parencite{teh2005} nor TopicMapping \parencite{lancichinetti2015}, thou, achieve the result effectively: preliminary investigation shown that, for not well divided dataset, HDP predicts a number of topics very close to the minimum number provided by the researcher, while TopicMapping collapse in few (even one or two) very big and uninformative clusters. I cannot exclude that different choices in preprocessing the dataset, which is --as I will discuss later-- a very arbitrary process, can resolve those problems.
+
+A different path is to use a combination of a dimensionality reduction technique, like UMAP \parencite{mcinnes2020}, followed by a clustering algorithm, like HDBSCAN \parencite{campello2013,mcinnes2017}, to classify the document. This strategy should show greater consistency across different random seed but also change the type of output obtained. LDA returns for document the probability to belong to each topic, this algorithm, instead, associate each document to at most one topic, leaving some documents unclassified. Regarding the number of topics, the researchers is able to set the minimum number of documents for each topic, allowing to resolve the model at different scales. Finally, this kind of workflow is often preceded by an embedding algorithm which provide a change-of-basis function from the word-spanned vector space to an abstract one, determined with machine learning techniques \parencite{angelov2020,grootendorst2022}.
+The presence of unclassified points, and a personal preference to not use embedding techniques, has put me on a different path.
+
+The strategy used in this work relies on the hierarchical stochastic block model algorithm \parencite[hSBM][]{peixoto2019,gerlach2018}, which aims to clusterize each partition of the bipartite graph, at different scale. It yields a collection of models, each one a zoomed version of the previous, in which each word is assigned to a topic and each document is assigned to a group. For those used to LDA this is an important difference: LDA infers a single latent layer (i.e. Words---Topic---Documents), while hSBM infers two of them (Words---Topics---Groups---Documents). Moreover, hSBM provides both a hard-clustering version (like UMAP-HDBSCAN in which each document or word belongs to only one cluster) and a soft-clustering version (like LDA in which the membership is probabilistic). The problem of this algorithm is it computational cost which is prohibitive for the soft-clustering version and still elevated for the hard-clustering one\footnote{The final version of the dataset requires more than 10GB of RAM to be processed and more than 10 hours on my personal laptop. One cause of this is the single-threaded nature of the algorithm. A previous version of the dataset with a smaller number of words removed required more than 20GB of RAM. The dataset with the documents' metadata is a 300MB SQLite file.}.
+
+The final choice is anyway hSBM, mostly because it is the algorithm that requires the researcher to input the smallest number of parameters, it allows zooming into each group to analyse its composition (i.e. of which subgroups is composed) and it provides an unsupervised method to choose among the results of different initial conditions.
 
 \section{Preliminary steps}
 
@@ -197,8 +216,8 @@ Finally, only the research article published between 1946 (the first year after 
 \section*{Acknowledgments}
 This paper is a (very) revised version of my master thesis, which benefitted from the excellent guidance of my supervisors, Michele Caselle, Mario Cedrini e Alessandra Durio, and the useful critiques provided by Matteo Osella.
 This work would not have been possible without the (computational) help provided by Diletta Abbonato in the exploratory phase, the, often ignored, advices from Carlo Debernardi, and the freedom to pursue secondary projects during the PhD granted me by Eugenio Caverzasi (and his support).
-The revisions of the various versions of this manuscript have taken advantage of Alice Re's scrupulousness and helpfulness
-Finally, I want to thank the whole DR2 community for the numerous stimuli in continuing working on quantitative history of the ideas and particularly Paolo Babbiotti e Eugenio Petrovich, who, in a cold January in Rome, taught me how to write an Acknowledgments section.
+The revisions of the various versions of this manuscript have taken advantage of Alice Re's scrupulousness and helpfulness.
+Finally, I want to thank the whole DR2 community for the numerous stimuli in continuing working on quantitative history of the ideas and particularly Paolo Babbiotti, and Eugenio Petrovich, who, in a cold January in Rome, taught me how to write an Acknowledgments section.
 
 \clearpage
 \begin{refcontext}[sorting=nyt]
