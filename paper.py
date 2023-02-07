@@ -1,6 +1,7 @@
 # %%
 ## IMPORT
 import os
+import sqlite3
 
 import matplotlib
 import pandas
@@ -21,6 +22,15 @@ def mkdir(p):
     except:
         pass
 
+
+# %%
+m = scipy.sparse.load_npz("sparse.npz")
+words = pandas.read_sql("vocabulary", "sqlite:///data.db").sort_values("id")
+docs = pandas.read_sql(
+    "document", "sqlite:///data.db", parse_dates=["date"]
+).sort_values("id")
+model = pandas.read_sql("model", "sqlite:///model.db")
+model.kind = model.kind.replace({0: "D", 1: "W"})
 
 # %%
 ## JOURNAL CHOICE
@@ -69,7 +79,7 @@ df2 = pandas.concat(
 )
 df2.H = df2.H.astype(int)
 
-#%%
+# %%
 with pandas.option_context("max_colwidth", 1000):
     open("paper/src/IF.tex", "w").write(
         df2.to_latex(
@@ -98,13 +108,80 @@ with pandas.option_context("max_colwidth", 1000):
     )
 
 # %%
+# DATA SHRINKING
+with sqlite3.connect("data.db") as db:
+    cur = db.cursor()
+    cur.execute("SELECT SUM(count) FROM graph")
+    t2 = cur.fetchall()[0][0]
+    cur.execute("SELECT COUNT(*) FROM vocabulary")
+    w2 = cur.fetchall()[0][0]
+    cur.execute("SELECT COUNT(*) FROM document")
+    d2 = cur.fetchall()[0][0]
+
+with sqlite3.connect("clean.db") as db:
+    cur = db.cursor()
+    cur.execute("SELECT SUM(count) FROM graph")
+    t1 = cur.fetchall()[0][0]
+    cur.execute("SELECT COUNT(*) FROM vocabulary")
+    w1 = cur.fetchall()[0][0]
+    cur.execute("SELECT COUNT(*) FROM document")
+    d1 = cur.fetchall()[0][0]
+
+with sqlite3.connect("raw.db") as db:
+    cur = db.cursor()
+    cur.execute("SELECT SUM(count) FROM graph")
+    t0 = cur.fetchall()[0][0]
+    cur.execute("SELECT COUNT(*) FROM vocabulary")
+    w0 = cur.fetchall()[0][0]
+    cur.execute("SELECT COUNT(*) FROM document")
+    d0 = cur.fetchall()[0][0]
+
+print("First cleaning phase:")
+print(f"{d1} of {d0} initial documents ({round(d1/d0*100)}%)")
+print(f"{w1} of {w0} initial words ({round(w1/w0*100)}%)")
+print(f"{t1} of {t0} initial tokens ({round(t1/t0*100)}%)")
+print("")
+
+print("Second cleaning phase:")
+print(f"{d2} of {d1} initial documents ({round(d2/d1*100)}%)")
+print(f"{w2} of {w1} initial words ({round(w2/w1*100)}%)")
+print(f"{t2} of {t1} initial tokens ({round(t2/t1*100)}%)")
+print("")
+
+print("All cleaning process:")
+print(f"{d2} of {d0} initial documents ({round(d2/d0*100)}%)")
+print(f"{w2} of {w0} initial words ({round(w2/w0*100)}%)")
+print(f"{t2} of {t0} initial tokens ({round(t2/t0*100)}%)")
+print("")
+
+# %%
+pandas.DataFrame(
+    [
+        ("Original dataset", d0, w0, t0),
+        ("After first cleaning", d1, w1, t1),
+        ("Final dataset", d2, w2, t2),
+    ],
+    columns=["", "Documents", "Words", "Tokens"],
+).to_latex(
+    "paper/src/dataset.tex",
+    index=False,
+    sparsify=False,
+    column_format="l|rrr",
+    label="tab:dataset",
+    position="tb",
+    caption=(
+        "Number of documents, unique words and tokens in the dataset at three different stages of the cleaning process",
+        "Dataset size",
+    ),
+    multicolumn=False,
+)
+
+# %%
 # JOURNALS PROPORTIONS
 # df = pandas.read_sql_table(
 #     "document", "sqlite:///raw.db", index_col="id", parse_dates=["date"]
 # )
-df2 = pandas.read_sql_table(
-    "document", "sqlite:///data.db", index_col="id", parse_dates=["date"]
-)
+df2 = docs.set_index("id")
 
 journals = [
     "Econometrica",
@@ -167,8 +244,6 @@ plot_journals(df2)
 
 # %%
 ## MODEL SELECTION
-model = pandas.read_sql("model", "sqlite:///model.db")
-model.kind = model.kind.replace({0: "D", 1: "W"})
 
 # %%
 print(
@@ -236,9 +311,6 @@ seaborn.heatmap(mi(model, 2), annot=True, xticklabels=labels, yticklabels=labels
 
 # %%
 ## MODEL INTERPRETATION
-m = scipy.sparse.load_npz("sparse.npz")
-words = pandas.read_sql("vocabulary", "sqlite:///data.db").sort_values("id")
-docs = pandas.read_sql("document", "sqlite:///data.db").sort_values("id")
 
 # %%
 labels = {
