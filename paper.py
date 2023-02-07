@@ -55,30 +55,47 @@ data["general"] = ~(
 data = data[data.general]
 data = data.drop(columns="general")
 
-for i in ["SJR", "H", "IF2"]:
-    data[i] = data.groupby("year")[i].rank(ascending=False, method="min")
-
-data = data.melt(["title", "year"])
-
-data["blue"] = data.title.isin(
+# data[i] = data.groupby("year")[i].rank(ascending=False, method="min")
+df2 = pandas.concat(
     [
-        "American Economic Review",
-        "Econometrica",
-        # "International Economic Review",
-        # "Journal of Economic Theory",
-        "Journal of Political Economy",
-        "Quarterly Journal of Economics",
-        "Review of Economic Studies",
-        "Review of Economics and Statistics",
-    ]
+        data.groupby("title")[[i]]
+        .mean()
+        .sort_values(i, ascending=False)
+        .head(20)
+        .reset_index()
+        for i in ["SJR", "H", "IF2"]
+    ],
+    axis=1,
 )
+df2.H = df2.H.astype(int)
 
-seaborn.FacetGrid(data=data[data.blue], col="variable", sharey=False).map_dataframe(
-    seaborn.lineplot, x="year", y="value", hue="title"
-).add_legend()
-
-# print(data[(data.year == 2000) & (data.variable == "SJR")].sort_values("value").head(20))
-# print(data[(data.year == 2018) & (data.variable == "IF2")].sort_values("value").head(20))
+#%%
+with pandas.option_context("max_colwidth", 1000):
+    open("paper/src/IF.tex", "w").write(
+        df2.to_latex(
+            index=False,
+            float_format="%.2f",
+            sparsify=False,
+            column_format="@{}Yr|Yr|Yr@{}",
+            header=[
+                "SCImago Journal Rank",
+                "",
+                "H-index",
+                "",
+                "2-year Impact Factor",
+                "",
+            ],
+            label="tab:IF",
+            position="",
+            caption=(
+                'The 20 journals with the highest average indicator in the period 1999-2021 for three different bibliometric indicators. Journals from the subject "Economics, Econometrics and Finance". Journals containing the words "Financ", "Marketing", "Account", "Business", "Entrepreneur" or "Consumer" are excluded. Sourced from \\url{https://www.scimagojr.com/journalrank.php}.',
+                "Bibliometrics indicator for top journals",
+            ),
+            multicolumn=False,
+        )
+        .replace("{tabular}", "{tabularx}")
+        .replace("\\begin{tabularx}", "\\begin{tabularx}{\\hsize}")
+    )
 
 # %%
 # JOURNALS PROPORTIONS
@@ -589,4 +606,14 @@ def plot_word_y():
 
 
 plot_word_y()
+# %%
+s = 1000
+l = 3
+df = model[(model.seed == s) & (model.level == l) & (model.kind == "D")]
+if labels:
+    df.group = df.group.replace(labels)
+df = df.merge(
+    model[(model.seed == s) & (model.level == l - 1) & (model.kind == "D")], on="id"
+)
+df.groupby("group_x").group_y.nunique().sort_values(ascending=False)
 # %%
