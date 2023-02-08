@@ -21,6 +21,7 @@
 \usepackage{appendix}
 \usepackage[hidelinks]{hyperref}
 \usepackage[font=small]{caption}
+\usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
@@ -195,12 +196,19 @@ The only non-obvious choice in this step is if to stem or not to stem. It is saf
 Finally, stemming is not the only way to achieve similar results, but similar results can be obtained also using lemmatization or embedding.
 
 The second cleaning step is more arbitrary.
-First, only the words (that at this point have already been lowercased and stemmed) which appears in at least 35 documents (approximately 1 every 1~000) and at most in 9000 documents (approximately one fourth) are kept. This lower and upper bounds are determined by the desired type of results, in other words how many groups are expected. The answer is ten to twenty, because less than ten would be too broad and archetypal (macroeconomics, microeconomics, econometrics and few others) to capture any change, while more than twenty can be too detailed to be easily distinguished and interpreted. Following this reasoning, a word which compare in over a quarter characterize a topic too broad to be of interest (if not the discipline as whole), while a word comparing in less than a document every one thousand brings a shade of meaning too specific to be of interest at the scale of interest (or more probably is an OCR error). Than a small set of \LaTeX command\footnote{\texttt{landscap}, \texttt{normalfont}, \texttt{usepackageamsbsi}, \texttt{renewcommandsfdefaultwncyss}, \texttt{declaremaths}, \texttt{usepackagestmaryrd}, \texttt{usepackagetextcomp}, \texttt{renewcommandrmdefaultwncyr}, \texttt{newcommandcyr}, \texttt{usepackageototfontenc}, \texttt{pagestyleempti}, \texttt{renewcommandencodingdefaultot}, \texttt{declaretextfontcommandtextcyrcyr}, \texttt{documentclassaastex}, \texttt{usepackageportlandxspac}, \texttt{usepackagepifont}, \texttt{usepackageamssymb}, \texttt{selectfont}, \texttt{usepackageamsmathamsxtra}, \texttt{usepackagemathrsf}, \texttt{usepackagebm}, \texttt{usepackageamsfont}, \texttt{begindocu}, \texttt{enddocu}, \texttt{iin}, \texttt{frac}.} are removed from the list of words, because they signal not a topic but a way of typesetting and digitalize (and so, probably, a journal).
-Finally, only the documents with at least 1~500 tokens (i.e. total words) after the first cleaning step are kept. Those are document longer than three or four pages, and it is another heuristic to remove errata corriges, short notes and similar documents.
+First, only the words (that at this point have already been lowercased and stemmed) which appears in at least 35 documents (approximately 1 every 1000) and at most in 9000 documents (approximately one fourth) are kept. This lower and upper bounds are determined by the desired type of results, in other words how many groups are expected. The answer is ten to twenty, because less than ten would be too broad and archetypal (macroeconomics, microeconomics, econometrics and few others) to capture any change, while more than twenty can be too detailed to be easily distinguished and interpreted. Following this reasoning, a word which compare in over a quarter characterize a topic too broad to be of interest (if not the discipline as whole), while a word comparing in less than a document every one thousand brings a shade of meaning too specific to be of interest at the scale of interest (or more probably is an OCR error). Than a small set of \LaTeX command\footnote{\texttt{landscap}, \texttt{normalfont}, \texttt{usepackageamsbsi}, \texttt{renewcommandsfdefaultwncyss}, \texttt{declaremaths}, \texttt{usepackagestmaryrd}, \texttt{usepackagetextcomp}, \texttt{renewcommandrmdefaultwncyr}, \texttt{newcommandcyr}, \texttt{usepackageototfontenc}, \texttt{pagestyleempti}, \texttt{renewcommandencodingdefaultot}, \texttt{declaretextfontcommandtextcyrcyr}, \texttt{documentclassaastex}, \texttt{usepackageportlandxspac}, \texttt{usepackagepifont}, \texttt{usepackageamssymb}, \texttt{selectfont}, \texttt{usepackageamsmathamsxtra}, \texttt{usepackagemathrsf}, \texttt{usepackagebm}, \texttt{usepackageamsfont}, \texttt{begindocu}, \texttt{enddocu}, \texttt{iin}, \texttt{frac}.} are removed from the list of words, because they signal not a topic but a way of typesetting and digitalize (and so, probably, a journal).
+Finally, only the documents with at least 1500 tokens (i.e. total words) after the first cleaning step are kept. Those are document longer than three or four pages, and it is another heuristic to remove errata corriges, short notes and similar documents.
 
 At the end the final dataset, on which the topic model is inferred, is composed by slightly more than thirty thousands documents (93\% of the intermediate dataset), thirty thousands unique words (2\%) and thirty-eight millions tokens (21\%).
 
-% plots of documents distribution
+\begin{figure}[tb]
+  \includegraphics[width=\textwidth]{src/journals.pdf}
+  \caption[Number of documents per journal and year]{These two plots represent the number of documents in the dataset divided by year and journal. On the left, the absolute number is reported, while on the right the same data is reported normalized by year.}
+  \label{fig:journals}
+\end{figure}
+
+Figure \ref{fig:journals} shows the absolute and relative composition of the final dataset disaggregated by journal and year.
+The most represented journal is the AER, and it is possible to observe the slowdown in publication described by \textcite{ellison2003,card2013}.
 
 \section{Model selection, validation and description}
 

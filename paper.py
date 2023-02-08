@@ -181,7 +181,7 @@ pandas.DataFrame(
 # df = pandas.read_sql_table(
 #     "document", "sqlite:///raw.db", index_col="id", parse_dates=["date"]
 # )
-df2 = docs.set_index("id")
+df = docs.set_index("id")
 
 journals = [
     "Econometrica",
@@ -195,52 +195,67 @@ journals = [
 ]
 
 # %%
-def plot_journals(df):
-    df2 = df[
-        (df.authors != "null")
-        & (df.provider == "jstor")
-        & (df.subtype == "research-article")
-        & df.unigrams
-        & df.journal.isin(journals)
-        & (df.year >= 1946)
-        & (df.year <= 2016)
-    ]
-    ax = seaborn.histplot(
-        x="year",
-        data=df2[["year", "journal"]],
-        hue="journal",
-        hue_order=journals,
-        multiple="stack",
-        bins=range(1947, 2018),
-    )
-    seaborn.move_legend(ax, "upper left", bbox_to_anchor=(1, 1))
-    journal_year = (
-        df2.groupby(["year", "journal"])
-        .count()
-        .type.reset_index()
-        .pivot(columns="journal", values="type", index="year")
-    )
-    journal_year = journal_year.div(journal_year.sum(axis=1), axis=0)[
-        list(reversed(journals))
-    ]
-    ax = journal_year.plot(
-        kind="bar",
-        stacked=True,
-        rot=0,
-        legend="reverse",
-        align="center",
-        width=1,
-        color=list(reversed(seaborn.color_palette(n_colors=len(journals)))),
-        edgecolor="black",
-        linewidth=0.8,
-    )
-    ax.xaxis.set_major_locator(matplotlib.ticker.MultipleLocator(10))
-    ax.legend(reversed(ax.legend().legendHandles), journals, bbox_to_anchor=(1.0, 1.0))
+fig, (ax1, ax2) = matplotlib.pyplot.subplots(1, 2, figsize=(7.5, 3))
 
+df2 = df[
+    (df.authors != "null")
+    & (df.provider == "jstor")
+    & (df.subtype == "research-article")
+    & df.unigrams
+    & df.journal.isin(journals)
+    & (df.year >= 1946)
+    & (df.year <= 2016)
+]
+seaborn.histplot(
+    x="year",
+    data=df2[["year", "journal"]],
+    hue="journal",
+    hue_order=journals,
+    multiple="stack",
+    bins=range(1947, 2018),
+    edgecolor="black",
+    linewidth=0.01,
+    alpha=1,
+    ax=ax1,
+)
 
-# %%
-# plot_journals(df)
-plot_journals(df2)
+journal_year = (
+    df2.groupby(["year", "journal"])
+    .count()
+    .type.reset_index()
+    .pivot(columns="journal", values="type", index="year")
+)
+journal_year = journal_year.div(journal_year.sum(axis=1), axis=0)[
+    list(reversed(journals))
+]
+journal_year.plot(
+    kind="bar",
+    stacked=True,
+    rot=0,
+    legend="reverse",
+    align="center",
+    width=1,
+    color=list(reversed(seaborn.color_palette()[: len(journals)])),
+    edgecolor="black",
+    ax=ax2,
+    linewidth=0.01,
+)
+ax2.xaxis.set_major_locator(matplotlib.ticker.MultipleLocator(10))
+
+handles, labels = ax2.get_legend_handles_labels()
+ax1.get_legend().remove()
+ax2.get_legend().remove()
+lgd = fig.legend(
+    handles[::-1], labels[::-1], loc="center left", bbox_to_anchor=(1, 0.5)
+)
+matplotlib.pyplot.tight_layout()
+matplotlib.pyplot.savefig(
+    "paper/src/journals.pdf",
+    transparent=True,
+    bbox_extra_artists=(lgd,),
+    bbox_inches="tight",
+)
+
 
 # %%
 ## MODEL SELECTION
