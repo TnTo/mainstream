@@ -19,15 +19,23 @@
 \usepackage[modulo]{lineno}
 \linenumbers
 \usepackage{appendix}
+\usepackage{lscape}
 \usepackage[hidelinks]{hyperref}
 \usepackage[font=small]{caption}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{s}{>{\raggedright\arraybackslash\hsize=.5\hsize}X}
 \AtBeginEnvironment{tabularx}{\small}
+\usepackage{xltabular}
+\AtBeginEnvironment{xltabular}{\small}
 
-\title{How is the Mainstream changed? \let\thefootnote\relax\footnotetext{This version is intended to be submitted to the XV ESHET Conference \\ An updated version of this paper and all the source code and the instructons required to replicate the paper are available at \url{https://github.com/TnTo/mainstream/}}}
+\title{How is the Mainstream changed? \let\thefootnote\relax\footnotetext{
+  This version is intended to be submitted to the XV ESHET Conference
+  
+  An updated version of this paper and all the source code and the instructions required to replicate the paper are available at \url{https://github.com/TnTo/mainstream/}
+}}
 \subtitle{A Topic Model insight}
 \author{Michele Ciruzzi\thanks{mciruzzi@uninsubria.it - \url{https://orcid.org/0000-0003-1485-1204}}}
 
@@ -234,16 +242,48 @@ To verify that the similarity is not only in the magnitude but also in the compo
 
 At this point it is necessary to chose one of the three models to analyse in details. The algorithm chosen (hSBM) provides a measure of the goodness-of-fit for both the complete hierarchy and each level. The metric is the entropy of the partition inferred, which, qualitatively, express how much information is needed to describe the model given the partition. So, lower the entropy more informative on itself is the partition.
 
-From table \ref{tab:entropy}, the model with random seed 1002 is the one with the lower entropy of the hierarchy, while the model 1000 is the one with the lower entropy for the level we are interested in (and it is also the one with the smaller amount of groups in that level, see table \ref{tab:levels}). Since in this work I don't exploit the presence of a full hierarchy, but I analyse only a single level, the choice of the model is driven by the entropy of the level, and so the model 1000, which is the only one considered in the following sections.
+From table \ref{tab:entropy}, the model with random seed 1002 is the one with the lower entropy of the hierarchy, while the model 1000 is the one with the lower entropy for the level we are interested in (and it is also the one with the smaller amount of groups in that level, see table \ref{tab:levels}). Since in this work I don't exploit the presence of a full hierarchy, but I analyse only a single level, the choice of the model is driven by the entropy of the level, and so the model 1000, which is the only one considered in the following section.
 
 \section{Interpreting the model}
+The chosen partition is composed by 9 groups of documents and 12 topics (or groups of words).
+To orient in the model it is useful to give a name to each topic and group.
+
+\input{src/groups.tex}
+
+To label the groups the occurrences of each word in each document of the group are summed together, then the most frequent words in the group are used to get a general sense of the group (table \ref{tab:groups}). Moreover, considering this sum as a single document, the most similar documents (using the cosine similarity) to the group as whole are also listed (see table \ref{tab:papers} in appendix).
+
+\input{src/topics.tex}
+
+For the topics (the groups composed by words), instead, the most frequent words in the corpus are listed for each topic \ref{tab:topics}. \textit{StopWords} are the two topics which regroup words with different meanings and which does not bring a semantic insight.
+
+\input{src/gt.tex}
+
+Once both groups and topics are labelled, it is possible to express a group as a combination of topics, as in table \ref{tab:gt}\footnote{This representation suggests an interesting thought. Science evolve also by recombining older ideas, and we are hypothesizing, using this model, that the same group of words has a different meaning if used in different context. Algorithm, like LDA, with a single intermediate layer provide a similar insight allowing each word to belong to different topics, of which more than one can be present in a single document.}.
+
+This is, obviously, only one possible strategy to label topics and groups, but it is the most common used, since it does not require additional data.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=\textwidth]{src/groups.pdf}
+  \caption[Groups]{Number of documents in each group during time. Smoothed with a 10-year rolling average}
+  \label{fig:groups}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=\textwidth]{src/topics.pdf}
+  \caption[Topics]{Prevalence of each topic during time. Smoothed with a 10-year rolling average}
+  \label{fig:topics}
+\end{figure}
+
+Finally, the evolution of topics and groups in time is reported in figure \ref{fig:topics} and \ref{fig:groups} (the plot report the graph smoothed with a 10-years moving average).
 
 \subsection{The empirical turn}
 
 \subsection{Mainstream pluralism?}
 
 \section{Limitations}
-\subsection{Choosing the corpus}
+\subsection{The choice of the corpus}
 % Data availability
 
 \subsection{The quest for a good Topic Modelling algorithm}
@@ -277,7 +317,10 @@ Finally, I want to thank the whole DR2 community for the numerous stimuli in con
 \clearpage
 
 \begin{appendices}
-  \section{Results from different random seeds}
+  \section{Additional tables}
+  \begin{landscape}
+    \input{src/papers.tex}
+  \end{landscape}
 
 \end{appendices}
 
