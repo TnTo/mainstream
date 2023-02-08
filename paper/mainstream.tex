@@ -202,6 +202,7 @@ Finally, only the documents with at least 1500 tokens (i.e. total words) after t
 At the end the final dataset, on which the topic model is inferred, is composed by slightly more than thirty thousands documents (93\% of the intermediate dataset), thirty thousands unique words (2\%) and thirty-eight millions tokens (21\%).
 
 \begin{figure}[tb]
+  \centering
   \includegraphics[width=\textwidth]{src/journals.pdf}
   \caption[Number of documents per journal and year]{These two plots represent the number of documents in the dataset divided by year and journal. On the left, the absolute number is reported, while on the right the same data is reported normalized by year.}
   \label{fig:journals}
@@ -210,7 +211,30 @@ At the end the final dataset, on which the topic model is inferred, is composed 
 Figure \ref{fig:journals} shows the absolute and relative composition of the final dataset disaggregated by journal and year.
 The most represented journal is the AER, and it is possible to observe the slowdown in publication described by \textcite{ellison2003,card2013}.
 
-\section{Model selection, validation and description}
+\section{Model selection and validation}
+The hSBM algorithm is sensitive to the initial conditions provided as random seed. For this reason three different random seeds are provided to the algorithm and the three outputs are compared.
+
+\input{src/levels.tex}
+
+Table \ref{tab:levels} shows the instability of the model: the number of levels in the hierarchy is different (but similar) for each random seed, and so is the number of groups (composed by either documents or words) at each level.
+On the other hand, for the first five levels of the hierarchy (0 to 4) the magnitude of the number of levels is the same independently of the random seed.
+
+For the reasons stated above, the level of the hierarchy at the scale of interest is the level 3.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=3.5in]{src/mi.pdf}
+  \caption[Mutual Information for the level of interest]{Normalized mutual information for the three level 3 partitions and a random control partition (RND)}
+  \label{fig:mi}
+\end{figure}
+
+To verify that the similarity is not only in the magnitude but also in the composition of the groups a null-model is generated. Focusing on the level of interest, the average number of words-groups and documents-groups are computed. Then, words (documents) are randomly divided in such number of groups. The resulting partitions (the null-model and the three topic models) are compared using the Normalized Mutual Information. As shown in figure \ref{fig:mi} the mutual information between the three topic models is higher (.36-.38) then the mutual information between one of the topic models and the control partition (.22-.23). This is a strong hint that the three models recognize some kind of structure (the topics) and their similarity is not a coincidence.
+
+\input{src/entropy.tex}
+
+At this point it is necessary to chose one of the three models to analyse in details. The algorithm chosen (hSBM) provides a measure of the goodness-of-fit for both the complete hierarchy and each level. The metric is the entropy of the partition inferred, which, qualitatively, express how much information is needed to describe the model given the partition. So, lower the entropy more informative on itself is the partition.
+
+From table \ref{tab:entropy}, the model with random seed 1002 is the one with the lower entropy of the hierarchy, while the model 1000 is the one with the lower entropy for the level we are interested in (and it is also the one with the smaller amount of groups in that level, see table \ref{tab:levels}). Since in this work I don't exploit the presence of a full hierarchy, but I analyse only a single level, the choice of the model is driven by the entropy of the level, and so the model 1000, which is the only one considered in the following sections.
 
 \section{Interpreting the model}
 

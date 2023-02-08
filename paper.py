@@ -178,9 +178,6 @@ pandas.DataFrame(
 
 # %%
 # JOURNALS PROPORTIONS
-# df = pandas.read_sql_table(
-#     "document", "sqlite:///raw.db", index_col="id", parse_dates=["date"]
-# )
 df = docs.set_index("id")
 
 journals = [
@@ -261,68 +258,84 @@ matplotlib.pyplot.savefig(
 ## MODEL SELECTION
 
 # %%
-print(
-    model.groupby(["seed", "level"])
-    .group.nunique()
-    .reset_index()
-    .pivot(index="level", columns="seed", values="group")
-    .astype("Int64")
+with open("paper/src/levels.tex", "w") as f:
+    f.write(
+        model.groupby(["seed", "level"])
+        .group.nunique()
+        .replace({1: numpy.nan})
+        .reset_index()
+        .pivot(index="seed", columns="level", values="group")
+        .astype("Int64")[list(range(7))]
+        .to_latex(
+            index=True,
+            sparsify=False,
+            column_format="l|rrrrrrrr",
+            label="tab:levels",
+            position="tb",
+            na_rep="",
+            caption=(
+                "Number of groups (both words and documents) in each level of the hierarchy for each random seed",
+                "Number of groups per level and seed",
+            ),
+            multicolumn=False,
+        )
+        .replace("<NA>", "")
+    )
+
+# %%
+# MI
+Egroup = model[model.level == 3].groupby("kind").group.mean().apply(numpy.ceil)
+ED = int(Egroup.D)
+EW = int(Egroup.W)
+
+data = model[model.level == 3].pivot(
+    index=["id", "kind"], columns="seed", values="group"
+)
+
+idx = data.reset_index()[["id", "kind"]]
+Didx = idx[idx.kind == "D"]
+Didx["RNG"] = numpy.random.randint(ED, size=len(Didx))
+Widx = idx[idx.kind == "W"]
+Widx["RNG"] = numpy.random.randint(EW, size=len(Widx)) + ED
+data = data.merge(
+    pandas.concat([Didx, Widx]).set_index(["id", "kind"]),
+    left_index=True,
+    right_index=True,
+)
+mi = numpy.zeros((len(data.columns), len(data.columns)))
+for i in range(len(data.columns)):
+    for j in range(len(data.columns)):
+        mi[i, j] = sklearn.metrics.normalized_mutual_info_score(
+            data.iloc[:, i].values, data.iloc[:, j].values
+        )
+
+labels = model.seed.unique().tolist() + ["RND"]
+
+matplotlib.pyplot.figure(figsize=(3.5, 3))
+seaborn.heatmap(mi, annot=True, xticklabels=labels, yticklabels=labels, fmt=".2f")
+matplotlib.pyplot.savefig(
+    "paper/src/mi.pdf",
+    transparent=True,
+    bbox_inches="tight",
 )
 
 # %%
 S = pandas.read_csv("entropy.csv")
-print(
-    S[S.level.isna()]
-    .sort_values("entropy")[["seed", "entropy"]]
-    .merge(S[S.level == 3].sort_values("entropy")[["seed", "entropy"]], on="seed")
-    .rename(columns={"entropy_x": "Model Entropy", "entropy_y": "Level 3 Entropy"})
+S[S.level.isna()].sort_values("entropy")[["seed", "entropy"]].merge(
+    S[S.level == 3].sort_values("entropy")[["seed", "entropy"]], on="seed"
+).rename(
+    columns={"entropy_x": "Model Entropy", "entropy_y": "Level 3 Entropy"}
+).sort_values('seed').to_latex(
+    "paper/src/entropy.tex",
+    index=False,
+    label="tab:entropy",
+    position="tb",
+    caption=(
+        "The table reports the entropy of the inferred partition for the whole model and for the level of intersed, per each random seed (lower is better)",
+        "Model and level entropy",
+    ),
 )
 
-# %%
-## MODEL ANALYSIS
-Ns = (
-    model.groupby(["seed", "level", "kind", "group"])
-    .count()
-    .reset_index()
-    .rename(columns={"id": "N"})
-)
-
-print(Ns[Ns.level == 4])
-
-# %%
-seaborn.FacetGrid(Ns[Ns.level == 3], col="seed", hue="kind").map_dataframe(
-    seaborn.histplot, x="N", kde=True, element="step", stat="percent"
-).add_legend()
-
-# %%
-seaborn.FacetGrid(Ns[Ns.level == 2], col="seed", hue="kind").map_dataframe(
-    seaborn.histplot, x="N", kde=True, element="step", stat="percent"
-).add_legend()
-
-# %%
-Egroup = model.groupby("level").group.mean().apply(numpy.ceil)
-
-
-def mi(data, l):
-    m = data[data.level == l].pivot(
-        index=["id", "kind"], columns="seed", values="group"
-    )
-    m = m.assign(random=numpy.random.randint(Egroup.loc[l], size=len(m)))
-    mi = numpy.zeros((len(m.columns), len(m.columns)))
-    for i in range(len(m.columns)):
-        for j in range(len(m.columns)):
-            mi[i, j] = sklearn.metrics.normalized_mutual_info_score(
-                m.iloc[:, i].values, m.iloc[:, j].values
-            )
-    return mi
-
-
-labels = model.seed.unique().tolist() + ["RND"]
-
-# %%
-seaborn.heatmap(mi(model, 3), annot=True, xticklabels=labels, yticklabels=labels)
-# %%
-seaborn.heatmap(mi(model, 2), annot=True, xticklabels=labels, yticklabels=labels)
 
 # %%
 ## MODEL INTERPRETATION
