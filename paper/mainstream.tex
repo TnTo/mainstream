@@ -204,7 +204,7 @@ The only non-obvious choice in this step is if to stem or not to stem. It is saf
 Finally, stemming is not the only way to achieve similar results, but similar results can be obtained also using lemmatization or embedding.
 
 The second cleaning step is more arbitrary.
-First, only the words (that at this point have already been lowercased and stemmed) which appears in at least 35 documents (approximately 1 every 1000) and at most in 9000 documents (approximately one fourth) are kept. This lower and upper bounds are determined by the desired type of results, in other words how many groups are expected. The answer is ten to twenty, because less than ten would be too broad and archetypal (macroeconomics, microeconomics, econometrics and few others) to capture any change, while more than twenty can be too detailed to be easily distinguished and interpreted. Following this reasoning, a word which compare in over a quarter characterize a topic too broad to be of interest (if not the discipline as whole), while a word comparing in less than a document every one thousand brings a shade of meaning too specific to be of interest at the scale of interest (or more probably is an OCR error). Than a small set of \LaTeX command\footnote{\texttt{landscap}, \texttt{normalfont}, \texttt{usepackageamsbsi}, \texttt{renewcommandsfdefaultwncyss}, \texttt{declaremaths}, \texttt{usepackagestmaryrd}, \texttt{usepackagetextcomp}, \texttt{renewcommandrmdefaultwncyr}, \texttt{newcommandcyr}, \texttt{usepackageototfontenc}, \texttt{pagestyleempti}, \texttt{renewcommandencodingdefaultot}, \texttt{declaretextfontcommandtextcyrcyr}, \texttt{documentclassaastex}, \texttt{usepackageportlandxspac}, \texttt{usepackagepifont}, \texttt{usepackageamssymb}, \texttt{selectfont}, \texttt{usepackageamsmathamsxtra}, \texttt{usepackagemathrsf}, \texttt{usepackagebm}, \texttt{usepackageamsfont}, \texttt{begindocu}, \texttt{enddocu}, \texttt{iin}, \texttt{frac}.} are removed from the list of words, because they signal not a topic but a way of typesetting and digitalize (and so, probably, a journal).
+First, only the words (that at this point have already been lowercased and stemmed) which appears in at least 35 documents (approximately 1 every 1000) and at most in 9000 documents (approximately one fourth) are kept. This lower and upper bounds are determined by the desired type of results, in other words how many groups are expected. The answer is ten to twenty, because less than ten would be too broad and archetypal (macroeconomics, microeconomics, econometrics and few others) to capture any change, while more than twenty can be too detailed to be easily distinguished and interpreted. Following this reasoning, a word which compare in over a quarter characterize a topic too broad to be of interest (if not the discipline as whole), while a word comparing in less than a document every one thousand brings a shade of meaning too specific to be of interest at the scale of interest (or more probably is an OCR error). Then, a small set of \LaTeX command\footnote{\texttt{landscap}, \texttt{normalfont}, \texttt{usepackageamsbsi}, \texttt{renewcommandsfdefaultwncyss}, \texttt{declaremaths}, \texttt{usepackagestmaryrd}, \texttt{usepackagetextcomp}, \texttt{renewcommandrmdefaultwncyr}, \texttt{newcommandcyr}, \texttt{usepackageototfontenc}, \texttt{pagestyleempti}, \texttt{renewcommandencodingdefaultot}, \texttt{declaretextfontcommandtextcyrcyr}, \texttt{documentclassaastex}, \texttt{usepackageportlandxspac}, \texttt{usepackagepifont}, \texttt{usepackageamssymb}, \texttt{selectfont}, \texttt{usepackageamsmathamsxtra}, \texttt{usepackagemathrsf}, \texttt{usepackagebm}, \texttt{usepackageamsfont}, \texttt{begindocu}, \texttt{enddocu}, \texttt{iin}, \texttt{frac}.} are removed from the list of words, because they signal not a topic but a way of typesetting and digitalize (and so, probably, a journal).
 Finally, only the documents with at least 1500 tokens (i.e. total words) after the first cleaning step are kept. Those are document longer than three or four pages, and it is another heuristic to remove errata corriges, short notes and similar documents.
 
 At the end the final dataset, on which the topic model is inferred, is composed by slightly more than thirty thousands documents (93\% of the intermediate dataset), thirty thousands unique words (2\%) and thirty-eight millions tokens (21\%).
@@ -317,26 +317,47 @@ Using these data, I am not able to see a way to exclude one of the two explanati
 To summarize, I have not found in this topic model a good instrument to measure the (eventual) advent of a new mainstream pluralism. This can be the consequence of the specific algorithm used or a signal that the research question has to be rephrased in a more theory-aware way.
 
 \section{Limitations}
-\subsection{The choice of the corpus}
-% Data availability
+This study is a work in progress, and probably cannot reach a mature stage without a huge multidisciplinary effort.
 
-\subsection{The quest for a good Topic Modelling algorithm}
+Here and there, a lot of arbitrary choices and unrefined step are present (explicitly or not).
+Some of them can be resolved with a lot of time, good relations with commercial providers of databases and/or a high performance cluster (a very fast computer).
+Some others open the windows on huge gaps in literature.
 
-\subsection{Interpreting the topics}
-% Mixing sources
+I will discuss some of them.
 
-\subsection{Assess the robustness}
-% Preprocessing
-% Clustering
-% Interpretation
+The idea of focusing on the top journals as a proxy for the mainstream convinces me. But which are the top journals is debatable.
+If only a smaller time period is going to be considered, approximately from the eighties until today, the Top5 can be an exhaustive group. But the equilibria in the discipline in the previous decades were less defined.
+Moreover, the very choice to use textual data rather than, for example, bibliometric ones is not written in stone.
+
+There are at least three steps which can benefit by a robustness check: the cleaning of the dataset, the inference of the model and its interpretation.
+
+The choice of stemming the dataset is arbitrary and should be checked if the alternatives (lemmatization, embedding and doing nothing) impact the model inferred.
+Similarly, the strategy used to reduce the size of the vocabulary, cutting the words presents in many of few documents, is only one of the possibility, and maybe not the best one \parencite{gerlach2019}.
+
+Allowing that inferring a topic model is the right way to approach this problem, there is not a consensus in literature in which algorithm perform better and, maybe more important, how to compare them \parencite[a recent and rare attempt is][]{shi2019}. I still believe that the limitations of LDA, particularly the need to determine a priori the number of topic, require pivoting to some more modern algorithms. Which is still an open question.
+
+Even testing more algorithms, how should they be interpreted if the proposed partitions are significantly different one from the others?
+
+At very least, the exercise of interpreting the resulting model should be repeated for each of the inferred models (with the three different random seed used) to see what is consistent across them and what, instead, change\footnote{Everything needed for this exercise is available in the folder \texttt{out} of the online repository.}
+
+Finally, the labels given to the topics and the groups are subjective, and the method chosen is dictated more by the data at disposition than by some fine reasoning.
+JSTOR is a fantastic resource to get the word count of many (but not all!) journals\footnote{But it does not provide the full text, which can be a useful resource for more advanced machine learning models.}, but it does not keep track of the citations received by a work, or the JEL codes attributed to it. Moreover, there is not a public database that relates the JSTOR identifier, with the Scopus one\footnote{A lot of the older document are missing from Scopus. As consequence, every study that relies on it to get bibliometric data, even just to identify the most relevant paper in a cluster, is constrained in the time period that can be studied.} or the EconLit one\footnote{The EconLit database associates to every record its JEL codes. But there are some different taxonomies of JEL codes for different periods, the last big update happened in 1990 \parencite{cherrier2017}, without a clear way to convert one in another.}, making the operation of mixing metadata from different sources really difficult and time-consuming.
+Two other strategies to interpret the groups have been discarded for this reason: label each group with the most frequent JEL Codes, and characterize each group with the most cited documents in it.
 
 \section{What's next?}
-\subsection{Rephrasing the questions for a theory-driven Distant Reading}
+I can suggest four direction in which this work can continue.
 
-\subsection{Delve into the hierarchy}
+The first one is to explore another finer-grained level of the hierarchy to look for specific subfields described in literature as part of the mainstream pluralism \parencite[§1]{davis2006}, and observe their evolution through time.
 
-\subsection{Enhancing the database}
-% Citations, JEL, Missing journals
+The second one is to substitute hSBM with another algorithm (maybe BERTtopic), and observe what will change and what not.
+
+The third one is to enhance the JSTOR database with citations data (from Scopus) and the JEL codes of the articles (from EconLit). Doing so requires to limit the time span (going back no later than 1980) and a lot of time, probably provided by master students for their thesis.
+
+The last one is probably the most important and most radical: forget about this work, doing a deeper qualitative study to highlight the very own characteristic of mainstream pluralism and translate them into quantitative question.
+There is a debate in the part of the digital humanities' community who studies history of ideas: is it better to use complex models to highlight some general features that are not observable by a human's eye (like in this work), or is it better to formulate more precise questions and try to measure some very specific features (like I did in \textcite{babbiotti2022})?
+I am inclined to the second approach, mostly because the data manipulated in this kind of studies are rarely high quality data, and more complex the algorithm more probable is that the noise of the data is transformed in a feature of the model. The possible side effect of simpler and understandable measures are easier to be spotted, allowing for a more conscious management of the noise in the data (like a poor OCR, or an imperfect coupling between two data sources).
+
+Unfortunately, at the time of writing, I have not in mind a characterization of the mainstream pluralism (or alternatively of what makes a research programme "post-neoclassical") clear enough to hypothesize some measurable proxies for it. But it can be the topic of another paper.
 
 \section*{Acknowledgments}
 This paper is a (very) revised version of my master thesis, which benefitted from the excellent guidance of my supervisors, Michele Caselle, Mario Cedrini e Alessandra Durio, and the useful critiques provided by Matteo Osella.
