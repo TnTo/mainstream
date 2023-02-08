@@ -279,8 +279,42 @@ This is, obviously, only one possible strategy to label topics and groups, but i
 Finally, the evolution of topics and groups in time is reported in figure \ref{fig:topics} and \ref{fig:groups} (the plot report the graph smoothed with a 10-years moving average).
 
 \subsection{The empirical turn}
+Looking at the groups over time plot (figure \ref{fig:groups}) some very noticeable trends appears.
+
+First the group labelled \textit{International - Development} (which includes \textit{union}, \textit{war} and \textit{soviet} among the most frequent words) is by far the most prevalent group at the beginning of the period and rapidly reduces its presence in the following years. This can be linked (but a more careful look is needed) to the progressive disappearing of the (original) Keynesianism and the classical political economy, in addition to the lost of interest in planned economies.
+
+The centre of the period (the seventies and the eighties) are characterized by the peak of \textit{Macroeconomics} and \textit{Mathematics}, which is reasonable to trace it back to the golden period of neo-Keynesian and neoclassical economics.
+
+Three groups show a growth from the beginning to the end of the time span: \textit{Game Theory} and the two \textit{Applied Microeconomics}. The top five words of the group \textit{Game Theory} (\textit{game}, \textit{player}, \textit{payoff}, \textit{bid}, \textit{belief}) can also describe the kind of laboratory experiment used in behavioural economics, another applied field.
+
+Similar considerations emerge, with less clarity, by analysing the topics (figure \ref{fig:topics}). Particularly the topic labelled \textit{Microdata} (which most frequent words recall micro-econometric studies) shows the strongest growth in the period.
+
+Those observations allow answering positively to the question "There has been an empirical turn in economics and is it possible to measure it?" (which, to be honest, has been already done in literature with other methods).
 
 \subsection{Mainstream pluralism?}
+The way the model has been presented tells very little on the other focal point of the study: the mainstream pluralism hypothesis.
+The empirical turn described above has been described as a condition that facilitate fragmentation and specialization \parencite{cedrini2018,backhouse2017}, but on its own is only a clue.
+
+\input{src/subgroups.tex}
+
+The hierarchical nature of the model allows counting the subgroups for each group (table \ref{tab:subgroups}) but the results are not interesting.
+The numerosity of the subgroups does not appear to be linked neither with the more applied fields, nor with the time in which a group reached its peak.
+
+It is time to take a step back, to lose the model from sight and to try to refrain the question in a more concrete way. Pluralism is the coexistence of different programmes, each with a different goal and, it is reasonable to assume, slightly different lexicons. So, in a pluralistic period the number of different words used should be higher than in a homogeneous period.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=\textwidth]{src/uwords.pdf}
+  \caption[Unique Words]{From left to right: number of unique words per year in the sample; total number of words per year in the sample; number of documents per year in the sample}
+  \label{fig:uwords}
+\end{figure}
+
+To grasp this idea, the number of unique words used in each year is measured, and then it is compared to the number of papers in the sample and the total words used (i.e. the total length of the cleaned papers published in a year). Figure \ref{fig:uwords} summarize the comparison.
+
+The number of the unique words used grows from the beginning of the sample and since the eighties it grows faster than the number of newly published documents. This means that the probability that a new document introduces a new word (for example because a new subfield has reached the status to be accepted in the top journals) is increasing too. On the other hand, the total number of words published is increasing way faster than the number of unique words, because of the progressive increment in length of the papers. This suggests that the increased lexical variety is not a matter of diversification, by a necessary by-product of longer articles.
+Using these data, I am not able to see a way to exclude one of the two explanations.
+
+To summarize, I have not found in this topic model a good instrument to measure the (eventual) advent of a new mainstream pluralism. This can be the consequence of the specific algorithm used or a signal that the research question has to be rephrased in a more theory-aware way.
 
 \section{Limitations}
 \subsection{The choice of the corpus}

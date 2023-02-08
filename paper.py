@@ -703,26 +703,118 @@ def plot_topics(s, l, labels=None):
 
 plot_topics(1000, 3, labels)
 
-
 # %%
-def plot_word_N(s, l, labels=None):
+def subgroups(s, l, labels):
     df = model[(model.seed == s) & (model.level == l) & (model.kind == "D")]
     if labels:
         df.group = df.group.replace(labels)
-    df = df.merge(docs, on="id")
-    df = graph.merge(df[["year", "group", "id"]], left_on="document_id", right_on="id")
-    data1 = (
-        df.groupby(["year", "group"])
-        .word_id.nunique()
+    df = df.merge(
+        model[(model.seed == s) & (model.level == l - 1) & (model.kind == "D")], on="id"
+    )
+    df.groupby("group_x").group_y.nunique().sort_values(ascending=False).to_latex(
+        "paper/src/subgroups.tex",
+        index=True,
+        index_names=False,
+        header=False,
+        label="tab:subgroups",
+        caption=(
+            "The numbers of groups in the more detailed level of the hierarchy for each group in the level of interest",
+            "Subgroups",
+        ),
+        position="tb",
+    )
+
+
+subgroups(1000, 3, labels)
+
+###########################################
+
+# %%
+# def plot_word_N(s, l, labels=None):
+#     df = model[(model.seed == s) & (model.level == l) & (model.kind == "D")]
+#     if labels:
+#         df.group = df.group.replace(labels)
+#     df = df.merge(docs, on="id")
+#     df = graph.merge(df[["year", "group", "id"]], left_on="document_id", right_on="id")
+#     data1 = (
+#         df.groupby(["year", "group"])
+#         .word_id.nunique()
+#         .reset_index()
+#         .sort_values("year")
+#         .set_index("year")
+#         .groupby("group")
+#         .rolling(10, center=True)
+#         .word_id.mean()
+#         .reset_index()
+#     )  # n unique words per year and group
+#     data2 = (
+#         docs.groupby("year")
+#         .id.count()
+#         .reset_index()
+#         .sort_values("year")
+#         .set_index("year")
+#         .rolling(10, center=True)
+#         .id.mean()
+#         .reset_index()
+#     )  # n document per year
+
+#     matplotlib.pyplot.figure(figsize=(7.5, 3))
+
+#     g = seaborn.lineplot(
+#         data=data1,
+#         x="year",
+#         y="word_id",
+#         hue="group",
+#     )
+#     g.set(ylabel="unique words")
+#     ax2 = matplotlib.pyplot.twinx()
+#     seaborn.lineplot(data=data2, x="year", y="id", ax=ax2, dashes=(2, 2))
+#     ax2.set(ylabel="n docs")
+
+#     seaborn.move_legend(g, loc="center left", bbox_to_anchor=(1.1, 0.5))
+#     matplotlib.pyplot.tight_layout()
+#     matplotlib.pyplot.savefig(
+#         "paper/src/uwords_yg_ndoc.pdf",
+#         transparent=True,
+#         bbox_inches="tight",
+#     )
+
+
+# plot_word_N(1000, 3, labels)
+
+# %%
+def plot_word_y():
+
+    data = graph.merge(
+        docs[["year", "id"]], left_on="document_id", right_on="id"
+    ).groupby("year")
+
+    fig, (ax1, ax2, ax3) = matplotlib.pyplot.subplots(1, 3, figsize=(7.5, 3))
+
+    uw = (
+        data.word_id.nunique()
+        .reset_index()
+        .set_index("year")
+        .word_id.reset_index()
+        .sort_values("year")
+        .set_index("year")
+        .rolling(10, center=True)
+        .mean()
+        .rename(columns={"word_id": "Unique Words"})
+    )
+    tw = (
+        data["count"]
+        .sum()
+        .reset_index()
+        .set_index("year")["count"]
         .reset_index()
         .sort_values("year")
         .set_index("year")
-        .groupby("group")
         .rolling(10, center=True)
-        .word_id.mean()
-        .reset_index()
+        .mean()
+        .rename(columns={"count": "Total Words"})
     )
-    data2 = (
+    nd = (
         docs.groupby("year")
         .id.count()
         .reset_index()
@@ -730,106 +822,48 @@ def plot_word_N(s, l, labels=None):
         .set_index("year")
         .rolling(10, center=True)
         .id.mean()
-        .reset_index()
+        .rename("N Documents")
     )
 
-    seaborn.lineplot(data=data1, x="year", y="word_id", hue="group")
-    ax2 = matplotlib.pyplot.twinx()
-    seaborn.lineplot(data=data2, x="year", y="id", ax=ax2, dashes=(2, 2))
-    matplotlib.pyplot.show()
-
-
-# %%
-plot_word_N(1000, 3, labels)
-# %%
-def plot_word_n(s, l, labels=None):
-    df = model[(model.seed == s) & (model.level == l) & (model.kind == "D")]
-    if labels:
-        df.group = df.group.replace(labels)
-    df1 = df.merge(docs, on="id")
-    df2 = graph.merge(
-        df1[["year", "group", "id"]], left_on="document_id", right_on="id"
+    df = (
+        pandas.merge(uw, tw, left_index=True, right_index=True)
+        .merge(nd, left_index=True, right_index=True)
+        .reset_index()
     )
 
     seaborn.lineplot(
-        data=(
-            df2.groupby(["year", "group"])
-            .word_id.nunique()
-            .reset_index()
-            .set_index(["group", "year"])
-            .word_id
-            / df1.groupby(["year", "group"])
-            .id.count()
-            .reset_index()
-            .set_index(["group", "year"])
-            .id
-        )
-        .reset_index()
-        .sort_values("year")
-        .set_index("year")
-        .groupby("group")
-        .rolling(10, center=True)[0]
-        .mean()
-        .reset_index(),
+        df,
         x="year",
-        y=0,
-        hue="group",
+        y="Unique Words",
+        color=seaborn.color_palette(n_colors=3)[0],
+        ax=ax1,
     )
-    matplotlib.pyplot.show()
-
-
-# %%
-plot_word_n(1000, 3, labels)
-plot_word_n(1001, 3)
-plot_word_n(1002, 3)
-# %%
-def plot_word_y():
-
+    ax1.set(ylabel="", title="Unique Words")
     seaborn.lineplot(
-        data=(
-            graph.merge(docs[["year", "id"]], left_on="document_id", right_on="id")
-            .groupby("year")
-            .word_id.nunique()
-            .reset_index()
-            .set_index("year")
-            .word_id
-            / docs.groupby("year").id.count().reset_index().set_index("year").id
-        )
-        .reset_index()
-        .sort_values("year")
-        .set_index("year")
-        .rolling(10, center=True)[0]
-        .mean()
-        .reset_index(),
+        df,
         x="year",
-        y=0,
-    )
-    ax2 = matplotlib.pyplot.twinx()
-    seaborn.lineplot(
-        data=docs.groupby("year")
-        .id.count()
-        .reset_index()
-        .sort_values("year")
-        .set_index("year")
-        .rolling(10, center=True)
-        .id.mean()
-        .reset_index(),
-        x="year",
-        y="id",
+        y="Total Words",
+        color=seaborn.color_palette(n_colors=3)[1],
         ax=ax2,
-        dashes=(2, 2),
+    )
+    ax2.set(ylabel="", title="Total Words")
+    seaborn.lineplot(
+        df,
+        x="year",
+        y="N Documents",
+        color=seaborn.color_palette(n_colors=3)[2],
+        ax=ax3,
+    )
+    ax3.set(ylabel="", title="N Documents")
+
+    matplotlib.pyplot.tight_layout()
+    matplotlib.pyplot.savefig(
+        "paper/src/uwords.pdf",
+        transparent=True,
+        bbox_inches="tight",
     )
 
 
 plot_word_y()
-# %%
-s = 1000
-l = 3
-df = model[(model.seed == s) & (model.level == l) & (model.kind == "D")]
-if labels:
-    df.group = df.group.replace(labels)
-df = df.merge(
-    model[(model.seed == s) & (model.level == l - 1) & (model.kind == "D")], on="id"
-)
-df.groupby("group_x").group_y.nunique().sort_values(ascending=False)
+
 # %%
