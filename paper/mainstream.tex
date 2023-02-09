@@ -218,12 +218,12 @@ Figure \ref{fig:journals} shows the absolute and relative composition of the fin
 The most represented journal is the AER, and it is possible to observe the slowdown in publication described by \textcite{ellison2003,card2013}.
 
 \section{Model selection and validation}
-The hSBM algorithm is sensitive to the initial conditions provided as random seed. For this reason three different random seeds are provided to the algorithm and the three outputs are compared.
+The hSBM algorithm is sensitive to the initial conditions, provided as random seed. For this reason three different random seeds are given to the algorithm and the three outputs are compared.
 
 \input{src/levels.tex}
 
 Table \ref{tab:levels} shows the instability of the model: the number of levels in the hierarchy is different (but similar) for each random seed, and so is the number of groups (composed by either documents or words) at each level.
-On the other hand, for the first five levels of the hierarchy (0 to 4) the magnitude of the number of levels is the same independently of the random seed.
+On the other hand, for the first five levels of the hierarchy (0 to 4) the magnitude of the number of levels is the same independently of the random seed (and so they describe the model at the same scale).
 
 For the reasons stated above, the level of the hierarchy at the scale of interest is the level 3.
 
@@ -240,11 +240,11 @@ To verify that the similarity is not only in the magnitude but also in the compo
 
 At this point it is necessary to chose one of the three models to analyse in details. The algorithm chosen (hSBM) provides a measure of the goodness-of-fit for both the complete hierarchy and each level. The metric is the entropy of the partition inferred, which, qualitatively, express how much information is needed to describe the model given the partition. So, lower the entropy more informative on itself is the partition.
 
-From table \ref{tab:entropy}, the model with random seed 1002 is the one with the lower entropy of the hierarchy, while the model 1000 is the one with the lower entropy for the level we are interested in (and it is also the one with the smaller amount of groups in that level, see table \ref{tab:levels}). Since in this work I don't exploit the presence of a full hierarchy, but I analyse only a single level, the choice of the model is driven by the entropy of the level, and so the model 1000, which is the only one considered in the following section.
+From table \ref{tab:entropy}, the model with random seed 1002 is the one with the lower entropy of the hierarchy, while the model 1000 is the one with the lower entropy for the level we are interested in (and it is also the one with the smaller amount of groups in that level, see table \ref{tab:levels}). Since in this work I don't exploit the presence of a full hierarchy, but I analyse only a single level, the choice of the model is driven by the entropy of the level, and so the model 1000 is chosen, and it is the only one considered in the following section.
 
 \section{Interpreting the model}
 The chosen partition is composed by 9 groups of documents and 12 topics (or groups of words).
-To orient in the model it is useful to give a name to each topic and group.
+To interpret the model it is useful to give a name to each topic and group.
 
 \input{src/groups.tex}
 
