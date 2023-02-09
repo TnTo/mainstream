@@ -322,7 +322,7 @@ This study is a work in progress, and probably cannot reach a mature stage witho
 
 Here and there, a lot of arbitrary choices and unrefined step are present (explicitly or not).
 Some of them can be resolved with a lot of time, good relations with commercial providers of databases and/or a high performance cluster (a very fast computer).
-Some others open the windows on huge gaps in literature.
+Some others turn on the light on some huge gaps in literature.
 
 I will discuss some of them.
 
@@ -332,38 +332,39 @@ Moreover, the very choice to use textual data rather than, for example, bibliome
 
 There are at least three steps which can benefit by a robustness check: the cleaning of the dataset, the inference of the model and its interpretation.
 
-The choice of stemming the dataset is arbitrary and should be checked if the alternatives (lemmatization, embedding and doing nothing) impact the model inferred.
-Similarly, the strategy used to reduce the size of the vocabulary, cutting the words presents in many of few documents, is only one of the possibility, and maybe not the best one \parencite{gerlach2019}.
+The choice of stemming the dataset is arbitrary, and it should be checked if the alternatives (lemmatization, embedding and doing nothing) impact the model inferred.
+Similarly, the strategy used to reduce the size of the vocabulary, cutting the words presents in many or few documents, is only one of the possibility, and maybe not the best one \parencite{gerlach2019}.
 
-Allowing that inferring a topic model is the right way to approach this problem, there is not a consensus in literature in which algorithm perform better and, maybe more important, how to compare them \parencite[a recent and rare attempt is][]{shi2019}. I still believe that the limitations of LDA, particularly the need to determine a priori the number of topic, require pivoting to some more modern algorithms. Which is still an open question.
+Allowing that inferring a topic model is the right way to approach this problem, there is not a consensus in literature about which algorithm performs better and, maybe more important, how to compare them \parencite[a recent and rare attempt is][]{shi2019}. I still believe that the limitations of LDA, particularly the need to a priori fix the number of topic, require pivoting to some more modern algorithms. Which is still an open question.
 
-Even testing more algorithms, how should they be interpreted if the proposed partitions are significantly different one from the others?
+Even if more algorithms were tested, how should they be interpreted if the proposed partitions are significantly different one from the others?
 
-At very least, the exercise of interpreting the resulting model should be repeated for each of the inferred models (with the three different random seed used) to see what is consistent across them and what, instead, change\footnote{Everything needed for this exercise is available in the folder \texttt{out} of the online repository.}
+At very least, the exercise of interpreting the resulting model should be repeated for each of the inferred models (with the three different random seed used) to see what is consistent across them and what, instead, changes\footnote{Everything needed for this exercise is available in the folder \texttt{out} of the online repository.}
 
 Finally, the labels given to the topics and the groups are subjective, and the method chosen is dictated more by the data at disposition than by some fine reasoning.
-JSTOR is a fantastic resource to get the word count of many (but not all!) journals\footnote{But it does not provide the full text, which can be a useful resource for more advanced machine learning models.}, but it does not keep track of the citations received by a work, or the JEL codes attributed to it. Moreover, there is not a public database that relates the JSTOR identifier, with the Scopus one\footnote{A lot of the older document are missing from Scopus. As consequence, every study that relies on it to get bibliometric data, even just to identify the most relevant paper in a cluster, is constrained in the time period that can be studied.} or the EconLit one\footnote{The EconLit database associates to every record its JEL codes. But there are some different taxonomies of JEL codes for different periods, the last big update happened in 1990 \parencite{cherrier2017}, without a clear way to convert one in another.}, making the operation of mixing metadata from different sources really difficult and time-consuming.
-Two other strategies to interpret the groups have been discarded for this reason: label each group with the most frequent JEL Codes, and characterize each group with the most cited documents in it.
+JSTOR is a fantastic resource to get the word count of many (but not all!) journals\footnote{But it does not provide the full text, which can be a useful resource for more advanced machine learning models.}, but it does not keep track of the citations received by a work, or the JEL codes attributed to it. Moreover, there is not a public database that relates the JSTOR identifier, with the Scopus one\footnote{A lot of the older document are missing from Scopus. As consequence, every study that relies on it to get bibliometric data, even just to identify the most relevant paper in a cluster, is constrained in the time period that can be studied.} or the EconLit one\footnote{The EconLit database associates to every record its JEL codes. But there are some different taxonomies of JEL codes in different periods. The last big update happened in 1990 \parencite{cherrier2017}, without a clear way to convert the previous taxonomy in the new one.}, making the operation of mixing metadata from different sources really difficult and time-consuming.
+Two other strategies to interpret the groups have been discarded for this reason: label each group with the most frequent JEL codes, and characterize each group with the most cited documents in it.
 
 \section{What's next?}
 I can suggest four direction in which this work can continue.
 
 The first one is to explore another finer-grained level of the hierarchy to look for specific subfields described in literature as part of the mainstream pluralism \parencite[§1]{davis2006}, and observe their evolution through time.
 
-The second one is to substitute hSBM with another algorithm (maybe BERTtopic), and observe what will change and what not.
+The second one is to substitute hSBM with another algorithm (maybe BERTtopic), and observe what changes and what not.
 
 The third one is to enhance the JSTOR database with citations data (from Scopus) and the JEL codes of the articles (from EconLit). Doing so requires to limit the time span (going back no later than 1980) and a lot of time, probably provided by master students for their thesis.
+The dataset obtained should permit to tackle the problem from multiple angles at time, for example generalizing to a communities' detection problem on a multi-layered graph, or exploring the correlation between different ways to signal the belonging to a research community.
 
-The last one is probably the most important and most radical: forget about this work, doing a deeper qualitative study to highlight the very own characteristic of mainstream pluralism and translate them into quantitative question.
+The last one is probably the most important and most radical: forget about this work, doing a deeper qualitative study to highlight the fundamental characteristics of mainstream pluralism and translate them into quantitative questions.
 There is a debate in the part of the digital humanities' community who studies history of ideas: is it better to use complex models to highlight some general features that are not observable by a human's eye (like in this work), or is it better to formulate more precise questions and try to measure some very specific features (like I did in \textcite{babbiotti2022})?
-I am inclined to the second approach, mostly because the data manipulated in this kind of studies are rarely high quality data, and more complex the algorithm more probable is that the noise of the data is transformed in a feature of the model. The possible side effect of simpler and understandable measures are easier to be spotted, allowing for a more conscious management of the noise in the data (like a poor OCR, or an imperfect coupling between two data sources).
+I am inclined to the second approach, mostly because the data manipulated in this kind of studies are rarely high quality data, and more complex the algorithm more probable is that the noise of the data is transformed in a feature of the model. The possible side effect of simpler and understandable measures are easier to spot, allowing for a more conscious management of the noise in the data (like a poor OCR, or an imperfect coupling between two data sources).
 
 Unfortunately, at the time of writing, I have not in mind a characterization of the mainstream pluralism (or alternatively of what makes a research programme "post-neoclassical") clear enough to hypothesize some measurable proxies for it. But it can be the topic of another paper.
 
 \section*{Acknowledgments}
 This paper is a (very) revised version of my master thesis, which benefitted from the excellent guidance of my supervisors, Michele Caselle, Mario Cedrini e Alessandra Durio, and the useful critiques provided by Matteo Osella.
-This work would not have been possible without the (computational) help provided by Diletta Abbonato in the exploratory phase, the, often ignored, advices from Carlo Debernardi, and the freedom to pursue secondary projects during the PhD granted me by Eugenio Caverzasi (and his support).
-The revisions of the various versions of this manuscript have taken advantage of Alice Re's scrupulousness and helpfulness.
+This work would not have been possible without the (computational) help provided by Diletta Abbonato in the exploratory phase, the, often ignored, advices from Carlo Debernardi, and the freedom to pursue secondary projects during the PhD granted me by Eugenio Caverzasi (and, in general, his support).
+%The revisions of the various versions of this manuscript have taken advantage of Alice Re's scrupulousness and helpfulness.
 Finally, I want to thank the whole DR2 community for the numerous stimuli in continuing working on quantitative history of the ideas and particularly Paolo Babbiotti, and Eugenio Petrovich, who, in a cold January in Rome, taught me how to write an Acknowledgments section.
 
 \clearpage
