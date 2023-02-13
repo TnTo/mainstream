@@ -100,7 +100,7 @@ with pandas.option_context("max_colwidth", 1000):
             label="tab:IF",
             position="p",
             caption=(
-                'The 20 journals with the highest average indicator in the period 1999-2021 for three different bibliometric indicators. Journals from the subject "Economics, Econometrics and Finance". Journals containing the words "Financ", "Marketing", "Account", "Business", "Entrepreneur" or "Consumer" are excluded. Sourced from \\url{https://www.scimagojr.com/journalrank.php}.',
+                'The 20 journals with the highest average indicators in the period 1999-2021 for three different bibliometric indicators. Journals from the subject "Economics, Econometrics and Finance". Journals containing the words "Financ", "Marketing", "Account", "Business", "Entrepreneur" or "Consumer" are excluded. Sourced from \\url{https://www.scimagojr.com/journalrank.php}.',
                 "Bibliometrics indicator for top journals",
             ),
             multicolumn=False,
@@ -238,6 +238,7 @@ journal_year.plot(
     edgecolor="black",
     ax=ax2,
     linewidth=0.01,
+    ylabel="Frequence"
 )
 ax2.xaxis.set_major_locator(matplotlib.ticker.MultipleLocator(10))
 
@@ -534,7 +535,7 @@ def gt(s, l, labels=None):
                 label="tab:gt",
                 position="tb",
                 caption=(
-                    "The composition of each group as a mixture of topics. Only the topics which represent at least the 10\\% of the group are listed",
+                    "The composition of each group as a mixture of topics. Only the topics which represent at least 10\\% of the group are listed",
                     "Groups-Topics",
                 ),
                 escape=False,
@@ -718,7 +719,7 @@ def subgroups(s, l, labels):
         header=False,
         label="tab:subgroups",
         caption=(
-            "The numbers of groups in the more detailed level of the hierarchy for each group in the level of interest",
+            "The number of groups in the more detailed level of the hierarchy for each group in the level of interest",
             "Subgroups",
         ),
         position="tb",
