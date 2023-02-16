@@ -55,7 +55,7 @@ Those are the same journals that are able to assure a scholar the tenure in the 
 
 In other words, there is a group of journals (the Top5 or the Blue Ribbon Eight) which are liked (and managed) by those who are generally liked (and cited and funded) by the discipline.
 
-This concentration of power and, as consequence, prestige has inevitably created a notion of prestige in every aspect of the discipline: there are more prestigious theories, more prestigious research topics, more prestigious departments and so on.
+This concentration of power and, as a consequence, prestige has inevitably created a notion of prestige in every aspect of the discipline: there are more prestigious theories, more prestigious research topics, more prestigious departments and so on.
 
 But it happens quickly, in the underfunded academia, that the most prestigious alternatives become the only alternatives, inducing conformism and, as a matter of necessity, excluding less prestigious theories from scientific debate.
 
@@ -75,7 +75,7 @@ So, critically studying the most widespread economics is necessary to understand
 Nevertheless, this work only tries to describe mainstream economics, without arguing on the social consequences of the features highlighted. Which is still a necessary first step.
 
 \section{The interpretative hypotheses}
-I'm not the first who tries to describe mainstream economics, and neither the first to do it quantitatively (I review some previous attempts in the next section).
+I am not the first who tries to describe mainstream economics, and neither the first to do it quantitatively (I review some previous attempts in the next section).
 
 Therefore, I can climb up on the shoulders of other scholars to be guided to what I can look for and which interpretative frameworks I can use.
 
@@ -193,7 +193,7 @@ The starting point of this analysis\footnote{The steps of the analysis can be fo
 
 First, the dataset is converted from the original jsonl format to a SQLite database. The resulting dataset is the "Original dataset" in table \ref*{tab:dataset}.
 
-Then the dataset goes through a first cleaning step. The articles published in one of the eight journals of the sample between 1946 and 2016 are selected. Of these, only those with at least one author listed (this heuristic discards mostly editorial articles, notes, comments and similar non-research articles), indexed on JSTOR, classified as "research-article" and with the unigrams count (i.e. the list of the words in each article with their frequency), are kept. In addition, non-alphabetical characters are removed from each word listed, which is then lowercased and stemmed (with the NLTK Snowball stemmer). Then words composed of one or two characters are discarded.
+Then the dataset goes through a first cleaning step. The articles published in one of the eight journals of the sample between 1946 and 2016 are selected. Of these, only those with at least one author listed (this heuristic discards mostly editorial articles, notes, comments and similar non-research articles), indexed on JSTOR, classified as "research-article" and with the unigrams count (i.e. the list of the words in each article with their frequency), are kept. Furthermore, non-alphabetical characters are removed from each word listed, which is then lowercased and stemmed (with the NLTK Snowball stemmer). Then words composed of one or two characters are discarded.
 The result of this step is the second row of table \ref{tab:dataset}.
 55\% of the original documents are discarded in this way and the number of unique words is reduced by 80\%.
 
