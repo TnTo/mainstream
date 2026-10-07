@@ -15,3 +15,7 @@ results_*
 *.log
 *.blg
 *.synctex.gz
+
+*.odt
+
+v1/*
