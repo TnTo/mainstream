@@ -41,7 +41,8 @@ graph = pandas.read_sql("graph", "sqlite:///data.db")
 ### IMPACT FACTOR
 def get_data(y):
     df = pandas.read_csv(
-        f"https://www.scimagojr.com/journalrank.php?category=2002&area=2000&type=j&year={y}&out=xls",
+        #f"https://www.scimagojr.com/journalrank.php?category=2002&area=2000&type=j&year={y}&out=xls",
+        "scimagojr 2025 Subject Category - Economics and Econometrics.csv",
         sep=";",
         decimal=",",
     )
@@ -52,7 +53,7 @@ def get_data(y):
 df = pandas.concat([get_data(y) for y in range(1999, 2022)])
 
 # %%
-data = df[["Title", "year", "SJR", "H index", "Cites / Doc. (2years)"]]
+data = df[["Title", "year", "SJR", "H index", "Citations / Doc. (2years)"]]
 data.columns = ["title", "year", "SJR", "H", "IF2"]
 
 data["general"] = ~(
@@ -267,11 +268,11 @@ open("paper/src/levels.tex", "w").write(
     .replace({1: numpy.nan})
     .reset_index()
     .pivot(index="seed", columns="level", values="group")
-    .astype("Int64")[list(range(7))]
+    .astype("Int64")[list(range(5))]
     .to_latex(
         index=True,
         sparsify=False,
-        column_format="l|rrrrrrrr",
+        column_format="l|rrrrrr",
         label="tab:levels",
         position="tb",
         na_rep="",
@@ -286,11 +287,11 @@ open("paper/src/levels.tex", "w").write(
 
 # %%
 # MI
-Egroup = model[model.level == 3].groupby("kind").group.mean().apply(numpy.ceil)
+Egroup = model[model.level == 2].groupby("kind").group.mean().apply(numpy.ceil)
 ED = int(Egroup.D)
 EW = int(Egroup.W)
 
-data = model[model.level == 3].pivot(
+data = model[model.level == 2].pivot(
     index=["id", "kind"], columns="seed", values="group"
 )
 
@@ -324,7 +325,7 @@ matplotlib.pyplot.savefig(
 # %%
 S = pandas.read_csv("entropy.csv")
 S[S.level.isna()].sort_values("entropy")[["seed", "entropy"]].merge(
-    S[S.level == 3].sort_values("entropy")[["seed", "entropy"]], on="seed"
+    S[S.level == 2].sort_values("entropy")[["seed", "entropy"]], on="seed"
 ).rename(
     columns={"entropy_x": "Model Entropy", "entropy_y": "Level 3 Entropy"}
 ).sort_values(
@@ -335,7 +336,7 @@ S[S.level.isna()].sort_values("entropy")[["seed", "entropy"]].merge(
     label="tab:entropy",
     position="tb",
     caption=(
-        "The table reports the entropy of the inferred partition for the whole model and for the level of intersed, per each random seed (lower is better)",
+        "The table reports the entropy of the inferred partition for the whole model and for the level of interest, per each random seed (lower is better)",
         "Model and level entropy",
     ),
 )
@@ -345,29 +346,9 @@ S[S.level.isna()].sort_values("entropy")[["seed", "entropy"]].merge(
 ## MODEL INTERPRETATION
 
 # %%
-labels = {
-    0: "Industrial Organization",  # D
-    1: "Labour",  # W
-    2: "Game Theory",  # D
-    3: "Applied Microeconomics - Labour",  # D
-    4: "Labour",  # D
-    5: "Production",  # W
-    6: "Mathematics",  # W
-    7: "International - Development",  # D
-    8: "Microdata",  # W
-    9: "Macro - Trade - Growth",  # D
-    10: "Game Theory",  # W
-    11: "Applied Microeconomics",  # D
-    12: "Macroeconomics",  # D
-    13: "Credit",  # W
-    14: "Mathematics",  # D
-    15: "Industrial Organization",  # W
-    16: "StopWords1",  # W
-    17: "Econometrics - Time",  # W
-    18: "Macroeconomics",  # W
-    19: "Econometrics",  # W
-    20: "StopWords2",  # W
-}
+# CHECK
+labels = pandas.read_csv("labels.csv", names=["seed", "kind", "N", "label"])
+labels = labels[labels.seed==1001][["N","label"]].set_index("N").to_dict()['label']
 
 # %%
 def dump(s, l, labels=None):
@@ -433,19 +414,56 @@ def dump(s, l, labels=None):
         )[["word", "freq"]].sort_values("freq", ascending=False).to_csv(
             f"out/{s}/{l}/D/{g}.csv", index=False
         )
-
-
-dump(1000, 3, labels)
+# %%
+for s in [1000,1001,1002,1003,1004]:
+    dump(s, 2)
 
 # %%
+lab = pandas.read_csv("labels.csv", names=["seed", "kind", "N", "label"])
+# %%
+for s in [1000,1001,1002,1003,1004]:
+    matplotlib.pyplot.figure(figsize=(7.5, 3))
+    df = (
+            model[(model.seed == s) & (model.level == 2) & (model.kind == "D")]
+            .merge(docs, on="id")
+            .groupby(["year", "group"])
+            .count()
+            .id.rename("N")
+            .reset_index()
+        )
+    df.group = df.group.replace(lab[lab.seed==s][["N","label"]].set_index("N").to_dict()['label'])
+    g = seaborn.lineplot(
+            data=df.sort_values("year")
+            .set_index("year")
+            .groupby("group")
+            .rolling(10, center=True)
+            .N.mean()
+            .reset_index()
+            .astype({"group": "category"}),
+            x="year",
+            y="N",
+            hue="group",
+            color="colorblind",
+        )
+
+    seaborn.move_legend(g, loc="center left", bbox_to_anchor=(1, 0.5))
+    matplotlib.pyplot.tight_layout()
+    matplotlib.pyplot.savefig(
+        f"paper/src/groups_{s}.pdf",
+        transparent=True,
+        bbox_inches="tight",
+    )
+
+# %%
+#CHECK
 def tab_d(s, l, labels):
     with pandas.option_context("max_colwidth", 1000):
-        open("paper/src/groups.tex", "w").write(
+        open(f"paper/src/groups_{s}.tex", "w").write(
             pandas.DataFrame(
                 [
                     (
                         labels[int(path.split("/")[-1].split(".")[0])],
-                        ", ".join(pandas.read_csv(path).head(20).word.to_list()),
+                        ", ".join(pandas.read_csv(path, na_filter=False).head(20).word.to_list()),
                     )
                     for path in glob.glob(f"out/{s}/{l}/D/*.csv")
                 ],
@@ -459,7 +477,7 @@ def tab_d(s, l, labels):
                 label="tab:groups",
                 position="tb",
                 caption=(
-                    "The nine documents-group and the twenty most frequent words in each of them",
+                    f"The documents-group and the twenty most frequent words in each of them. Seed {s}",
                     "Groups",
                 ),
             )
@@ -467,8 +485,8 @@ def tab_d(s, l, labels):
             .replace("\\begin{tabularx}", "\\begin{tabularx}{\\hsize}")
         )
 
-
-tab_d(1000, 3, labels)
+for s in [1000,1001,1002,1003,1004]:
+    tab_d(s, 2, lab[lab.seed==s][["N","label"]].set_index("N").to_dict()['label'])
 
 # %%
 def tab_w(s, l, labels):
@@ -501,7 +519,7 @@ def tab_w(s, l, labels):
         )
 
 
-tab_w(1000, 3, labels)
+tab_w(1001, 2, labels)
 
 # %%
 ### G-T Composition
@@ -521,7 +539,7 @@ def gt(s, l, labels=None):
     for g in data.Group.unique():
         buffer = ""
         for t in data[data.Group == g].itertuples():
-            if t.N >= 0.1:
+            if (t.N >= 0.1) and (t.Topic != "Stopwords"):
                 buffer += f" {t.N:.2f}*{t.Topic.replace(' ', '~')} +"
         out.append((g, buffer + " ..."))
     with pandas.option_context("max_colwidth", 1000):
@@ -545,7 +563,7 @@ def gt(s, l, labels=None):
         )
 
 
-gt(1000, 3, labels)
+gt(1001, 2, labels)
 
 # %%
 ### Most similar papers
@@ -618,7 +636,7 @@ def similar_papers(s, l, labels=None, n=5):
         )
 
 
-similar_papers(1000, 3, labels)
+similar_papers(1001, 2, labels)
 
 # %%
 def plot(s, l, labels=None):
@@ -660,7 +678,7 @@ def plot(s, l, labels=None):
     )
 
 
-plot(1000, 3, labels)
+plot(1001, 2, labels)
 
 
 # %%
@@ -702,8 +720,7 @@ def plot_topics(s, l, labels=None):
     )
 
 
-plot_topics(1000, 3, labels)
-
+plot_topics(1001, 2, labels)
 # %%
 def subgroups(s, l, labels):
     df = model[(model.seed == s) & (model.level == l) & (model.kind == "D")]
@@ -726,7 +743,7 @@ def subgroups(s, l, labels):
     )
 
 
-subgroups(1000, 3, labels)
+subgroups(1001, 2, labels)
 
 ###########################################
 

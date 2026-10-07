@@ -1,1 +1,1 @@
-mamba env create -f environment.yml --force
+micromamba env create -f environment.yml

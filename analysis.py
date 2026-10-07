@@ -17,10 +17,11 @@ wq = w[["freq"]].quantile(q=[x / 20 for x in range(0, 21, 1)])
 s = w.freq.sum()
 l = len(w)
 for i in list(range(1, 11)) + list(range(10, 201, 10)):
-    w0 = w[(w.word.str.len() > j) & (w.freq >= i)]
-    print(
-        f"min_freq: {i}; min_len: {j+1}; preserved vocab: {len(w0) / l}; preserved mass: {w0.freq.sum() / s}"
-    )
+    for j in list(range(1,11)):
+        w0 = w[(w.word.str.len() > j) & (w.freq >= i)]
+        print(
+            f"min_freq: {i}; min_len: {j+1}; preserved vocab: {len(w0) / l}; preserved mass: {w0.freq.sum() / s}"
+        )
 
 # %%
 # SECOND ATTEMPT
@@ -123,3 +124,5 @@ print(len(docs[docs.lenght >= 1500]) / len(docs))
 dp = dmeta[dmeta.lenght < 1500]
 dp.year.hist()
 dp.groupby("journal").count().id.plot.bar()
+
+# %%

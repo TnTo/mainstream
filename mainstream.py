@@ -7,12 +7,12 @@ from collections import defaultdict
 from multiprocessing import Pool
 
 import graph_tool.all as gt
-import hdbscan
+#import hdbscan
 import nltk
 import numpy as np
 import pandas
 import scipy.sparse
-import umap
+#import umap
 
 ### modin ###
 import modin.pandas as pandas
@@ -382,10 +382,6 @@ def infer_hsbm_tm(
 
     label = g.vp["kind"]
 
-    state_args = {"clabel": label}
-    state_args["pclabel"] = label
-    state_args["eweight"] = g.ep.count
-
     for s in seeds:
         np.random.seed(s)
         gt.seed_rng(s)
@@ -393,13 +389,12 @@ def infer_hsbm_tm(
         print(f"Seed {s}")
         state = gt.minimize_nested_blockmodel_dl(
             g,
-            state_args=dict(base_type=gt.BlockState, **state_args),
             multilevel_mcmc_args=dict(verbose=verbose),
         )
         L = 0
         for l in state.levels:
             L += 1
-            if l.get_nonempty_B() == 2:
+            if l.get_N() == 1:
                 break
         state = state.copy(bs=state.get_bs()[:L] + [np.zeros(1)])
         print(state)
@@ -455,8 +450,7 @@ def dump_hsbm_tm(
     def load(s):
         return pickle.load(open(f"{input_prefix}_{s}.pkl", "rb"))
 
-    with Pool(4) as p:
-        states = p.map(load, seeds)
+    states = [load(s) for s in seeds]
     print("Loaded!")
 
     S = []

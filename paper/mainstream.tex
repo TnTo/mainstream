@@ -37,7 +37,7 @@
   An updated version of this paper and all the source code and the instructions required to replicate the paper are available at \url{https://github.com/TnTo/mainstream/}
 }}
 \subtitle{A Topic Model insight}
-\author{Michele Ciruzzi\thanks{mciruzzi@uninsubria.it - \url{https://orcid.org/0000-0003-1485-1204}}}
+\author{Margherita Redigonda\thanks{m@orsorosso.net - \url{https://orcid.org/0000-0003-1485-1204}}}
 
 \begin{document}
 
@@ -81,12 +81,12 @@ Therefore, I can climb up on the shoulders of other scholars to be guided to wha
 
 Two qualitative theories will be the core pieces to guide this work: the \textit{empirical turn} hypothesis and the \textit{mainstream pluralism} hypothesis.
 
-The first lens with which to observe the mainstream economics is the progressive shift toward empirical research \parencite{backhouse2000,backhouse2016,backhouse2017,cherrier2022}.
+The first lens with which to observe the mainstream economics is the progressive shift toward empirical research \parencite{backhouse2000,backhouse2016,backhouse2017,cherrier2018a}.
 Neoclassical economics, which is the theoretical framework on which mainstream economics is based since the seventies, built its fortune on the ability to provide clear models expressed using a very formal flavour of mathematics, mostly calculus-based.
 In more recent times instead, in part as a reaction to the credibility crisis arose after the financial crises of the first decade of the XXI century, econometrics is becoming the standard mathematical tool of analysis and theory-driven models are being replaced by data-driven models.
 This empirical turn in the scientific practices of the discipline is moving researchers away from the comprehensive economic models of the past, towards a perilous land in which the only theory is the way in which data are analysed, and every economic insight can come only from data itself.
 
-The second lens is the mainstream pluralism hypothesis \parencite{davis2006,davis2019a,davis2019b,cedrini2018}. It has been observed that the domain of research of economics is widening and the number of different computational and mathematical tools used is increasing\footnote{I want to highlight two factors that have probably helped this shift. The first are the new data-driven methodologies, which are able to deal with a wider range of hypotheses than the neoclassical calculus-based approach \parencite{cherrier2022}. The second one is the return from the imperial conquests of other social sciences \parencite{fourcade2015,marchionatti2017}, which has widened the domains of research and introduced new methodologies, like the laboratory experiments that behavioural economists have learnt from psychology.}. These two tendencies have allowed the emergence of many new fields in the discipline, which are very focused on a particular topic (like environmental or health economics) or on a particular method (like economic complexity or behavioural economics).
+The second lens is the mainstream pluralism hypothesis \parencite{davis2006,davis2019a,davis2019b,cedrini2018}. It has been observed that the domain of research of economics is widening and the number of different computational and mathematical tools used is increasing\footnote{I want to highlight two factors that have probably helped this shift. The first are the new data-driven methodologies, which are able to deal with a wider range of hypotheses than the neoclassical calculus-based approach \parencite{cherrier2018a}. The second one is the return from the imperial conquests of other social sciences \parencite{fourcade2015,marchionatti2017}, which has widened the domains of research and introduced new methodologies, like the laboratory experiments that behavioural economists have learnt from psychology.}. These two tendencies have allowed the emergence of many new fields in the discipline, which are very focused on a particular topic (like environmental or health economics) or on a particular method (like economic complexity or behavioural economics).
 Researchers who are specialized in one of these fields rarely engage with the other niches, creating an archipelago of unconnected islands and an appearance of pluralism in economics.
 The mainstream pluralism hypothesis argues that this process of specialization is not developing pluralism as historically intended in economics (i.e. as a plurality of competing ontological views of the economy and the economics), but rather it is creating a plurality of loosely connected fields. These share a common ancestral set of hypothesis (the neoclassical one) and relax some of them to be able to tackle specific problems, putting them in continuity rather than in contrast with neoclassical economics\footnote{In this sense they can be viewed as subfields of a wider "post-neoclassical" economics, which aims to improve (or save) the neoclassical approach and legacy, rather than rebuild the discipline on completely different assumptions like the heterodoxies aim to do.}.
 
@@ -157,7 +157,7 @@ Looking at some older journals' ranking \parencite{billings1972,hawkins1973,lieb
 
 The resulting sample is composed by: the Top5 (\textit{The American Economic Review}, \textit{Econometrica}, \textit{Journal of Political Economy}, \textit{Quarterly Journal of Economics} and \textit{Review of Economic Studies}), one additional Blue Ribbon (\textit{Review of Economics and Statistics}) and two "old glories" (\textit{Economica} and \textit{The Economic Journal}).
 
-Finally, only the research article published between 1946 (the first year after the WWII) and 2016 (the last year for which the full-texts of the articles was available for the eight journals in the sample) are considered.
+Finally, only the research article published between 1946 (the first year after the WWII) and 2016 (the last year for which the full-texts of the articles was available for the eight journals in the sample at the time of starting the project) are considered\footnote{The date were downloaded from Constellate on the 19/09/2022. A later attempt to renew the dataset has been made on the 21/09/2026, but the constellate service were shut down and the new JSTOR dataset does not include two top5 journals (\textit{Quarterly Journal of Economics} and \textit{Review of Economic Studies}). For this reason the older dataset has been used.}.
 
 \section{Strategies of analysis}
 The research question of this work (if mainstream economics is going through an empirical shift and a pattern of specialization) is about the topics dealt with in mainstream economics (using a sample of top journals as proxy).
@@ -182,12 +182,12 @@ Neither HDP \parencite{teh2005} nor TopicMapping \parencite{lancichinetti2015} a
 A different path is to use a combination of a dimensionality reduction technique, like UMAP \parencite{mcinnes2020}, followed by a clustering algorithm, like HDBSCAN \parencite{campello2013,mcinnes2017}, to classify the document. This strategy should show greater consistency across different random seeds but also change the type of output obtained. LDA returns the probability for each document to belong to each topic. HDBSCAN, instead, associates each document to at most one topic, leaving some documents unclassified. Regarding the number of topics, the researcher is able to set the minimum number of documents for each topic, allowing to resolve the model at different scales. Finally, this kind of workflow is often preceded by an embedding algorithm which provides a change-of-basis function from the word-spanned vector space to an abstract one, determined with machine learning techniques \parencite{angelov2020,grootendorst2022}.
 The presence of unclassified documents, and a personal preference to not use embedding techniques, has put me on another different path.
 
-The strategy used in this work relies on the hierarchical stochastic block model algorithm \parencite[hSBM,][]{peixoto2019,gerlach2018}, which aims to clusterize each partition of the bipartite graph, at different scales. It yields a collection of models, each one a zoomed version of the previous, in which each word is assigned to a topic and each document is assigned to a group. For those used to LDA this is an important difference: LDA infers a single latent layer (i.e. Words---Topic---Documents), while hSBM infers two of them (Words---Topics---Groups---Documents). Moreover, hSBM provides both a hard-clustering version (like UMAP-HDBSCAN in which each document or word belongs to only one cluster) and a soft-clustering version (like LDA in which the membership is probabilistic). The problem of this algorithm is its computational cost which is prohibitive for the soft-clustering version and still elevated for the hard-clustering one\footnote{The final version of the dataset requires more than 10GB of RAM to be processed and more than 10 hours on my personal laptop. One cause of this is the single-threaded nature of the algorithm. A previous version of the dataset, with a smaller number of words removed, required more than 20GB of RAM. The dataset with the documents' metadata is a 300MB SQLite file.}.
+The strategy used in this work relies on the hierarchical stochastic block model algorithm \parencite[hSBM,][]{peixoto2019,gerlach2018}, which aims to clusterize each partition of the bipartite graph, at different scales. It yields a collection of models, each one a zoomed version of the previous, in which each word is assigned to a topic and each document is assigned to a group. For those used to LDA this is an important difference: LDA infers a single latent layer (i.e. Words---Topic---Documents), while hSBM infers two of them (Words---Topics---Groups---Documents). Moreover, hSBM provides both a hard-clustering version (like UMAP-HDBSCAN in which each document or word belongs to only one cluster) and a soft-clustering version (like LDA in which the membership is probabilistic). The problem of this algorithm is its computational cost which is prohibitive for the soft-clustering version and still elevated for the hard-clustering one\footnote{The final version of the dataset requires more than 10GB of RAM to be processed and more than 10 hours on my old personal laptop. One cause of this is the single-threaded nature of the algorithm. A previous version of the dataset, with a smaller number of words removed, required more than 20GB of RAM. The dataset with the documents' metadata is a 300MB SQLite file.}.
 
 The final choice is anyway hSBM, mostly because it is the algorithm that requires the researcher to input the smallest number of parameters, it allows zooming into each group to analyse its composition (i.e. of which subgroups is composed) and it provides an unsupervised method to choose among the results of different initial conditions.
 
 \section{Corpus cleaning}
-The starting point of this analysis\footnote{The steps of the analysis can be followed and reproduced using the files \texttt{main.py} and \texttt{mainstream.py} at \url{https://github.com/TnTo/mainstream/}.} is a dataset downloaded from Constellate, a web-based software to analyse papers in JSTOR database, which includes all the available documents published in the seven available Blue Ribbon Journals, \textit{Economica}, the \textit{Economic Journal} and the \textit{Bell Journal of Economics}\footnote{The Constellate IDs of the dataset downloaded are: \texttt{31bcd322-032f-2ba5-37c4-c2ca96952ebf} (7 Blue Ribbons - 1900-1954), \texttt{1a0cd895-717b-dcc2-940d-a4d7ed069aea} (7 Blue Ribbons - 1955-1984), \texttt{03aa84ad-ec5e-290c-69e7-721535714c9e} (7Blue Ribbons - 1985-2022) (Downloaded 19/09/2022), \texttt{4788f182-8ec3-8eb8-ac5b-a1b318b03dbb} (Economica and Economic Journal), \texttt{c55cf30b-737b-9a83-3325-8d82a71bd8e6} (Bell Journal of Economics) (Downloaded 08/10/2022). These datasets can be retrieved online at \url{https://constellate.org/dataset/} followed by the dataset ID.}.
+The starting point of this analysis\footnote{The steps of the analysis can be followed and reproduced using the files \texttt{main.py} and \texttt{mainstream.py} at \url{https://github.com/TnTo/mainstream/}.} is a dataset downloaded from Constellate, a web-based software to analyse papers in JSTOR database, which includes all the available documents published in the seven available Blue Ribbon Journals, \textit{Economica}, the \textit{Economic Journal} and the \textit{Bell Journal of Economics}\footnote{The Constellate IDs of the dataset downloaded are: \texttt{31bcd322-032f-2ba5-37c4-c2ca96952ebf} (7 Blue Ribbons - 1900-1954), \texttt{1a0cd895-717b-dcc2-940d-a4d7ed069aea} (7 Blue Ribbons - 1955-1984), \texttt{03aa84ad-ec5e-290c-69e7-721535714c9e} (7Blue Ribbons - 1985-2022) (Downloaded 19/09/2022), \texttt{4788f182-8ec3-8eb8-ac5b-a1b318b03dbb} (Economica and Economic Journal), \texttt{c55cf30b-737b-9a83-3325-8d82a71bd8e6} (Bell Journal of Economics) (Downloaded 08/10/2022). Constellate website was off-lined in July 2025.}.
 
 \input{src/dataset.tex}
 
@@ -219,41 +219,41 @@ Figure \ref{fig:journals} shows the absolute and relative composition of the fin
 The most represented journal is the AER, and it is possible to observe the slowdown in publication described by \textcite{ellison2003,card2013}.
 
 \section{Model selection and validation}
-The hSBM algorithm is sensitive to the initial conditions, provided as random seed. For this reason three different random seeds are given to the algorithm and the three outputs are compared.
+The hSBM algorithm is sensitive to the initial conditions, provided as random seed. For this reason five different random seeds are given to the algorithm and the five outputs are compared.
 
 \input{src/levels.tex}
 
-Table \ref{tab:levels} shows the instability of the model: the number of levels in the hierarchy is different (but similar) for each random seed, and so is the number of groups (composed by either documents or words) at each level.
-On the other hand, for the first five levels of the hierarchy (0 to 4) the magnitude of the number of levels is the same independently of the random seed (and so they describe the model at the same scale).
+Table \ref{tab:levels} shows the instability of the model: while the number of levels in the hierarchy is the same for each random seed, the number of groups (composed by either documents or words) at each level varies.
+Furthermore, the magnitude of the number of levels is the same independently of the random seed (and so they describe the model at the same scale).
 
-For the reasons stated above, the level of the hierarchy at the scale of interest is the level 3.
+For the reasons stated above, the level of the hierarchy at the scale of interest is the level 2.
 
 \begin{figure}[tb]
   \centering
   \includegraphics[width=3.5in]{src/mi.pdf}
-  \caption[Mutual Information for the level of interest]{Normalized mutual information for the three level 3 partitions and a random control partition (RND)}
+  \caption[Mutual Information for the level of interest]{Normalized mutual information for the five level 2 partitions and a random control partition (RND)}
   \label{fig:mi}
 \end{figure}
 
-To verify that the similarity is not only in the magnitude but also in the composition of the groups a null-model is generated. Focusing on the level of interest, the average number of words-groups and documents-groups are computed. Then, words (documents) are randomly divided in such number of groups. The resulting partitions (the null-model and the three topic models) are compared using the Normalized Mutual Information. As shown in figure \ref{fig:mi} the mutual information between the three topic models is higher (.36-.38) than the mutual information between one of the topic models and the control partition (.22-.23). This is a strong hint that the three models recognize some kind of structure (the topics) and their similarity is not a coincidence.
+To verify that the similarity is not only in the magnitude but also in the composition of the groups a null-model is generated. Focusing on the level of interest, the average number of words-groups and documents-groups are computed. Then, words (documents) are randomly divided in such number of groups. The resulting partitions (the null-model and the five topic models) are compared using the Normalized Mutual Information. As shown in figure \ref{fig:mi} the mutual information between the five topic models is higher (.42-.46) than the mutual information between one of the topic models and the control partition (.19-.21). This is a strong hint that the five models recognize some kind of structure (the topics) and their similarity is not a coincidence.
 
 \input{src/entropy.tex}
 
-At this point it is necessary to chose one of the three models to analyse in detail. The algorithm chosen (hSBM) provides a measure of the goodness-of-fit for both the complete hierarchy and each level. The metric is the entropy of the partition inferred, which, qualitatively, expresses how much information is needed to describe the model given the partition. So, the lower the entropy the more informative on itself is the partition.
+At this point it is necessary to chose one of the five models to analyse in detail. The algorithm chosen (hSBM) provides a measure of the goodness-of-fit for both the complete hierarchy and each level. The metric is the entropy of the partition inferred, which, qualitatively, expresses how much information is needed to describe the model given the partition. So, the lower the entropy the more informative on itself is the partition.
 
-From table \ref{tab:entropy}, the model with random seed 1002 is the one with the lowest entropy of the hierarchy, while the model 1000 is the one with the lowest entropy for the level we are interested in (and it is also the one with the smallest amount of groups in that level, see table \ref{tab:levels}). Since in this work I don't exploit the presence of a full hierarchy, but I analyse only a single level, the choice of the model is driven by the entropy of the level, and so the model 1000 is chosen, and it is the only one considered in the following section.
+From table \ref{tab:entropy}, the model with random seed 1003 is the one with the lowest entropy of the hierarchy, while the model 1001 is the one with the lowest entropy for the level we are interested in (and it is also the one with the smallest amount of groups in that level, see table \ref{tab:levels}). Since in this work I don't exploit the presence of a full hierarchy, but I analyse only a single level, the choice of the model is driven by the entropy of the level, and so the model 1001 is chosen, and it is the only one considered in the following section\footnote{For the other models see the appendices.}.
 
 \section{Interpreting the model}
-The chosen partition is composed by 9 groups of documents and 12 topics (or groups of words).
+The chosen partition is composed by 11 groups of documents and 15 topics (or groups of words).
 To interpret the model it is useful to give a name to each topic and group.
 
-\input{src/groups.tex}
+\input{src/groups_1001.tex}
 
 To label the groups the occurrences of each word in each document of the group are summed together, then the most frequent words in the group are used to get a general sense of the group (table \ref{tab:groups}). Moreover, considering this sum as a single document, the most similar documents (using the cosine similarity) to the group as whole are also listed (see table \ref{tab:papers} in appendix).
 
 \input{src/topics.tex}
 
-For the topics (the groups composed by words), instead, the most frequent words in the corpus are listed for each topic in table \ref{tab:topics}. \textit{StopWords} are the two topics which regroup words with different meanings and which do not bring a semantic insight.
+For the topics (the groups composed by words), instead, the most frequent words in the corpus are listed for each topic in table \ref{tab:topics}. \textit{StopWords} is the topic which regroups words with different meanings and which do not bring a semantic insight.
 
 \input{src/gt.tex}
 
@@ -280,13 +280,15 @@ Finally, the evolution of groups and topics in time is reported in figure \ref{f
 \subsection{The empirical turn}
 Looking at the groups over time plot (figure \ref{fig:groups}) some very noticeable trends appear.
 
-First the group labelled \textit{International - Development} (which includes \textit{union}, \textit{war} and \textit{soviet} among the most frequent words) is by far the most prevalent group at the beginning of the period and rapidly reduces its presence in the following years. This can be linked (but a more careful look is needed) to the progressive disappearing of the (original) Keynesianism and the classical political economy, in addition to the loss of interest in planned economies.
+First the group labelled \textit{Trade} (which includes \textit{war} and \textit{union} among the most frequent words) is by far the most prevalent group at the beginning of the period and rapidly reduces its presence in the following years. This can be linked (but a more careful look is needed) to the progressive disappearing of the (original) Keynesianism and the classical political economy, in addition to the loss of interest in planned economies.
 
-The centre of the period (the seventies and the eighties) are characterized by the peak of \textit{Macroeconomics} and \textit{Mathematics}, which is reasonable to trace it back to the golden period of neo-Keynesian and neoclassical economics.
+The centre of the period (the seventies and the eighties) are characterized by the peak of Macroeconomics and later Game Theory (divided in more topics), which is reasonable to trace it back to the golden period of neo-Keynesian and neoclassical economics.
 
-Three groups show a growth from the beginning to the end of the time span: \textit{Game Theory} and the two \textit{Applied Microeconomics}. The top five words of the group \textit{Game Theory} (\textit{game}, \textit{player}, \textit{payoff}, \textit{bid}, \textit{belief}) can also describe the kind of laboratory experiment used in behavioural economics, another applied field.
+Some groups show a growth from the beginning to the end of the time span: among them \textit{Labour} and \textit{Applied Microeconomics}.
 
-Similar considerations emerge, with less clarity, by analysing the topics (figure \ref{fig:topics}). Particularly the topic labelled \textit{Microdata} (whose most frequent words recall micro-econometric studies) shows the strongest growth in the period.
+Similar considerations emerge, with less clarity, by analysing the topics (figure \ref{fig:topics}). Particularly the topics labelled \textit{Applied Micro} shows the strongest growth in the period.
+
+In appendix the same graph and word-list for the groups of documents obtained with the other seeds are reported: similar dynamics appear (particularly in seed 1000) with an early classical economics, a middle mathematize Macroeconomics and a late Applied Micro/Game Theory cluster.
 
 Those observations allow answering positively to the question "Has there been an empirical turn in economics and is it possible to measure it?" (which, to be honest, has been already done in literature with other methods).
 
@@ -319,28 +321,20 @@ Using these data, I am not able to see a way to exclude one of the two explanati
 To summarize, I have not found in this topic model a good instrument to measure the (eventual) advent of a new mainstream pluralism. This can be the consequence of the specific algorithm used or a signal that the research question has to be rephrased in a more theory-aware way.
 
 \section{Limitations}
-This study is a work in progress, and probably cannot reach a mature stage without a huge multidisciplinary effort.
+This study is an early work in its fields, and probably would reach a mature stage only with a further effort.
 
-Here and there, a lot of arbitrary choices and unrefined steps are present (explicitly or not).
-Some of them can be resolved with a lot of time, good relations with commercial providers of databases and/or a high performance cluster (a very fast computer).
-Some others shed a light on some huge gaps in literature.
-
-I will discuss some of them.
+A better source of data (maybe with an agreement with some commercial providers) could improve the results, particularly extending the time period could highlight an eventual process of specialization stemmed from the 2008 crisis, which could be interpreted as an effect of mainstream pluralism.
 
 The idea of focusing on the top journals as a proxy for mainstream convinces me. But which are the top journals is debatable.
 If only a smaller time period is going to be considered, approximately from the eighties until today, the Top5 can be an exhaustive group. But the equilibria in the discipline in the previous decades were less defined.
 Moreover, the very choice to use textual data rather than, for example, bibliometric ones is not written in stone.
 
-There are at least three steps which could benefit from a robustness check: the cleaning of the dataset, the inference of the model and its interpretation.
+There are at least two steps which could benefit from a robustness check: the cleaning of the dataset and the inference of the model.
 
 The choice of stemming the dataset is arbitrary, and it should be checked if the alternatives (lemmatization, embedding and doing nothing) impact the model inferred.
 Similarly, the strategy used to reduce the size of the vocabulary, cutting the words present in many or few documents, is only one of the possibility, and maybe not the best one \parencite{gerlach2019}.
 
 Allowing that inferring a topic model is the right way to approach this problem, there is not a consensus in literature about which algorithm performs better and, maybe more importantly, how to compare them \parencite[a recent and rare attempt is][]{shi2019}. I still believe that the limitations of LDA, particularly the need to fix a priori the number of topics, requires pivoting to some more modern algorithms. Which is still an open question.
-
-Even if more algorithms were tested, how should they be interpreted if the proposed partitions are significantly different one from the others?
-
-At very least, the exercise of interpreting the resulting model should be repeated for each of the inferred models (with the three different random seed used) to see what is consistent across them and what, instead, changes\footnote{Everything needed for this exercise is available in the folder \texttt{out} of the online repository.}
 
 Finally, the labels given to the topics and the groups are subjective, and the method chosen is dictated more by the data at disposition than by some fine reasoning.
 JSTOR is a fantastic resource to get the word count of many (but not all!) journals\footnote{But it does not provide the full text, which can be a useful resource for more advanced machine learning models.}, but it does not keep track of the citations received by a work, or the JEL codes attributed to it. Moreover, there is not a public database that relates the JSTOR identifier, with the Scopus one\footnote{A lot of the older document are missing from Scopus. As consequence, every study that relies on it to get bibliometric data, even just to identify the most relevant paper in a cluster, is constrained in the time period that can be studied.} or the EconLit one\footnote{The EconLit database associates to every record its JEL codes. But there are some different taxonomies of JEL codes in different periods. The last big update happened in 1990 \parencite{cherrier2017}, without a clear way to convert the previous taxonomy in the new one.}, making the operation of mixing metadata from different sources really difficult and time-consuming.
@@ -357,15 +351,15 @@ The third one is to enhance the JSTOR database with citations data (from Scopus)
 The dataset obtained should permit to tackle the problem from multiple angles at a time, for example generalizing to a communities' detection problem on a multi-layered graph, or exploring the correlation between different ways to signal the belonging to a research community.
 
 The last one is probably the most important and most radical: to forget about this work, doing a deeper qualitative study to highlight the fundamental characteristics of mainstream pluralism and to translate them into quantitative questions.
-There is a debate in the part of the digital humanities' community who studies history of ideas: is it better to use complex models to highlight some general features that are not observable by a human's eye (like in this work), or is it better to formulate more precise questions and try to measure some very specific features (like I did in \textcite{babbiotti2022})?
+There is a debate in the part of the digital humanities' community who studies history of ideas: is it better to use complex models to highlight some general features that are not observable by a human's eye (like in this work), or is it better to formulate more precise questions and try to measure some very specific features (like in \textcite{babbiotti2022})?
 I am inclined to the second approach, mostly because the data manipulated in this kind of studies are rarely high quality data, and more complex algorithms are able to find "features" even when only noise is present. The possible side effects of simpler and understandable measures are easier to spot, allowing for a more conscious management of the noise in the data (like a poor OCR, or an imperfect coupling between two data sources).
 
-Unfortunately, at the time of writing, I have not in mind a characterization of the mainstream pluralism (or alternatively of what makes a research programme "post-neoclassical") clear enough to hypothesize some measurable proxies for it. But it can be the topic of another paper.
+Unfortunately, at the time of writing, I have not in mind a characterization of the mainstream pluralism (or alternatively of what makes a research programme "post-neoclassical"\parencite{Redigonda2023}) clear enough to hypothesize some measurable proxies for it. But it can be the topic of another paper.
 
 \section*{Acknowledgments}
 This paper is a (very) revised version of my master thesis, which benefitted from the excellent guidance of my supervisors, Michele Caselle, Mario Cedrini e Alessandra Durio, and the useful critiques provided by Matteo Osella.
 This work would not have been possible without the (computational) help provided by Diletta Abbonato in the exploratory phase, the, often ignored, advices from Carlo Debernardi, and the freedom to pursue secondary projects during the PhD granted me by Eugenio Caverzasi (and, in general, his support).
-%The revisions of the various versions of this manuscript have taken advantage of Alice Re's scrupulousness and helpfulness.
+The revisions of the various versions of this manuscript have taken advantage of Alice Re's scrupulousness and helpfulness.
 Finally, I want to thank the whole DR2 community for the numerous stimuli in continuing working on quantitative history of the ideas and particularly Paolo Babbiotti, and Eugenio Petrovich, who, in a cold January in Rome, taught me how to write an Acknowledgments section.
 
 \clearpage
@@ -379,6 +373,40 @@ Finally, I want to thank the whole DR2 community for the numerous stimuli in con
   \begin{landscape}
     \input{src/papers.tex}
   \end{landscape}
+
+  \section{Graph and Groups for the other seeds}
+  \clearpage
+  \begin{figure}[]
+    \centering
+    \includegraphics[width=\textwidth]{src/groups_1000.pdf}
+    \caption[Groups]{Number of documents in each group during time. Smoothed with a 10-year rolling average. Seed 1000}
+    \label{fig:groups}
+  \end{figure}
+  \input{src/groups_1000.tex}
+  \clearpage
+  \begin{figure}[]
+    \centering
+    \includegraphics[width=\textwidth]{src/groups_1002.pdf}
+    \caption[Groups]{Number of documents in each group during time. Smoothed with a 10-year rolling average. Seed 1002}
+    \label{fig:groups}
+  \end{figure}
+  \input{src/groups_1002.tex}
+  \clearpage
+  \begin{figure}[]
+    \centering
+    \includegraphics[width=\textwidth]{src/groups_1003.pdf}
+    \caption[Groups]{Number of documents in each group during time. Smoothed with a 10-year rolling average. Seed 1003}
+    \label{fig:groups}
+  \end{figure}
+  \input{src/groups_1003.tex}
+  \clearpage
+  \begin{figure}[]
+    \centering
+    \includegraphics[width=\textwidth]{src/groups_1004.pdf}
+    \caption[Groups]{Number of documents in each group during time. Smoothed with a 10-year rolling average. Seed 1004}
+    \label{fig:groups}
+  \end{figure}
+  \input{src/groups_1004.tex}
 
 \end{appendices}
 

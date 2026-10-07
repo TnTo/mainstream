@@ -45,8 +45,7 @@ print("infer hsbm topic model")
 infer_hsbm_tm(
     input=f"graph{suffix}.gt.gz",
     output_prefix=f"state{suffix}",
-    verbose=verbose,
-    seeds=seeds,
+    verbose=verbose
 )
 
 # %%
@@ -55,6 +54,7 @@ dump_hsbm_tm(
     graph_input=f"graph{suffix}.gt.gz",
     input_prefix=f"state{suffix}",
     model_output=f"model{suffix}.db",
-    entropy_output=f"entropy{suffix}.csv",
-    seeds=seeds,
+    entropy_output=f"entropy{suffix}.csv"
 )
+
+# %%

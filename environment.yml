@@ -15,23 +15,10 @@ dependencies:
   - nltk
   # hsbm
   - graph-tool
-  # umap-hdbscan
-  - umap-learn
-  - hdbscan
-  # umap.plot
-  - datashader
-  - bokeh
-  - holoviews >= 1.15
-  - scikit-image 
-  - colorcet 
   # analysis
   - seaborn
   - pingouin
   - scikit-learn
-  # polars
-  - polars
-  - pyarrow
-  - connectorx
   # metadata
   - python-dotenv
   - pip:
